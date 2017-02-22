@@ -81,22 +81,29 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         controller.addObserver(Dashboard.this);
         count();
 
+
+        //// TODO: 2/20/2017 change with correct fcm url and uncomment
+
         if(CheckConnectivity.isNetConnected(Dashboard.this)) {
 
             SharedPreferences sharedPreferences = getSharedPreferences(FCMConfig.SHARED_PREF, 0);
             String firebase_id_send_to_server_or_not = sharedPreferences.getString("FirebaseIdSendToServer", "");
 
             if (firebase_id_send_to_server_or_not.equals("0")) {
+
                 String token = sharedPreferences.getString("regId", "");
-                sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-                String UserContact = sharedPreferences.getString("UserContact", "");
+               
+
+
                 FirebaseTokenBackgroundWorker firebaseTokenBackgroundWorker = new FirebaseTokenBackgroundWorker(new AsyncResponse() {
                     @Override
                     public void processFinish(String output) {
                         System.out.println(output);
                     }
                 });
-                firebaseTokenBackgroundWorker.execute(UserContact, token);
+
+                firebaseTokenBackgroundWorker.execute(token);
+
             }
 
         }
