@@ -76,6 +76,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         showroom.setOnClickListener(this);
 
 
+
         controller.addObserver(DashboardActivity.this);
         count();
 
@@ -147,7 +148,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             //putting values
                             editor.putString(co[i], Integer.toString(commod[i]));
-                            editor.apply();
+
+
+                            editor.commit();
                             controller.setBambooCount(commod[3]);
                             controller.setBananaCount(commod[2]);
                             controller.setTimberCount(commod[1]);
