@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.Observable;
 
+
 public class Dashboard extends AppCompatActivity implements View.OnClickListener, java.util.Observer {
 
     private ImageView park, parked, parking, garage, showroom, coinimg, coinimg2, dashboard, Volume;
@@ -75,31 +76,30 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         garage.setOnClickListener(this);
         showroom.setOnClickListener(this);
 
-        String tok = sharedpreferences.getString("fidKey", "");
+
 
         controller.addObserver(Dashboard.this);
         count();
 
-        //// TODO: 2/20/2017 change with correct fcm url and uncomment
-/*        if(CheckConnectivity.isNetConnected(Dashboard.this)) {
+        if(CheckConnectivity.isNetConnected(Dashboard.this)) {
 
             SharedPreferences sharedPreferences = getSharedPreferences(FCMConfig.SHARED_PREF, 0);
             String firebase_id_send_to_server_or_not = sharedPreferences.getString("FirebaseIdSendToServer", "");
 
             if (firebase_id_send_to_server_or_not.equals("0")) {
-            //    String token = sharedPreferences.getString("regId", "");
-            //    sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-            //    String UserContact = sharedPreferences.getString("UserContact", "");
+                String token = sharedPreferences.getString("regId", "");
+                sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+                String UserContact = sharedPreferences.getString("UserContact", "");
                 FirebaseTokenBackgroundWorker firebaseTokenBackgroundWorker = new FirebaseTokenBackgroundWorker(new AsyncResponse() {
                     @Override
                     public void processFinish(String output) {
                         System.out.println(output);
                     }
                 });
-                firebaseTokenBackgroundWorker.execute("", tok);
+                firebaseTokenBackgroundWorker.execute(UserContact, token);
             }
 
-        }*/
+        }
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -160,25 +160,25 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
             },this);
             apicalling.execute(API_URL_LIST.COMODITY_URL,"0","get");
         }
-       else
-            {
-                for(i=0;i<5;i++)
-                {   if (sharedpreferences.contains(Dashboard.co[i])) {
-                    commod[i]= Integer.parseInt(sharedpreferences.getString(Dashboard.co[i],""));
+        else
+        {
+            for(i=0;i<5;i++)
+            {   if (sharedpreferences.contains(Dashboard.co[i])) {
+                commod[i]= Integer.parseInt(sharedpreferences.getString(Dashboard.co[i],""));
 
-
-
-                }
-
-                }
-                controller.setBambooCount(commod[3]);
-                controller.setBananaCount(commod[2]);
-                controller.setTimberCount(commod[1]);
-                controller.setCoconutCount(commod[0]);
-                controller.setGoldCoinCount(commod[4]);
 
 
             }
+
+            }
+            controller.setBambooCount(commod[3]);
+            controller.setBananaCount(commod[2]);
+            controller.setTimberCount(commod[1]);
+            controller.setCoconutCount(commod[0]);
+            controller.setGoldCoinCount(commod[4]);
+
+
+        }
 
 
 
@@ -203,8 +203,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent4);
                 break;
             case R.id.imageviewparking:
-//                Intent intent1 = new Intent(this, Parkinge.class);
-//                startActivity(intent1);
+                Intent intent1 = new Intent(this, Parking.class);
+                startActivity(intent1);
                 break;
             case R.id.imageviewshowroom:
                 Intent i = new Intent(Dashboard.this, Show_room.class);
