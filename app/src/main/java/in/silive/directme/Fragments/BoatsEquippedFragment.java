@@ -19,26 +19,21 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by YESH AGNIHOTRI on 19-11-2016.
  */
 
-public class Boats_equipped extends Fragment
+public class BoatsEquippedFragment extends Fragment
 
 {
     static JSONObject json_data;
     static int slot;
-    public static Boats_equipped newInstance(JSONObject jsonObject, int value)
-    {
-        Boats_equipped boats_equipped=new Boats_equipped();
-        json_data=jsonObject;
-        slot=value;
+    int dockstatus = 1;
+    ImageView img;
+    SharedPreferences prefrences;
+
+    public static BoatsEquippedFragment newInstance(JSONObject jsonObject, int value) {
+        BoatsEquippedFragment boats_equipped = new BoatsEquippedFragment();
+        json_data = jsonObject;
+        slot = value;
         return boats_equipped;
     }
-
-
-    int dockstatus=1;
-    //TextView banana_req, gold_req, wood_req, bamboo_req, coconut_req;
-    ImageView img;
-
-
-    SharedPreferences prefrences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,22 +50,9 @@ public class Boats_equipped extends Fragment
             TextView boatname;
             boatname=(TextView)rootView.findViewById(R.id.boatname);
             boatname.setText(name);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e)
-        {
-
-        }
-    /*public void onResume()
-    {
-        super.onResume();
-
-        banana_req.setText(pref.getString("Raft" + "Banana", null));
-        gold_req.setText(pref.getString("Raft" + "Gold", null));
-        bamboo_req.setText(pref.getString("Raft" + "Bamboo", null));
-        wood_req.setText(pref.getString("Raft" + "Timber", null));
-        coconut_req.setText(pref.getString("Raft" + "Coconut", null));
-
-    }*/
         return rootView;
     }
 

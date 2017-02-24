@@ -3,7 +3,7 @@ package in.silive.directme;
 
 import android.content.SharedPreferences;
 
-import java.util.*;
+import java.util.Observable;
 import java.util.Observer;
 
 
@@ -14,10 +14,9 @@ public class Controller extends Observable {
     private int coconutCount = 0;
     private int bambooCount = 0;
     private int goldCoinCount = 0;
-    SharedPreferences sharedPreferences;
     private String Commodity = "";
 
-    public Controller(){
+    public Controller() {
 
     }
 
@@ -38,32 +37,15 @@ public class Controller extends Observable {
         return bambooCount;
     }
 
-    public int getBananaCount() {
-
-        return bananaCount;
-    }
-
-    public int getCoconutCount() {
-        return coconutCount;
-    }
-
-    public int getGoldCoinCount() {
-        return goldCoinCount;
-    }
-
-    public int getTimberCount() {
-        return timberCount;
-    }
-
     public void setBambooCount(int bambooCount) {
         this.bambooCount = bambooCount;
         setChanged();
         notifyObservers();
     }
 
-    @Override
-    public synchronized void addObserver(Observer o) {
-        super.addObserver(o);
+    public int getBananaCount() {
+
+        return bananaCount;
     }
 
     public void setBananaCount(int bananaCount) {
@@ -73,10 +55,18 @@ public class Controller extends Observable {
         notifyObservers();
     }
 
+    public int getCoconutCount() {
+        return coconutCount;
+    }
+
     public void setCoconutCount(int coconutCount) {
         this.coconutCount = coconutCount;
         setChanged();
         notifyObservers();
+    }
+
+    public int getGoldCoinCount() {
+        return goldCoinCount;
     }
 
     public void setGoldCoinCount(int goldCoinCount) {
@@ -85,9 +75,18 @@ public class Controller extends Observable {
         notifyObservers();
     }
 
+    public int getTimberCount() {
+        return timberCount;
+    }
+
     public void setTimberCount(int timberCount) {
         this.timberCount = timberCount;
         setChanged();
         notifyObservers();
+    }
+
+    @Override
+    public synchronized void addObserver(Observer o) {
+        super.addObserver(o);
     }
 }

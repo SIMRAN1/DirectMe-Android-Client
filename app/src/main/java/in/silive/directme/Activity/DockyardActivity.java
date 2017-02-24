@@ -19,29 +19,25 @@ import org.json.JSONObject;
 
 import in.silive.directme.AsyncTask.ApiCalling;
 import in.silive.directme.CheckConnectivity;
-import in.silive.directme.Fragments.Boats_equipped;
+import in.silive.directme.Fragments.BoatsEquippedFragment;
 import in.silive.directme.Interface.AsyncResponse;
 import in.silive.directme.R;
 import in.silive.directme.Utils.API_URL_LIST;
 
+import static in.silive.directme.Activity.UserLoginActivity.Authorization_Token;
 
-import static in.silive.directme.Activity.UserLogin.Authorization_Token;
 
-
-public class Dockyard extends AppCompatActivity
-{
+public class DockyardActivity extends AppCompatActivity {
+    public static final String MyPREFERENCES = "UserName";
     JSONArray jArray;
     ViewPager mViewPager;
-
     boolean network_available;
     ApiCalling apicalling;
-    int count=1;
-
+    int count = 1;
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "UserName";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garage_viewpager);
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -54,9 +50,8 @@ public class Dockyard extends AppCompatActivity
 
     }
 
-    void startfragments()
-    {
-        mViewPager.setAdapter(new Dockyard.BoatPagerAdapter(
+    void startfragments() {
+        mViewPager.setAdapter(new DockyardActivity.BoatPagerAdapter(
                 getSupportFragmentManager()));
     }
     void connect() {
@@ -100,27 +95,26 @@ public class Dockyard extends AppCompatActivity
                     if (position == 0)
                     {    slot=1;
                         json_send = jArray.getJSONObject(0);
-                        return Boats_equipped.newInstance(json_send,slot);
+                        return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
                     if(position==1)
                     {   slot=2;
                         json_send = jArray.getJSONObject(1);
-                        return Boats_equipped.newInstance(json_send,slot);
+                        return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
                     if(position==2) {
                         slot=3;
                         json_send = jArray.getJSONObject(2);
-                        return Boats_equipped.newInstance(json_send,slot);
+                        return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
                     if(position==3) {
                         slot=4;
                         json_send = jArray.getJSONObject(3);
-                        return Boats_equipped.newInstance(json_send,slot);
-                    }
-                    else
-                    {    slot=5;
+                        return BoatsEquippedFragment.newInstance(json_send, slot);
+                    } else {
+                        slot = 5;
                         json_send = jArray.getJSONObject(4);
-                        return Boats_equipped.newInstance(json_send,slot);
+                        return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
 
                 } catch (JSONException e) {

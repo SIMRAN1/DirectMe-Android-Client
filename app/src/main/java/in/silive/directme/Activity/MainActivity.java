@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -32,6 +31,7 @@ import in.silive.directme.CheckConnectivity;
 import in.silive.directme.R;
 
 public class MainActivity extends Activity {
+
 
     ImageView boat_ImageView;
     RelativeLayout water_image;
@@ -59,130 +59,128 @@ public class MainActivity extends Activity {
     public  boolean net_connected,play_services_available ;
 
 
-    @Override    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sharedpreferences = getSharedPreferences(Authorization_Token, Context.MODE_PRIVATE);
-        final String token = sharedpreferences.getString("Authorization_Token" , "");
+        final String token = sharedpreferences.getString("Authorization_Token", "");
         boat_ImageView = (ImageView) findViewById(R.id.splashboat);
         water_image = (RelativeLayout) findViewById(R.id.spritesheet);
-        Bitmap waterbmp = getBitmapFromAssets(this,"splashh.png");
-        if (waterbmp != null) {
+        Bitmap waterbmp = getBitmapFromAssets(this, "splashh.png");
 
-            bmps = new Bitmap[NB_FRAMES];
-            int currentFrame = 0;
+            if (waterbmp != null) {
 
-            for (int i = 0; i < COUNT_Y; i++) {
-                for (int j = 0; j < COUNT_X; j++) {
-                    bmps[currentFrame] = Bitmap.createBitmap(waterbmp, FRAME_W
-                            * j, FRAME_H * i, FRAME_W, FRAME_H);
+                Bitmap[] bitmaps = new Bitmap[NB_FRAMES];
+                int currentFrame = 0;
+
+                for (int i = 0; i < COUNT_Y; i++) {
+                    for (int j = 0; j < COUNT_X; j++) {
+                        bitmaps[currentFrame] = Bitmap.createBitmap(waterbmp, FRAME_W
+                                * j, FRAME_H * i, FRAME_W, FRAME_H);
 
 
-
-
-                    if (++currentFrame >= NB_FRAMES) {
-                        break;
+                        if (++currentFrame >= NB_FRAMES) {
+                            break;
+                        }
                     }
                 }
-            }
 
-            // create animation programmatically
-            final AnimationDrawable animation = new AnimationDrawable();
-            animation.setOneShot(false); // repeat animation
+                // create animation programmatically
+                final AnimationDrawable animation = new AnimationDrawable();
+                animation.setOneShot(false); // repeat animation
 
-            for (int i = 0; i < NB_FRAMES; i++) {
-                animation.addFrame(new BitmapDrawable(getResources(), bmps[i]),
-                        FRAME_DURATION);
-            }
-
-            // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                water_image.setBackgroundDrawable(animation);
-            } else {
-                water_image.setBackground(animation);
-            }
-
-            // start animation on image
-            water_image.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    animation.start();
+                for (int i = 0; i < NB_FRAMES; i++) {
+                    animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
+                            FRAME_DURATION);
                 }
 
-            });
+                // load animation on image
+                if (Build.VERSION.SDK_INT < 16) {
+                    water_image.setBackgroundDrawable(animation);
+                } else {
+                    water_image.setBackground(animation);
+                }
 
-        }
+                // start animation on image
+                water_image.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        animation.start();
+                    }
+
+                });
 
 
 
-        net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
-        try{
-            play_services_available = isGooglePlayServicesAvailable();
-            if (play_services_available) {
-                if (net_connected) {
+
+            net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
+            try {
+                play_services_available = isGooglePlayServicesAvailable();
+                if (play_services_available) {
+                    if (net_connected) {
 
 
-                    Thread timer = new Thread() {
-                        public void run() {
-                            try {
-                                Animation animation_boat= AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanim);
+                        Thread timer = new Thread() {
+                            public void run() {
+                                try {
+                                    Animation animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanim);
 
 
-                                boat_ImageView.startAnimation(animation_boat);
-                                sleep(5000);
+                                    boat_ImageView.startAnimation(animation_boat);
+                                    sleep(5000);
 
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                if (!token.equals("")) {
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    if (!token.equals("")) {
 
-                                    Intent i = new Intent(MainActivity.this, Dashboard.class);
-                                    startActivity(i);
-                                } else {
-                                    Intent i = new Intent(MainActivity.this, CreateAccount.class);
-                                    startActivity(i);
+                                        Intent i = new Intent(MainActivity.this, DashboardActivity.class);
+                                        startActivity(i);
+                                    } else {
+                                        Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
+                                        startActivity(i);
+                                    }
                                 }
                             }
-                        }
-                    };
-                    timer.start();
-                } else
+                        };
+                        timer.start();
+                    } else
 
-                {
+                    {
 
-                    alertDialog("Error", "Sorry, your device doesn't connect to internet!");
+                        alertDialog("Error", "Sorry, your device doesn't connect to internet!");
+                    }
+
+                } else {
+
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                    alertDialog.setTitle("error");
+                    alertDialog.setMessage("please install google paly services");
+                    alertDialog.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    onDestroy();
+                                }
+                            });
+
+                    alertDialog.create();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+
                 }
-
-            } else {
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setTitle("error");
-                alertDialog.setMessage("please install google paly services");
-                alertDialog.setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                onDestroy();
-                            }
-                        });
-
-                alertDialog.create();
-                alertDialog.setCancelable(false);
-                alertDialog.show();
-
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
-        }catch (NullPointerException e){
-            e.printStackTrace();
+
         }
-
     }
-
     @Override
 //to stop sound when minimised
-
 
 
     protected void onDestroy() {
@@ -192,16 +190,15 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
 
     }
 
 
+    public void alertDialog(String title, String message) {
 
-    public  void alertDialog(String title , String message){
-
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
         alertDialog.setPositiveButton("Settings",
@@ -215,7 +212,7 @@ public class MainActivity extends Activity {
         alertDialog.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                        onDestroy();
                     }
                 });
         alertDialog.create();
@@ -234,6 +231,7 @@ public class MainActivity extends Activity {
         }
         return true;
     }
+
     private Bitmap getBitmapFromAssets(MainActivity mainActivity,
                                        String filepath) {
         AssetManager assetManager = mainActivity.getAssets();

@@ -6,7 +6,6 @@ package in.silive.directme.Fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,8 @@ import android.widget.TextView;
 import in.silive.directme.R;
 
 
-public class Dialog_Fragment extends DialogFragment
-{
-    String tvalue="",banana_req="", gold_req="", wood_req="", bamboo_req="", coconut_req="";
+public class CustomDialogFragment extends android.support.v4.app.DialogFragment {
+    String tvalue = "", banana_req = "", gold_req = "", wood_req = "", bamboo_req = "", coconut_req = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,6 +106,8 @@ public class Dialog_Fragment extends DialogFragment
         if (choice==3)
         {
             msg="you dont have enough money to buy this one";
+        if (choice == 3) {
+            msg = "You don't have enough money to buy this one";
             message.setText(msg);
             Button button=(Button)rootView1.findViewById(R.id.ok1);
             button.setOnClickListener(new View.OnClickListener() {

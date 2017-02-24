@@ -15,14 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import in.silive.directme.AsyncTask.ApiCalling;
-import in.silive.directme.CheckConnectivity;
-import in.silive.directme.Controller;
-import in.silive.directme.AsyncTask.FirebaseTokenBackgroundWorker;
-import in.silive.directme.Interface.AsyncResponse;
-import in.silive.directme.R;
-import in.silive.directme.Utils.API_URL_LIST;
-import in.silive.directme.Utils.FCMConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,23 +22,31 @@ import org.json.JSONObject;
 
 import java.util.Observable;
 
+import in.silive.directme.AsyncTask.ApiCalling;
+import in.silive.directme.AsyncTask.FirebaseTokenBackgroundWorker;
+import in.silive.directme.CheckConnectivity;
+import in.silive.directme.Controller;
+import in.silive.directme.Interface.AsyncResponse;
+import in.silive.directme.R;
+import in.silive.directme.Utils.API_URL_LIST;
+import in.silive.directme.Utils.FCMConfig;
 
-public class Dashboard extends AppCompatActivity implements View.OnClickListener, java.util.Observer {
 
-    private ImageView park, parked, parking, garage, showroom, coinimg, coinimg2, dashboard, Volume;
-    private TextView bamboo, coconut, banana, timber, gold_coin, log_out;
-    int i;
-    Intent svc;
-    SharedPreferences sharedpreferences;
-    public int[] commod = new int[5];
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer {
+
+
     public static final String[] co = new String[5];
-    Controller controller = new Controller();
     public static final String MyPREFERENCES = "MyPrefs";
-    CheckConnectivity network;
+    public int[] commod = new int[5];
+    int i;
+    SharedPreferences sharedpreferences;
+    Controller controller = new Controller();
     boolean network_available;
     BroadcastReceiver mRegistrationBroadcastReceiver;
     ApiCalling apicalling;
-    private boolean im=true;
+    private ImageView park, parked, parking, garage, showroom, coinimg, coinimg2, dashboard, Volume;
+    private TextView bamboo, coconut, banana, timber, gold_coin, log_out;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
@@ -78,58 +78,64 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
 
 
-        controller.addObserver(Dashboard.this);
+        controller.addObserver(DashboardActivity.this);
         count();
 
-        if(CheckConnectivity.isNetConnected(Dashboard.this)) {
+
+        //// TODO: 2/20/2017 change with correct fcm url and uncomment
+
+        if (CheckConnectivity.isNetConnected(DashboardActivity.this)) {
+
 
             SharedPreferences sharedPreferences = getSharedPreferences(FCMConfig.SHARED_PREF, 0);
             String firebase_id_send_to_server_or_not = sharedPreferences.getString("FirebaseIdSendToServer", "");
 
             if (firebase_id_send_to_server_or_not.equals("0")) {
+
                 String token = sharedPreferences.getString("regId", "");
-                sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-                String UserContact = sharedPreferences.getString("UserContact", "");
+
+
                 FirebaseTokenBackgroundWorker firebaseTokenBackgroundWorker = new FirebaseTokenBackgroundWorker(new AsyncResponse() {
                     @Override
                     public void processFinish(String output) {
                         System.out.println(output);
                     }
                 });
-                firebaseTokenBackgroundWorker.execute(UserContact, token);
+
+                firebaseTokenBackgroundWorker.execute(token);
+
             }
 
-        }
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
 
-                // checking for type intent filter
-                if (intent.getAction().equals(FCMConfig.REGISTRATION_COMPLETE)) {
-                    // fcm successfully registered
-                    // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(FCMConfig.TOPIC_GLOBAL);
+            mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
 
-
-
-                } else if (intent.getAction().equals(FCMConfig.PUSH_NOTIFICATION)) {
-                    // new push notification is received
-
-                    String message = intent.getStringExtra("message");
-
-                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+                    // checking for type intent filter
+                    if (intent.getAction().equals(FCMConfig.REGISTRATION_COMPLETE)) {
+                        // fcm successfully registered
+                        // now subscribe to `global` topic to receive app wide notifications
+                        FirebaseMessaging.getInstance().subscribeToTopic(FCMConfig.TOPIC_GLOBAL);
 
 
+                    } else if (intent.getAction().equals(FCMConfig.PUSH_NOTIFICATION)) {
+                        // new push notification is received
+
+                        String message = intent.getStringExtra("message");
+
+                        Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+
+                    }
                 }
-            }
-        };
+            };
 
-    }
+        }}
 
     public void count() {
 
 
-        network_available = network.isNetConnected(getApplicationContext());
+        network_available = CheckConnectivity.isNetConnected(getApplicationContext());
         if (network_available) {
             apicalling = new ApiCalling(new AsyncResponse() {
                 @Override
@@ -139,14 +145,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         JSONArray things = jsonObject.getJSONArray("inventory");
                         for (i = 0; i < 5; i++) {
                             JSONObject jsonObject1 = things.getJSONObject(i);
-                            commod[i] = Integer.parseInt(jsonObject1.getString("count").toString());
+                            commod[i] = Integer.parseInt(jsonObject1.getString("count"));
 
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             //putting values
                             editor.putString(co[i], Integer.toString(commod[i]));
-
-
-                            editor.commit();
+                            editor.apply();
                             controller.setBambooCount(commod[3]);
                             controller.setBananaCount(commod[2]);
                             controller.setTimberCount(commod[1]);
@@ -157,78 +161,59 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         e.printStackTrace();
                     }
                 }
-            },this);
-            apicalling.execute(API_URL_LIST.COMODITY_URL,"0","get");
-        }
-        else
-        {
-            for(i=0;i<5;i++)
-            {   if (sharedpreferences.contains(Dashboard.co[i])) {
-                commod[i]= Integer.parseInt(sharedpreferences.getString(Dashboard.co[i],""));
-
-
-
-            }
-
+            }, this);
+            apicalling.execute(API_URL_LIST.COMODITY_URL, "0", "get");
+        } else {
+            for (i = 0; i < 5; i++) {
+                if (sharedpreferences.contains(DashboardActivity.co[i])) {
+                    commod[i] = Integer.parseInt(sharedpreferences.getString(DashboardActivity.co[i], ""));
+                }
             }
             controller.setBambooCount(commod[3]);
             controller.setBananaCount(commod[2]);
             controller.setTimberCount(commod[1]);
             controller.setCoconutCount(commod[0]);
             controller.setGoldCoinCount(commod[4]);
-
-
         }
-
-
-
-
-
-
-
     }
 
 
     @Override
     public void onClick(View view) {
-
-
         switch (view.getId()) {
             case R.id.imageviewpark:
-                Intent intent = new Intent(this, Parknow.class);
+                Intent intent = new Intent(this, ParkNowActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageviewparked:
-                Intent intent4 = new Intent(this, Parked.class);
+                Intent intent4 = new Intent(this, ParkedActivity.class);
                 startActivity(intent4);
                 break;
             case R.id.imageviewparking:
-                Intent intent1 = new Intent(this, Parking.class);
+                Intent intent1 = new Intent(this, ParkingActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.imageviewshowroom:
-                Intent i = new Intent(Dashboard.this, Show_room.class);
+                Intent i = new Intent(DashboardActivity.this, ShowroomActivity.class);
                 startActivity(i);
                 break;
             case R.id.imageviewgarage:
-                Intent in = new Intent(Dashboard.this, Dockyard.class);
+                Intent in = new Intent(DashboardActivity.this, DockyardActivity.class);
                 startActivity(in);
                 break;
-
-
         }
-
     }
+
     @Override
     //updating values through observer
     public void update(Observable observable, Object o) {
         controller = (Controller) observable;
         System.out.println(controller.getBananaCount());
-        bamboo.setText(Integer.toString(controller.getBambooCount()));
-        coconut.setText(Integer.toString(controller.getCoconutCount()));
-        banana.setText(Integer.toString(controller.getBananaCount()));
-        timber.setText(Integer.toString(controller.getTimberCount()));
-        gold_coin.setText(Integer.toString(controller.getGoldCoinCount()));
+        bamboo.setText(String.valueOf(controller.getBambooCount()));
+        coconut.setText(String.valueOf(controller.getCoconutCount()));
+        banana.setText(String.valueOf(controller.getBananaCount()));
+        timber.setText(String.valueOf(controller.getTimberCount()));
+        gold_coin.setText(String.valueOf(controller.getGoldCoinCount()));
 
     }
 }
