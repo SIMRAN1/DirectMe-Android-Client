@@ -101,25 +101,29 @@ public class CustomDialogFragment extends android.support.v4.app.DialogFragment 
             });
         }
         if (choice == 3) {
-            msg = "You don't have enough money to buy this one";
-            message.setText(msg);
-            Button button = (Button) rootView1.findViewById(R.id.ok1);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
-            Button buttoncancel = (Button) rootView1.findViewById(R.id.cancel);
-            buttoncancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
-        }
+            msg = "you dont have enough money to buy this one";
+            if (choice == 3) {
+                msg = "You don't have enough money to buy this one";
+                message.setText(msg);
+                Button button = (Button) rootView1.findViewById(R.id.ok1);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                Button buttoncancel = (Button) rootView1.findViewById(R.id.cancel);
+                buttoncancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
 
-        return rootView1;
+            return rootView1;
+        }
+        return null;
     }
 
     public void seperate(String str) {

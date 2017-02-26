@@ -108,11 +108,19 @@ public class MainActivity extends Activity {
         }
 
 
+<<<<<<< HEAD
         net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
         try {
             play_services_available = isGooglePlayServicesAvailable();
             if (play_services_available) {
                 if (net_connected) {
+=======
+            net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
+            try {
+                play_services_available = isGooglePlayServicesAvailable();
+                if (true) {
+                    if (net_connected) {
+>>>>>>> parknow_layout made
 
 
                     Thread timer = new Thread() {
@@ -148,6 +156,7 @@ public class MainActivity extends Activity {
 
             } else {
 
+<<<<<<< HEAD
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                 alertDialog.setTitle("error");
                 alertDialog.setMessage("please install google paly services");
@@ -157,6 +166,17 @@ public class MainActivity extends Activity {
                                 onDestroy();
                             }
                         });
+=======
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                    alertDialog.setTitle("error");
+                    alertDialog.setMessage("please install google play services");
+                    alertDialog.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    onDestroy();
+                                }
+                            });
+>>>>>>> parknow_layout made
 
                 alertDialog.create();
                 alertDialog.setCancelable(false);
