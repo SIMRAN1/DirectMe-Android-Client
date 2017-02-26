@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
             net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
             try {
                 play_services_available = isGooglePlayServicesAvailable();
-                if (play_services_available) {
+                if (true) {
                     if (net_connected) {
 
 
@@ -160,7 +160,7 @@ public class MainActivity extends Activity {
 
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                     alertDialog.setTitle("error");
-                    alertDialog.setMessage("please install google paly services");
+                    alertDialog.setMessage("please install google play services");
                     alertDialog.setPositiveButton("OK",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {

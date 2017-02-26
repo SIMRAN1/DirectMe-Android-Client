@@ -59,7 +59,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:text="Button"
+        android:text="SELECT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/select"
