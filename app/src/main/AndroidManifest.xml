@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="in.silive.directme.Activity.User_details_Activity"
+            android:name="in.silive.directme.Activity.UserDetailsActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="in.silive.directme.DASHBOARD" />
@@ -82,7 +82,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="in.silive.directme.Activity.Parknow_shipActivity"
+            android:name="in.silive.directme.Activity.ParknowShipActivity"
             android:screenOrientation="landscape">
 
 

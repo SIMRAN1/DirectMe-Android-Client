@@ -31,7 +31,7 @@ import in.silive.directme.R;
  * Created by simran on 2/23/2017.
  */
 
-public class Parknow_user_ships extends android.support.v4.app.Fragment implements View.OnClickListener {
+public class ParknowUsershipselectFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     @Nullable
     public static int FRAME_W=720;
@@ -50,7 +50,7 @@ public class Parknow_user_ships extends android.support.v4.app.Fragment implemen
     public static String spritesheetimage;
 
 
-    public Parknow_user_ships() {
+    public ParknowUsershipselectFragment() {
 
     }
 
@@ -59,7 +59,7 @@ public class Parknow_user_ships extends android.support.v4.app.Fragment implemen
                 false);
         spritesheetimage=getArguments().getString("name");
         FRAME_H=getArguments().getInt("Frame_width");
-        Toast.makeText(getActivity(),spritesheetimage,Toast.LENGTH_LONG).show();
+
         boat_image = (ImageView) v.findViewById(R.id.boatimage);
         select=(Button)v.findViewById(R.id.select);
         Bitmap boat_bitmap = getBitmapFromAssets(spritesheetimage);

@@ -18,24 +18,24 @@ import java.util.ArrayList;
 import in.silive.directme.rest.User_details;
 import in.silive.directme.R;
 
-public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
+public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAdapter.ViewHolder> {
     private ArrayList<User_details> user_details;
     private Context context;
 
-    public DataAdapter(Context context,ArrayList<User_details> user_details) {
+    public DataUserSelectAdapter(Context context, ArrayList<User_details> user_details) {
         this.context=context;
         this.user_details = user_details;
         this.context = context;
     }
 
     @Override
-    public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_layout, viewGroup, false);
+    public DataUserSelectAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_layout_userselect, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DataAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(DataUserSelectAdapter.ViewHolder viewHolder, int i) {
 
         viewHolder.usr_name.setText(user_details.get(i).getUser_name());
     //   Picasso.with(context).load(user_details.get(i).getUser_image_url()).resize(240, 120).into(viewHolder.usr_img);

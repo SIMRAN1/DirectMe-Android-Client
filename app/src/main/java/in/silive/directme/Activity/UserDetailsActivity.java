@@ -8,14 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.silive.directme.R;
-import in.silive.directme.adapter.DataAdapter;
+import in.silive.directme.adapter.DataUserSelectAdapter;
 import in.silive.directme.rest.User_details;
 
 /**
  * Created by simran on 2/24/2017.
  */
 
-public class User_details_Activity extends AppCompatActivity {
+public class UserDetailsActivity extends AppCompatActivity {
     private final String user_names[] = {
             "si",
             "si",
@@ -33,7 +33,7 @@ public class User_details_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recycler_view);
+        setContentView(R.layout.recycler_view_userselect);
         initViews();
     }
     private void initViews(){
@@ -44,7 +44,7 @@ public class User_details_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         ArrayList<User_details> user_details = prepareData();
-        DataAdapter adapter = new DataAdapter(getApplicationContext(),user_details);
+        DataUserSelectAdapter adapter = new DataUserSelectAdapter(getApplicationContext(),user_details);
         recyclerView.setAdapter(adapter);
 
 

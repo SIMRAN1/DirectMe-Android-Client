@@ -14,15 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import in.silive.directme.Fragments.Parknow_user_ships;
-import in.silive.directme.Fragments.ShipsFragment;
+import in.silive.directme.Fragments.ParknowUsershipselectFragment;
 import in.silive.directme.R;
 
 /**
  * Created by simran on 2/23/2017.
  */
 
-public class Parknow_shipActivity extends AppCompatActivity {
+public class ParknowShipActivity extends AppCompatActivity {
     ViewPager mViewPager;
     int count=1;
   ImageView left,right;
@@ -62,18 +61,18 @@ public class Parknow_shipActivity extends AppCompatActivity {
             super(fm);
 
         }
-        Parknow_user_ships ships_fragment;
+        ParknowUsershipselectFragment ships_fragment;
         @Override
         public Fragment getItem(int position) {
             switch (position) {
 
-                case 0: ships_fragment = new Parknow_user_ships();
+                case 0: ships_fragment = new ParknowUsershipselectFragment();
                  arguments= new Bundle();
                 arguments.putString("name", spritesheetship1);
                     arguments.putInt("Frame_width",Frame_Width_ship1);
                 ships_fragment.setArguments(arguments);
                 break;
-                case 1: ships_fragment = new Parknow_user_ships();
+                case 1: ships_fragment = new ParknowUsershipselectFragment();
                      arguments = new Bundle();
                     arguments.putString("name", spritesheetship2);
                     arguments.putInt("Frame_width",Frame_Width_ship2);
