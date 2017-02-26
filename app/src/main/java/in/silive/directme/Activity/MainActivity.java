@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -31,24 +32,32 @@ import in.silive.directme.R;
 
 public class MainActivity extends Activity {
 
-    public static final String Authorization_Token = "Authorization_Token";
+
+    ImageView boat_ImageView;
+    RelativeLayout water_image;
     // frame width
-    private static final int FRAME_W = 300;
+    private static final int FRAME_W =300;
     // frame height
-    private static final int FRAME_H = 180;
+    private static final int FRAME_H =180;
     // number of frames
-    private static final int NB_FRAMES = 20;
+    private static final int NB_FRAMES =20;
     // nb of frames in x
     private static final int COUNT_X = 5;
     // nb of frames in y
     private static final int COUNT_Y = 4;
+    // frame duration
+
     // we can slow animation by changing frame duration
     private static final int FRAME_DURATION = 150; // in ms !
-    // frame duration
-    public boolean net_connected, play_services_available;
-    ImageView boat_ImageView;
-    RelativeLayout water_image;
+
+    // stores each frame
+    private Bitmap[] bmps;
+
+
+    public static final String Authorization_Token = "Authorization_Token" ;
     SharedPreferences sharedpreferences;
+    public  boolean net_connected,play_services_available ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,88 +71,94 @@ public class MainActivity extends Activity {
         boat_ImageView = (ImageView) findViewById(R.id.splashboat);
         water_image = (RelativeLayout) findViewById(R.id.spritesheet);
         Bitmap waterbmp = getBitmapFromAssets(this, "splashh.png");
-        if (waterbmp != null) {
 
-            Bitmap[] bitmaps = new Bitmap[NB_FRAMES];
-            int currentFrame = 0;
+            if (waterbmp != null) {
 
-            for (int i = 0; i < COUNT_Y; i++) {
-                for (int j = 0; j < COUNT_X; j++) {
-                    bitmaps[currentFrame] = Bitmap.createBitmap(waterbmp, FRAME_W
-                            * j, FRAME_H * i, FRAME_W, FRAME_H);
+                Bitmap[] bitmaps = new Bitmap[NB_FRAMES];
+                int currentFrame = 0;
+
+                for (int i = 0; i < COUNT_Y; i++) {
+                    for (int j = 0; j < COUNT_X; j++) {
+                        bitmaps[currentFrame] = Bitmap.createBitmap(waterbmp, FRAME_W
+                                * j, FRAME_H * i, FRAME_W, FRAME_H);
 
 
-                    if (++currentFrame >= NB_FRAMES) {
-                        break;
+                        if (++currentFrame >= NB_FRAMES) {
+                            break;
+                        }
                     }
                 }
-            }
 
-            // create animation programmatically
-            final AnimationDrawable animation = new AnimationDrawable();
-            animation.setOneShot(false); // repeat animation
+                // create animation programmatically
+                final AnimationDrawable animation = new AnimationDrawable();
+                animation.setOneShot(false); // repeat animation
 
-            for (int i = 0; i < NB_FRAMES; i++) {
-                animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
-                        FRAME_DURATION);
-            }
-
-            // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                water_image.setBackgroundDrawable(animation);
-            } else {
-                water_image.setBackground(animation);
-            }
-
-            // start animation on image
-            water_image.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    animation.start();
+                for (int i = 0; i < NB_FRAMES; i++) {
+                    animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
+                            FRAME_DURATION);
                 }
 
-            });
+                // load animation on image
+                if (Build.VERSION.SDK_INT < 16) {
+                    water_image.setBackgroundDrawable(animation);
+                } else {
+                    water_image.setBackground(animation);
+                }
 
-        }
+                // start animation on image
+                water_image.post(new Runnable() {
 
-        net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
-        try {
-            play_services_available = isGooglePlayServicesAvailable();
-            if (true) {
-                if (net_connected) {
-                    Thread timer = new Thread() {
-                        public void run() {
-                            try {
-                                Animation animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanim);
+                    @Override
+                    public void run() {
+                        animation.start();
+                    }
+
+                });
 
 
-                                boat_ImageView.startAnimation(animation_boat);
-                                sleep(5000);
 
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                if (!token.equals("")) {
 
-                                    Intent i = new Intent(MainActivity.this, DashboardActivity.class);
-                                    startActivity(i);
-                                } else {
-                                    Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
-                                    startActivity(i);
+
+            net_connected = CheckConnectivity.isNetConnected(getApplicationContext());
+            try {
+                play_services_available = isGooglePlayServicesAvailable();
+                if (true) {
+                    if (net_connected) {
+
+
+
+                        Thread timer = new Thread() {
+                            public void run() {
+                                try {
+                                    Animation animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanim);
+
+
+                                    boat_ImageView.startAnimation(animation_boat);
+                                    sleep(5000);
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    if (!token.equals("")) {
+
+                                        Intent i = new Intent(MainActivity.this, DashboardActivity.class);
+                                        startActivity(i);
+                                    } else {
+                                        Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
+                                        startActivity(i);
+                                    }
                                 }
                             }
-                        }
-                    };
-                    timer.start();
-                } else
+                        };
+                        timer.start();
+                    } else
 
-                {
+                    {
 
-                    alertDialog("Error", "Sorry, your device doesn't connect to internet!");
-                }
+                        alertDialog("Error", "Sorry, your device doesn't connect to internet!");
+                    }
 
-            } else {
+                } else {
 
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                     alertDialog.setTitle("error");
@@ -155,17 +170,17 @@ public class MainActivity extends Activity {
                                 }
                             });
 
-                alertDialog.create();
-                alertDialog.setCancelable(false);
-                alertDialog.show();
+                    alertDialog.create();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
 
+                }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+
         }
-
     }
-
     @Override
 //to stop sound when minimised
 

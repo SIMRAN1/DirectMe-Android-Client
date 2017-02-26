@@ -122,28 +122,32 @@ public class CustomDialogFragment extends android.support.v4.app.DialogFragment 
             }
 
             return rootView1;
+
+
         }
         return null;
     }
-
-    public void seperate(String str) {
-        int c = 0, i;
-        for (i = 0; i < str.length(); i++) {
-            if (str.charAt(i) != ' ') {
-                if (c == 0)
-                    tvalue = tvalue + str.charAt(i);
-                if (c == 1)
-                    banana_req = banana_req + str.charAt(i);
-                if (c == 2)
-                    gold_req = gold_req + str.charAt(i);
-                if (c == 3)
-                    wood_req = wood_req + str.charAt(i);
-                if (c == 4)
-                    bamboo_req = bamboo_req + str.charAt(i);
-                if (c == 5)
-                    coconut_req = coconut_req + str.charAt(i);
+    public void seperate(String str)
+    {
+        int c=0,i;
+        for(i=0;i<str.length();i++)
+        {
+            if(str.charAt(i)!=' ')
+            {
+                if(c==0)
+                    tvalue=tvalue+str.charAt(i);
+                if(c==1)
+                    banana_req=banana_req+str.charAt(i);
+                if(c==2)
+                    gold_req=gold_req+str.charAt(i);
+                if(c==3)
+                    wood_req=wood_req+str.charAt(i);
+                if(c==4)
+                    bamboo_req=bamboo_req+str.charAt(i);
+                if(c==5)
+                    coconut_req=coconut_req+str.charAt(i);
             }
-            if (str.charAt(i) == ' ')
+            if(str.charAt(i)==' ')
                 c++;
         }
     }

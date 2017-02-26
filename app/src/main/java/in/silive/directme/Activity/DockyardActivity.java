@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,9 +54,8 @@ public class DockyardActivity extends AppCompatActivity {
         mViewPager.setAdapter(new DockyardActivity.BoatPagerAdapter(
                 getSupportFragmentManager()));
     }
-
     void connect() {
-        final String token = sharedpreferences.getString("Authorization_Token", "");
+        final String token = sharedpreferences.getString("Authorization_Token" , "");
         network_available = CheckConnectivity.isNetConnected(getApplicationContext());
         if (network_available) {
             apicalling = new ApiCalling(new AsyncResponse() {
@@ -62,50 +63,52 @@ public class DockyardActivity extends AppCompatActivity {
                 public void processFinish(String output) {
                     try {
                         jArray = new JSONArray(output);
-                        count = jArray.length();
+                        count=jArray.length();
                         startfragments();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-            }, this);
-            apicalling.execute(API_URL_LIST.PARKED_URL, token, "get");
+            },this);
+            apicalling.execute(API_URL_LIST.PARKED_URL,token,"get");
 
         }
     }
 
 
-    public class BoatPagerAdapter extends FragmentPagerAdapter {
+    public class BoatPagerAdapter extends FragmentPagerAdapter
+    {
 
-        int slot = 0;
-
-        public BoatPagerAdapter(FragmentManager fm) {
+        public BoatPagerAdapter(FragmentManager fm)
+        {
 
             super(fm);
         }
 
+        int slot=0;
         @Override
-        public Fragment getItem(int position) {
-            JSONObject json_send = null;
-            if (jArray != null) {
+        public Fragment getItem(int position)
+        {
+            JSONObject json_send=null;
+            if(jArray!=null) {
                 try {
-                    if (position == 0) {
-                        slot = 1;
+                    if (position == 0)
+                    {    slot=1;
                         json_send = jArray.getJSONObject(0);
                         return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
-                    if (position == 1) {
-                        slot = 2;
+                    if(position==1)
+                    {   slot=2;
                         json_send = jArray.getJSONObject(1);
                         return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
-                    if (position == 2) {
-                        slot = 3;
+                    if(position==2) {
+                        slot=3;
                         json_send = jArray.getJSONObject(2);
                         return BoatsEquippedFragment.newInstance(json_send, slot);
                     }
-                    if (position == 3) {
-                        slot = 4;
+                    if(position==3) {
+                        slot=4;
                         json_send = jArray.getJSONObject(3);
                         return BoatsEquippedFragment.newInstance(json_send, slot);
                     } else {
@@ -119,13 +122,15 @@ public class DockyardActivity extends AppCompatActivity {
                     return null;
 
                 }
-            } else
+            }
+            else
                 return null;
         }
 
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             return count;
 
         }

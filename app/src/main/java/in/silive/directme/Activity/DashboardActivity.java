@@ -34,6 +34,7 @@ import in.silive.directme.Utils.FCMConfig;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer {
 
+
     public static final String[] co = new String[5];
     public static final String MyPREFERENCES = "MyPrefs";
     public int[] commod = new int[5];
@@ -85,6 +86,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         if (CheckConnectivity.isNetConnected(DashboardActivity.this)) {
 
+
             SharedPreferences sharedPreferences = getSharedPreferences(FCMConfig.SHARED_PREF, 0);
             String firebase_id_send_to_server_or_not = sharedPreferences.getString("FirebaseIdSendToServer", "");
 
@@ -104,31 +106,31 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             }
 
-        }
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
 
-                // checking for type intent filter
-                if (intent.getAction().equals(FCMConfig.REGISTRATION_COMPLETE)) {
-                    // fcm successfully registered
-                    // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(FCMConfig.TOPIC_GLOBAL);
+            mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
 
-
-                } else if (intent.getAction().equals(FCMConfig.PUSH_NOTIFICATION)) {
-                    // new push notification is received
-
-                    String message = intent.getStringExtra("message");
-
-                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+                    // checking for type intent filter
+                    if (intent.getAction().equals(FCMConfig.REGISTRATION_COMPLETE)) {
+                        // fcm successfully registered
+                        // now subscribe to `global` topic to receive app wide notifications
+                        FirebaseMessaging.getInstance().subscribeToTopic(FCMConfig.TOPIC_GLOBAL);
 
 
+                    } else if (intent.getAction().equals(FCMConfig.PUSH_NOTIFICATION)) {
+                        // new push notification is received
+
+                        String message = intent.getStringExtra("message");
+
+                        Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+
+                    }
                 }
-            }
-        };
+            };
 
-    }
+        }}
 
     public void count() {
 
@@ -182,7 +184,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imageviewpark:
+
                 Intent intent = new Intent(this,ParknowShipActivity.class);
+
                 startActivity(intent);
                 break;
             case R.id.imageviewparked:

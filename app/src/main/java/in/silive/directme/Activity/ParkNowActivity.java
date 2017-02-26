@@ -113,7 +113,10 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             while (true) {
                                 sleep(10000);
+
                                 Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
+
+
                                 startActivity(intent);
                             }
                         } catch (InterruptedException e) {
@@ -142,7 +145,10 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             while (true) {
                                 sleep(10000);
+
                                 Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
+
+
                                 startActivity(intent);
                             }
                         } catch (InterruptedException e) {
@@ -169,7 +175,10 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             while (true) {
                                 sleep(10000);
+
                                 Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
+
+
                                 startActivity(intent);
                             }
                         } catch (InterruptedException e) {
@@ -196,7 +205,9 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             while (true) {
                                 sleep(10000);
+
                                 Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
+
                                 startActivity(intent);
                             }
                         } catch (InterruptedException e) {
@@ -226,7 +237,10 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             while (true) {
                                 sleep(10000);
+
                                 Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
+
+
                                 startActivity(intent);
                             }
                         } catch (InterruptedException e) {
