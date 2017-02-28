@@ -15,6 +15,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 import in.silive.directme.Interface.AsyncResponse;
+import in.silive.directme.Utils.API_URL_LIST;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -35,7 +36,7 @@ public class FetchData extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPreExecute() {
-        Log.d("debugging", "pre execute : " + url);
+        Log.d("debugging", "pre execute : " + url+token+post_data);
         super.onPreExecute();
 
     }
@@ -49,43 +50,46 @@ public class FetchData extends AsyncTask<String, String, String> {
     @Override
     public String doInBackground(String... args) {
         String result = "";
-        try {
-            URL url = new URL(this.url);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setReadTimeout(15000);
-            connection.setConnectTimeout(15000);
-            connection.setRequestMethod("GET");
+        if (this.post_data == "") {
+            try {
+                URL url = new URL(API_URL_LIST.BASE_URL + this.url);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(15000);
+                connection.setConnectTimeout(15000);
+                connection.setRequestMethod("GET");
 //            String s = args[0];
-            connection.addRequestProperty("Authorization", "Token " + token);
-            connection.connect();
+                connection.addRequestProperty("Authorization", "Token " + token);
+                connection.connect();
 
-            int responseCode = connection.getResponseCode();
+                int responseCode = connection.getResponseCode();
 
-            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder sb = new StringBuilder("");
-                String line = "";
+                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder sb = new StringBuilder("");
+                    String line = "";
 
-                while ((line = in.readLine()) != null) {
+                    while ((line = in.readLine()) != null) {
 
-                    sb.append(line);
-                    break;
+                        sb.append(line);
+                        break;
+                    }
+
+                    in.close();
+                    result = sb.toString();
+                } else {
+                    Toast.makeText(getApplicationContext(), responseCode,
+                            Toast.LENGTH_LONG).show();
                 }
-
-                in.close();
-                result = sb.toString();
-            } else {
-                Toast.makeText(getApplicationContext(), responseCode,
-                        Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        if(post_data!=null)
+      else   if(this.post_data!="")
         {
             try {
-                URL url = new URL(this.url);
+                URL url = new URL(API_URL_LIST.BASE_URL+this.url);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setReadTimeout(15000);
                 connection.setConnectTimeout(15000);

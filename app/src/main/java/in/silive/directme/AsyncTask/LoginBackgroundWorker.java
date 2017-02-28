@@ -76,7 +76,7 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
             e.printStackTrace();
         }
         try {
-            URL url = new URL(API_URL_LIST.USER_GOOGLE_OAUTH_URL);
+            URL url = new URL(API_URL_LIST.BASE_URL+API_URL_LIST.USER_GOOGLE_OAUTH_URL);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);

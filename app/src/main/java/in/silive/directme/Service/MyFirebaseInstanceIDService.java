@@ -58,6 +58,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         String post_data="";
         try {
             post_data = URLEncoder.encode("access_token", "UTF-8") + "=" + URLEncoder.encode(token, "UTF-8");
+            Log.d("fcm",post_data);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

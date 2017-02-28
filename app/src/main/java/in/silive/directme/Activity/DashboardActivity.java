@@ -85,7 +85,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         SharedPreferences sharedpreferences1 = getSharedPreferences(Authorization_Token, MODE_PRIVATE);
         token = sharedpreferences1.getString("Authorization_Token", "");
-        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+
         Log.d("token", token);
         //// TODO: 2/20/2017 change with correct fcm url and uncomment
         count();
