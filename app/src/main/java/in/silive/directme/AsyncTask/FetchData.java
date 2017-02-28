@@ -1,19 +1,13 @@
 package in.silive.directme.AsyncTask;
 
-import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -27,8 +21,10 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class FetchData extends AsyncTask<String, String, String> {
 
+    String token=null;
     private AsyncResponse delegate = null;//Call back interface
-
+    private String post_data=null;
+    private String url="";
 
     public FetchData(AsyncResponse asyncResponse) {
         delegate = asyncResponse;//Assigning call back interfacethrough constructor
@@ -36,54 +32,60 @@ public class FetchData extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPreExecute() {
+        Log.d("debugging", "pre execute : " + url);
         super.onPreExecute();
+
+    }
+
+    public void setArgs(String url, String token, String post_data){
+        this.url = url;
+        this.token = token;
+        this.post_data = post_data;
     }
 
     @Override
     public String doInBackground(String... args) {
         String result = "";
-            try {
-                URL url = new URL(args[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setReadTimeout(15000);
-                connection.setConnectTimeout(15000);
-                connection.setRequestMethod(args[1]);
-                connection.addRequestProperty("Authorization", "Token "+args[2]);
-                connection.connect();
+        try {
+            URL url = new URL(this.url);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(15000);
+            connection.setConnectTimeout(15000);
+            connection.setRequestMethod("GET");
+//            String s = args[0];
+            connection.addRequestProperty("Authorization", "Token " + token);
+            connection.connect();
 
-                OutputStream outputStream = connection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                bufferedWriter.write(args[3]);
-                bufferedWriter.flush();
-                bufferedWriter.close();
+            int responseCode = connection.getResponseCode();
 
-                int responseCode = connection.getResponseCode();
-                if (responseCode == HttpsURLConnection.HTTP_OK) {
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuffer sb = new StringBuffer("");
-                    String line;
-                    while ((line = in.readLine()) != null) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder sb = new StringBuilder("");
+                String line = "";
 
-                        sb.append(line);
-                        break;
-                    }
+                while ((line = in.readLine()) != null) {
 
-                    in.close();
-                    result = sb.toString();
-                } else {
-                    Toast.makeText(getApplicationContext(), responseCode,
-                            Toast.LENGTH_LONG).show();
+                    sb.append(line);
+                    break;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        return result;
 
+                in.close();
+                result = sb.toString();
+            } else {
+                Toast.makeText(getApplicationContext(), responseCode,
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
+
 
     @Override
     protected void onPostExecute(String result) {
+        Log.d("debugging", "post execute : " + result);
         delegate.processFinish(result);
         super.onPostExecute(result);
     }
