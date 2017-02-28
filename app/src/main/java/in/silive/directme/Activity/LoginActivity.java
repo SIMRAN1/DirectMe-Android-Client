@@ -150,10 +150,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             GoogleSignInAccount acct = result.getSignInAccount();
             String personName = acct.getDisplayName();
             String email = acct.getEmail();
+            
 
             LoginBackgroundWorker loginBackgroundWorker = new LoginBackgroundWorker(new AsyncResponse() {
                 @Override
                 public void processFinish(String output) {
+
 
 
                     System.out.println(output);

@@ -44,6 +44,10 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
     public AsyncResponse delecate  = null;
     public static final String MyPREFERENCES = "Authorization_Token" ;
     ProgressDialog progressDialog;
+    private String url;
+    private String token;
+    private String post_data;
+
 
     public LoginBackgroundWorker(AsyncResponse stringInterface){
         this.delecate = stringInterface;
@@ -52,6 +56,11 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
     protected void onPreExecute() {
         super.onPreExecute();
 
+    }
+    public void setArgs(String url, String token, String post_data){
+        this.url = url;
+        this.token = token;
+        this.post_data = post_data;
     }
 
     @Override

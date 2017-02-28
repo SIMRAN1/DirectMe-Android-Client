@@ -61,7 +61,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        fetchData.execute(API_URL_LIST.FIREBASE_TOKEN_UPDATE, "POST", authorization_token, post_data);
+        fetchData.setArgs(API_URL_LIST.FIREBASE_TOKEN_UPDATE,authorization_token,post_data);
+        fetchData.execute();
 
         Log.e(TAG, "sendRegistrationToServer: " + token);
     }
