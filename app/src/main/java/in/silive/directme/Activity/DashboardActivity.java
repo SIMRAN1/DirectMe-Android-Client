@@ -111,7 +111,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-//                fetchData.execute(API_URL_LIST.FIREBASE_TOKEN_UPDATE, "POST", token, post_data);
+                fetchData.setArgs(API_URL_LIST.FIREBASE_TOKEN_UPDATE,token,post_data);
+              fetchData.execute();
 
             }
 
