@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import in.silive.directme.activity.ShipTransitionActivity;
 import in.silive.directme.model.UserDetailsList;
 
 import in.silive.directme.R;
@@ -63,7 +64,9 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
         @Override
         public void onClick(View v) {
             String s=usr_name.getText().toString();
-
+            Intent i=new Intent(context, ShipTransitionActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
             Toast.makeText(context,s,Toast.LENGTH_LONG).show();
         }
     }

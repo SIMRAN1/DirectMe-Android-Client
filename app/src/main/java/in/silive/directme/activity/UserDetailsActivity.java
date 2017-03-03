@@ -121,7 +121,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         for (int i = 0; i < user_names.length; i++) {
             UserDetailsList userDetailsList = new UserDetailsList();
             Toast.makeText(getApplicationContext(),user_names[i],Toast.LENGTH_LONG).show();
-
+            userDetailsList.setUser_name(user_names[i]);
             userDetailsList.setUser_image_url("simran");
             user_details.add(userDetailsList);
         }
