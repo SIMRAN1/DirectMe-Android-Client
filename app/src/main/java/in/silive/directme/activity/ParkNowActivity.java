@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -96,14 +99,14 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
-
+    Fragment fr;
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
 
             case R.id.imageViewisland1:
-                cloud1.setVisibility(View.VISIBLE);
+           /*     cloud1.setVisibility(View.VISIBLE);
                 cloud2.setVisibility(View.VISIBLE);
                 animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud1);
                 animationb = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud2);
@@ -129,6 +132,9 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
                 //making UserModel list visible
                 //    llUserList.setVisibility(View.VISIBLE);
+                */
+                 Intent i=new Intent(getApplicationContext(),UserDetailsActivity.class);
+                startActivity(i);
 
                 break;
             case R.id.imageViewisland2:
@@ -242,6 +248,8 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 //     llUserList.setVisibility(View.VISIBLE);
                 break;
         }
+
+
     }
 
     public void userList(String island) {

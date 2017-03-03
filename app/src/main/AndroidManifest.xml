@@ -89,8 +89,9 @@
 
             </intent-filter>
         </activity>
+
         <activity
-            android:name="in.silive.directme.activity.UserDetailsActivity"
+            android:name="in.silive.directme.activity.ShowroomActivity"
             android:screenOrientation="landscape">
 
 
@@ -101,7 +102,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="in.silive.directme.activity.ShowroomActivity"
+            android:name="in.silive.directme.activity.UserDetailsActivity"
             android:screenOrientation="landscape">
 
 
