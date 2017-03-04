@@ -67,7 +67,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
             Intent i=new Intent(context, ShipTransitionActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
-            Toast.makeText(context,s,Toast.LENGTH_LONG).show();
+
         }
     }
 

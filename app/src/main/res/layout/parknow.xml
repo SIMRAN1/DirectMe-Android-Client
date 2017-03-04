@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
@@ -15,6 +17,7 @@
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -23,6 +26,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:layout_constraintRight_toLeftOf="@+id/guideline15">
 
+
         <ImageView
             android:id="@+id/water"
             android:layout_width="0dp"
@@ -30,7 +34,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintVertical_bias="0.0">
 
 
         </ImageView>
@@ -48,7 +54,7 @@
             android:id="@+id/imageViewisland1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/island1"
+            android:src="@drawable/ic_banana_island"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -76,9 +82,9 @@
 
         <ImageView
             android:id="@+id/imageViewisland2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/island2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_coconut_island"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -106,13 +112,15 @@
 
         <ImageView
             android:id="@+id/imageViewpirateisland"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pirateisland"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_pyrate_island"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageViewpirateislandmarker"
@@ -137,13 +145,15 @@
 
         <ImageView
             android:id="@+id/imageViewisland3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/island3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_banboo_island"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageViewisland3marker"
@@ -168,13 +178,15 @@
 
         <ImageView
             android:id="@+id/imageViewisland4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/island4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_wood_island"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageViewisland4marker"
@@ -189,36 +201,13 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
+
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/cloud"
-        app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:layout_constraintBottom_toTopOf="@+id/guideline17"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline14"
-        app:layout_constraintRight_toLeftOf="@+id/guideline15">
-
-        <ImageView
-            app:srcCompat="@drawable/cloud1"
-            android:id="@+id/imageViewcloud1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:srcCompat="@drawable/cloud2"
-            android:id="@+id/imageViewcloud2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline7"
@@ -318,17 +307,15 @@
         app:layout_constraintGuide_percent="1.0"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="359dp" />
-    <fragment
 
-        android:name="in.silive.directme.activity.UserDetailsActivity"
-
-        android:id="@+id/fragment_place"
-
-        android:layout_width="match_parent"
-
-        android:layout_height="match_parent"
-        />
-
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline43"
+        app:layout_constraintGuide_percent="0.0"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
 
 </android.support.constraint.ConstraintLayout>

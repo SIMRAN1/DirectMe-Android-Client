@@ -26,7 +26,7 @@ import in.silive.directme.utils.BitmapUtils;
  * Created by simran on 3/3/2017.
  */
 
-public class ShipTransitionActivity extends AppCompatActivity {
+public class ShipTransitionActivity extends AppCompatActivity implements Animation.AnimationListener{
     // frame width
     private static final int FRAME_W = 300;
     // frame height
@@ -59,7 +59,8 @@ public class ShipTransitionActivity extends AppCompatActivity {
         startAnimation();
         Animation animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanimtransition);
         iv_boat.startAnimation(animation_boat);
-        
+        animation_boat.setAnimationListener(this);
+
     }
     private void startAnimation() {
         Bitmap waterbmp = BitmapUtils.getBitmapFromAssets("splashh.png");
@@ -111,5 +112,22 @@ public class ShipTransitionActivity extends AppCompatActivity {
         alertDialog.create();
         alertDialog.setCancelable(false);
         alertDialog.show();
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        Intent i=new Intent(getApplicationContext(),ParkedActivity.class);
+        startActivity(i);
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 }

@@ -1,4 +1,4 @@
-package in.silive.directme.activity;
+package in.silive.directme.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -39,7 +39,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by simran on 2/24/2017.
  */
 
-public class UserDetailsActivity extends Fragment {
+public class UserDetailsFragment extends Fragment {
     public final String user_names[]=new String[10] ;
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;

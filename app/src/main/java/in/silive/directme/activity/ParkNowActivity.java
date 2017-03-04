@@ -1,42 +1,21 @@
 package in.silive.directme.activity;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import in.silive.directme.application.DirectMe;
-import in.silive.directme.network.FetchData;
-import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.R;
-import in.silive.directme.utils.API_URL_LIST;
+import in.silive.directme.fragments.UserDetailsFragment;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 //// TODO: 2/22/2017 set animation in a method and uncomment
@@ -82,12 +61,9 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         island3.setOnClickListener(this);
         island4.setOnClickListener(this);
         pirate_Island.setOnClickListener(this);
-        cloud1 = (ImageView) findViewById(R.id.imageViewcloud1);
-        cloud2 = (ImageView) findViewById(R.id.imageViewcloud2);
-        cloud1.setVisibility(View.INVISIBLE);
-        cloud2.setVisibility(View.INVISIBLE);
-        frag = findViewById(R.id.fragment_place);
-        frag.setVisibility(View.GONE);
+
+
+
         final ImageView animImageView = (ImageView) findViewById(R.id.water);
 
         animImageView.setBackgroundResource(R.drawable.animation);
@@ -99,14 +75,15 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 frameAnimation.start();
             }
         });
-        // removeuserList.setOnClickListener(this);
+        // removeuserList.setOnClickListe
+        // ner(this);
 
 
     }
 
-    FragmentManager fm;
+    FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    Fragment fr = null;
+    UserDetailsFragment fragment ;
 
     @Override
     public void onClick(View view) {
@@ -126,7 +103,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             while (true) {
                                 sleep(10000);
-                                Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
+                                Intent intent=new Intent(getApplicationContext(),UserDetailsFragment.class);
                                 startActivity(intent);
                             }
                         } catch (InterruptedException e) {
@@ -141,55 +118,67 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 //making UserModel list visible
                 //    llUserList.setVisibility(View.VISIBLE);
                 */
-                //Intent i=new Intent(getApplicationContext(),UserDetailsActivity.class);
+                //Intent i=new Intent(getApplicationContext(),UserDetailsFragment.class);
                 //startActivity(i);
-                fr = new UserDetailsActivity();
-                frag.setVisibility(View.VISIBLE);
-                fm = getSupportFragmentManager();
+                fragmentManager = getSupportFragmentManager();
 
-                fragmentTransaction = fm.beginTransaction();
 
-                fragmentTransaction.replace(R.id.fragment_place, fr);
 
+
+                 fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                fragment= new UserDetailsFragment();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
                 break;
             case R.id.imageViewisland2:
 
-                fr = new UserDetailsActivity();
-                frag.setVisibility(View.VISIBLE);
-                fm = getSupportFragmentManager();
+                fragmentManager = getSupportFragmentManager();
 
-                fragmentTransaction = fm.beginTransaction();
 
-                fragmentTransaction.replace(R.id.fragment_place, fr);
 
+
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                fragment= new UserDetailsFragment();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 break;
             case R.id.imageViewisland3:
 
-                fr = new UserDetailsActivity();
-                frag.setVisibility(View.VISIBLE);
-                fm = getSupportFragmentManager();
+                fragmentManager = getSupportFragmentManager();
 
-                fragmentTransaction = fm.beginTransaction();
 
-                fragmentTransaction.replace(R.id.fragment_place, fr);
 
+
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                fragment= new UserDetailsFragment();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case R.id.imageViewisland4:
+                fragmentManager = getSupportFragmentManager();
 
-                fr = new UserDetailsActivity();
-                frag.setVisibility(View.VISIBLE);
-                fm = getSupportFragmentManager();
 
-                fragmentTransaction = fm.beginTransaction();
 
-                fragmentTransaction.replace(R.id.fragment_place, fr);
 
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                fragment= new UserDetailsFragment();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                break;
+                              break;
 
             case R.id.imageViewpirateisland:
 
