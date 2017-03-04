@@ -245,7 +245,6 @@ public class UserShipsFragment extends Fragment implements View.OnClickListener,
         gold_coin.setText(String.valueOf(controller.getGoldCoinCount()));
 
     }
-
     public void alertDialog(String title, String message) {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());

@@ -44,8 +44,6 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.parknow);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
         island1 = (ImageView) findViewById(R.id.imageViewisland1);
         island2 = (ImageView) findViewById(R.id.imageViewisland2);
         island3 = (ImageView) findViewById(R.id.imageViewisland3);
@@ -121,11 +119,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 //Intent i=new Intent(getApplicationContext(),UserDetailsFragment.class);
                 //startActivity(i);
                 fragmentManager = getSupportFragmentManager();
-
-
-
-
-                 fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                         R.anim.exit_to_right);
                 fragment= new UserDetailsFragment();
@@ -137,10 +131,6 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imageViewisland2:
 
                 fragmentManager = getSupportFragmentManager();
-
-
-
-
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                         R.anim.exit_to_right);
@@ -153,10 +143,6 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imageViewisland3:
 
                 fragmentManager = getSupportFragmentManager();
-
-
-
-
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                         R.anim.exit_to_right);
@@ -167,10 +153,6 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.imageViewisland4:
                 fragmentManager = getSupportFragmentManager();
-
-
-
-
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                         R.anim.exit_to_right);
