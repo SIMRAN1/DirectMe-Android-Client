@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import in.silive.directme.NetworkUtils;
+import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.adapter.BoatPagerAdapter;
 import in.silive.directme.application.DirectMe;

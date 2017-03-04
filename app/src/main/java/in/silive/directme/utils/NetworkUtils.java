@@ -1,4 +1,4 @@
-package in.silive.directme;
+package in.silive.directme.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -16,7 +16,6 @@ public class NetworkUtils {
                 .getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
-
 
     public static boolean isGooglePlayServicesAvailable() {
         GoogleApiAvailability gApi = GoogleApiAvailability.getInstance();

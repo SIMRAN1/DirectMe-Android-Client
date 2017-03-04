@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Observable;
 
-import in.silive.directme.NetworkUtils;
+import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.activity.DashboardActivity;
 import in.silive.directme.activity.ParkNowActivity;

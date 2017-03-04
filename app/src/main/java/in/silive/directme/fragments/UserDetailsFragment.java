@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import in.silive.directme.NetworkUtils;
+import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.adapter.DataUserSelectAdapter;
 import in.silive.directme.application.DirectMe;
