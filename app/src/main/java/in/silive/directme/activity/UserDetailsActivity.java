@@ -39,26 +39,26 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by simran on 2/24/2017.
  */
 
-public class UserDetailsActivity extends AppCompatActivity {
+public class UserDetailsActivity extends Fragment {
     public final String user_names[]=new String[10] ;
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;
     private boolean network_available;
     FetchData apicalling;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.recycler_view_userselect);
-
-        sharedPreferences=DirectMe.getInstance().sharedPrefs;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.recycler_view_userselect, container,
+                false);
+        sharedPreferences = DirectMe.getInstance().sharedPrefs;
+        recyclerView = (RecyclerView) v.findViewById(R.id.card_recycler_view);
 
         connect();
-
+        return v;
     }
 
     private void initViews() {
-        recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 5);
 
@@ -120,7 +120,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         ArrayList<UserDetailsList> user_details = new ArrayList<>();
         for (int i = 0; i < user_names.length; i++) {
             UserDetailsList userDetailsList = new UserDetailsList();
-            Toast.makeText(getApplicationContext(),user_names[i],Toast.LENGTH_LONG).show();
+
             userDetailsList.setUser_name(user_names[i]);
             userDetailsList.setUser_image_url("simran");
             user_details.add(userDetailsList);

@@ -318,6 +318,17 @@
         app:layout_constraintGuide_percent="1.0"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="359dp" />
+    <fragment
+
+        android:name="in.silive.directme.activity.UserDetailsActivity"
+
+        android:id="@+id/fragment_place"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        />
+
 
 
 </android.support.constraint.ConstraintLayout>

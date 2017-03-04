@@ -43,19 +43,21 @@ import java.util.HashMap;
 
 public class ParkNowActivity extends AppCompatActivity implements View.OnClickListener {
 
-//    public static final String Authorization_Token = "Authorization_Token";
+    //    public static final String Authorization_Token = "Authorization_Token";
 //    public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String times = "null";
     HashMap<String, String> queryValues;
     ArrayList<HashMap<String, String>> users;
-    ImageView cloud1,cloud2;
+    ImageView cloud1, cloud2;
     String token;
+
     SharedPreferences sharedPreferences, sharedPreferences1;
     String PARK_NOW = "PARK_NOW";
     SharedPreferences.Editor editor1;
     Thread thread;
     Animation animation, animationb;
     private ImageView island1, island2, island3, island4, pirate_Island;
+    View frag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +86,8 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         cloud2 = (ImageView) findViewById(R.id.imageViewcloud2);
         cloud1.setVisibility(View.INVISIBLE);
         cloud2.setVisibility(View.INVISIBLE);
+        frag = findViewById(R.id.fragment_place);
+        frag.setVisibility(View.GONE);
         final ImageView animImageView = (ImageView) findViewById(R.id.water);
 
         animImageView.setBackgroundResource(R.drawable.animation);
@@ -99,7 +103,11 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
-    Fragment fr;
+
+    FragmentManager fm;
+    FragmentTransaction fragmentTransaction;
+    Fragment fr = null;
+
     @Override
     public void onClick(View view) {
 
@@ -133,124 +141,65 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 //making UserModel list visible
                 //    llUserList.setVisibility(View.VISIBLE);
                 */
-                 Intent i=new Intent(getApplicationContext(),UserDetailsActivity.class);
-                startActivity(i);
+                //Intent i=new Intent(getApplicationContext(),UserDetailsActivity.class);
+                //startActivity(i);
+                fr = new UserDetailsActivity();
+                frag.setVisibility(View.VISIBLE);
+                fm = getSupportFragmentManager();
 
+                fragmentTransaction = fm.beginTransaction();
+
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+
+                fragmentTransaction.commit();
                 break;
             case R.id.imageViewisland2:
 
-                cloud1.setVisibility(View.VISIBLE);
-                cloud2.setVisibility(View.VISIBLE);
-                animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud1);
-                animationb = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud2);
-                cloud1.startAnimation(animation);
-                cloud2.startAnimation(animationb);
-                thread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (true) {
-                                sleep(10000);
-                                Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
-                                startActivity(intent);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
+                fr = new UserDetailsActivity();
+                frag.setVisibility(View.VISIBLE);
+                fm = getSupportFragmentManager();
 
-                thread.start();
-                //making UserModel list visible
-                //      llUserList.setVisibility(View.VISIBLE);
+                fragmentTransaction = fm.beginTransaction();
+
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+
+                fragmentTransaction.commit();
 
                 break;
             case R.id.imageViewisland3:
 
-                cloud1.setVisibility(View.VISIBLE);
-                cloud2.setVisibility(View.VISIBLE);
-                animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud1);
-                animationb = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud2);
-                cloud1.startAnimation(animation);
-                cloud2.startAnimation(animationb);
-                thread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (true) {
-                                sleep(10000);
-                                Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
-                                startActivity(intent);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
+                fr = new UserDetailsActivity();
+                frag.setVisibility(View.VISIBLE);
+                fm = getSupportFragmentManager();
 
-                thread.start();
-                //making UserModel list visible
-                //     llUserList.setVisibility(View.VISIBLE);
+                fragmentTransaction = fm.beginTransaction();
 
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+
+                fragmentTransaction.commit();
                 break;
             case R.id.imageViewisland4:
 
-                cloud1.setVisibility(View.VISIBLE);
-                cloud2.setVisibility(View.VISIBLE);
-                animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud1);
-                animationb = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud2);
-                cloud1.startAnimation(animation);
-                cloud2.startAnimation(animationb);
-                thread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (true) {
-                                sleep(10000);
-                                Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
-                                startActivity(intent);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
+                fr = new UserDetailsActivity();
+                frag.setVisibility(View.VISIBLE);
+                fm = getSupportFragmentManager();
 
-                thread.start();
-                //making UserModel list visible
-                //     llUserList.setVisibility(View.VISIBLE);
+                fragmentTransaction = fm.beginTransaction();
+
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+
+                fragmentTransaction.commit();
                 break;
 
             case R.id.imageViewpirateisland:
-                cloud1.setVisibility(View.VISIBLE);
-                cloud2.setVisibility(View.VISIBLE);
-                animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud1);
-                animationb = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud2);
-                cloud1.startAnimation(animation);
-                cloud2.startAnimation(animationb);
-                thread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (true) {
-                                sleep(10000);
-                                Intent intent=new Intent(getApplicationContext(),UserDetailsActivity.class);
-                                startActivity(intent);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
 
-                thread.start();
-                //making ISland view Visible
-                //     llUserList.setVisibility(View.VISIBLE);
                 break;
         }
 
 
     }
+}
+    /*
 
     public void userList(String island) {
 
@@ -402,8 +351,9 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
         });*/
-    }
 
-}
+
+
+
 
 
