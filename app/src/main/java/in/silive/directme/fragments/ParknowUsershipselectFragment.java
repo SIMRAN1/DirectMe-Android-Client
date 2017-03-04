@@ -14,6 +14,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,8 @@ import in.silive.directme.activity.ParkNowActivity;
  * Created by simran on 2/23/2017.
  */
 
-public class ParknowUsershipselectFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
+public class ParknowUsershipselectFragment extends Fragment implements View.OnClickListener {
 
-    @Nullable
     public static int FRAME_W = 720;
     // frame height
     public static int FRAME_H;
@@ -45,7 +45,6 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
     public static String spritesheetimage;
     ImageView boat_image;
     Button select;
-    private Bitmap[] bitmaps;
 
 
     public ParknowUsershipselectFragment() {
@@ -64,7 +63,7 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
         select.setOnClickListener(this);
         if (boat_bitmap != null) {
 
-            bitmaps = new Bitmap[NB_FRAMES];
+            Bitmap[] bitmaps = new Bitmap[NB_FRAMES];
             int currentFrame = 0;
 
             for (int i = 0; i < COUNT_Y; i++) {
@@ -127,6 +126,7 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
                 try {
                     istr.close();
                 } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }

@@ -1,7 +1,6 @@
 package in.silive.directme.fragments;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,21 +26,21 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Observable;
 
+import in.silive.directme.NetworkUtils;
+import in.silive.directme.R;
 import in.silive.directme.activity.DashboardActivity;
 import in.silive.directme.activity.ParkNowActivity;
-import in.silive.directme.NetworkUtils;
-import in.silive.directme.Controller;
 import in.silive.directme.application.DirectMe;
+import in.silive.directme.controller.Controller;
 import in.silive.directme.database.DatabaseHandler;
 import in.silive.directme.database.ShipModel;
-import in.silive.directme.R;
 
 /**
  * Created by Lenovo on 01-Dec-16.
  */
 
 public class UserShipsFragment extends Fragment implements View.OnClickListener, java.util.Observer {
-//    public static final String MyPREFERENCES = "MyPrefs";
+    //    public static final String MyPREFERENCES = "MyPrefs";
     public static int value;
     static JSONObject data;
     TextView parkingUserName, parkingBoatName, parkingIsland;
@@ -245,6 +244,7 @@ public class UserShipsFragment extends Fragment implements View.OnClickListener,
         gold_coin.setText(String.valueOf(controller.getGoldCoinCount()));
 
     }
+
     public void alertDialog(String title, String message) {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());

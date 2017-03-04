@@ -1,15 +1,9 @@
 package in.silive.directme.network;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,7 +18,6 @@ import java.net.URLEncoder;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import in.silive.directme.application.DirectMe;
 import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.utils.API_URL_LIST;
 
@@ -34,44 +27,31 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by Shobhit-pc on 2/23/2017.
  */
 
-public class LoginBackgroundWorker  extends AsyncTask<String , String , String> {
+public class LoginBackgroundWorker extends AsyncTask<String, String, String> {
 
-    public AsyncResponse delecate  = null;
-//    public static final String MyPREFERENCES = "Authorization_Token" ;
-    ProgressDialog progressDialog;
-    private String url;
-    private String token;
-    private String post_data;
+    private AsyncResponse delecate = null;
 
-
-    public LoginBackgroundWorker(AsyncResponse stringInterface){
+    public LoginBackgroundWorker(AsyncResponse stringInterface) {
         this.delecate = stringInterface;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
     }
-    public void setArgs(String url, String token, String post_data){
-        this.url = url;
-        this.token = token;
-        this.post_data = post_data;
-    }
 
     @Override
     protected String doInBackground(String... params) {
-        String token = "",result = "";
+        String token = "", result = "";
         String scopes = "oauth2:profile email";
         try {
-            token = GoogleAuthUtil.getToken(getApplicationContext(), params[0] , scopes );
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } catch (GoogleAuthException e) {
+            token = GoogleAuthUtil.getToken(getApplicationContext(), params[0], scopes);
+        } catch (IOException | GoogleAuthException e) {
             e.printStackTrace();
         }
         try {
-            URL url = new URL(API_URL_LIST.BASE_URL+API_URL_LIST.USER_GOOGLE_OAUTH_URL);
+            URL url = new URL(API_URL_LIST.BASE_URL + API_URL_LIST.USER_GOOGLE_OAUTH_URL);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
@@ -91,7 +71,7 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
                 String line = "";
                 while ((line = bufferedReader.readLine()) != null) {
 
-                        result += line;
+                    result += line;
                 }
                 bufferedReader.close();
                 inputStream.close();
@@ -101,7 +81,6 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
             e.printStackTrace();
         }
 
-//return result from the server
         return result;
     }
 

@@ -1,6 +1,5 @@
 package in.silive.directme.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,26 +26,26 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import in.silive.directme.application.DirectMe;
-import in.silive.directme.network.LoginBackgroundWorker;
-import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.R;
+import in.silive.directme.application.DirectMe;
+import in.silive.directme.listeners.AsyncResponse;
+import in.silive.directme.network.LoginBackgroundWorker;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
 
-    //Signin button
-    private SignInButton signInButton;
-    //Signing Options
-    private GoogleSignInOptions gso;
-//    public static final String MyPREFERENCES = "Authorization_Token" ;
-    //google api client
-    private GoogleApiClient mGoogleApiClient;
     public static final String usergid = "gidKey";
     public static final String userfbid = "Authorization_Token";
     //Signin constant to check the activity result
     public int RC_SIGN_IN = 100;
+    //Signin button
+    private SignInButton signInButton;
+    //Signing Options
+    private GoogleSignInOptions gso;
+    //    public static final String MyPREFERENCES = "Authorization_Token" ;
+    //google api client
+    private GoogleApiClient mGoogleApiClient;
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
@@ -151,14 +150,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             LoginBackgroundWorker loginBackgroundWorker = new LoginBackgroundWorker(new AsyncResponse() {
                 @Override
                 public void processFinish(String output) {
-                    JSONObject jsonObject= null;
+                    JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(output);
-                        token=jsonObject.getString("token");
+                        token = jsonObject.getString("token");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                  
+
                     SharedPreferences sharedpreferences = DirectMe.getInstance().sharedPrefs;
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("Authorization_Token", token);
@@ -179,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startDashboardActivity() {
-        Intent i = new Intent(LoginActivity.this , DashboardActivity.class);
+        Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
         finish();
         startActivity(i);
     }

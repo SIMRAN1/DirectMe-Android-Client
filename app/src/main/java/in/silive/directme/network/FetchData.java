@@ -1,7 +1,6 @@
 package in.silive.directme.network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -73,7 +72,7 @@ public class FetchData extends AsyncTask<String, String, String> {
             }
 
             int responseCode = connection.getResponseCode();
-            Log.d("debuggingfcm response", Integer.toString(responseCode));
+            LoggerUtils.logger("resonse code : " + responseCode);
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

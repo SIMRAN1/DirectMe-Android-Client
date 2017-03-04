@@ -15,6 +15,8 @@ import in.silive.directme.application.DirectMe;
 import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
+import in.silive.directme.utils.Constants;
+import in.silive.directme.utils.LoggerUtils;
 
 /**
  * Created by Shobhit-pc on 2/16/2017.
@@ -30,7 +32,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         super.onTokenRefresh();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-        System.out.println("refreshedToken" + refreshedToken);
+        LoggerUtils.logger("refreshedToken" + refreshedToken);
         // Saving reg id to shared preferences
         storeRegIdInPref(refreshedToken);
 
@@ -38,7 +40,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         sendRegistrationToServer(refreshedToken);
 
         // Notify UI that registration has completed, so the progress indicator can be hidden.
-        Intent registrationComplete = new Intent(FCMConfig.REGISTRATION_COMPLETE);
+        Intent registrationComplete = new Intent(Constants.REGISTRATION_COMPLETE);
         registrationComplete.putExtra("token", refreshedToken);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }

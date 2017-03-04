@@ -2,17 +2,12 @@ package in.silive.directme.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +16,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import in.silive.directme.NetworkUtils;
 import in.silive.directme.R;
@@ -40,11 +34,12 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 
 public class UserDetailsFragment extends Fragment {
-    public final String user_names[]=new String[10] ;
+    public final String user_names[] = new String[10];
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;
-    private boolean network_available;
     FetchData apicalling;
+    String post_data;
+    private boolean network_available;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,9 +64,8 @@ public class UserDetailsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-
     }
-    String post_data;
+
     void connect() {
         final String token = sharedPreferences.getString("Authorization_Token", "");
         network_available = NetworkUtils.isNetConnected();
@@ -92,15 +86,11 @@ public class UserDetailsFragment extends Fragment {
                                 JSONObject obj = (JSONObject) arr.get(i);
                                 user_names[i] = obj.get("name").toString();
                                 initViews();
-
-
                             }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                        catch(JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
                 }
             });
             String post_data = "";
@@ -109,7 +99,7 @@ public class UserDetailsFragment extends Fragment {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            apicalling.setArgs(API_URL_LIST.GET_USER_LIST, token,post_data);
+            apicalling.setArgs(API_URL_LIST.GET_USER_LIST, token, post_data);
             apicalling.execute();
 
         }
@@ -118,10 +108,10 @@ public class UserDetailsFragment extends Fragment {
     private ArrayList<UserDetailsList> prepareData() {
 
         ArrayList<UserDetailsList> user_details = new ArrayList<>();
-        for (int i = 0; i < user_names.length; i++) {
+        for (String userName : user_names) {
             UserDetailsList userDetailsList = new UserDetailsList();
-
-            userDetailsList.setUser_name(user_names[i]);
+            userDetailsList.setUser_name(userName);
+            //// TODO: 3/4/2017 add image url
             userDetailsList.setUser_image_url("simran");
             user_details.add(userDetailsList);
         }

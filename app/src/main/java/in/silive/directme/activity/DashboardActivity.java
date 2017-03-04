@@ -26,7 +26,7 @@ import java.util.Observable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.silive.directme.Controller;
+import in.silive.directme.controller.Controller;
 import in.silive.directme.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
@@ -111,7 +111,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 });
                 String post_data = "";
                 try {
+
                     post_data = URLEncoder.encode("fcm_token", "UTF-8") + "=" + URLEncoder.encode(Firebase_token, "UTF-8");
+
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

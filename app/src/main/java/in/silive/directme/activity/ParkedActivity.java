@@ -23,7 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import in.silive.directme.Controller;
+import in.silive.directme.controller.Controller;
 import in.silive.directme.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
@@ -197,7 +197,6 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
         final Dialog dialog = new Dialog(ParkedActivity.this);
 
-//        dialog.setContentView(R.layout.parked);
         View view = View.inflate(this, R.layout.customdialog, null);
         dialog.setContentView(view);
         TextView BoatnameTextview = (TextView) dialog.findViewById(R.id.BOATNAMEVALUE);

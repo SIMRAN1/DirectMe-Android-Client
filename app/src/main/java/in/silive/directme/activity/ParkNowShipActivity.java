@@ -20,7 +20,6 @@ import in.silive.directme.fragments.ParknowUsershipselectFragment;
 
 public class ParkNowShipActivity extends AppCompatActivity {
     ViewPager mViewPager;
-    int count = 1;
     ImageView left, right;
     Bundle arguments;
     String spritesheetship1 = "ship1spritesheet.png";
