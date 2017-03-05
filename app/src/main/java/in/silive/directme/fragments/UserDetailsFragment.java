@@ -69,7 +69,7 @@ public class UserDetailsFragment extends Fragment {
 
     void connect() {
         final String token = sharedPreferences.getString("Authorization_Token", "");
-        final String id=sharedPreferences.getString("Island_id","");
+        final String id=sharedPreferences.getString("ISLAND_ID","");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
             apicalling = new FetchData(new AsyncResponse() {

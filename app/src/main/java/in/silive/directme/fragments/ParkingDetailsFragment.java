@@ -117,7 +117,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
     }
     void connect() {
         final String token = sharedPreferences.getString("Authorization_Token", "");
-        final String ship_id=sharedPreferences.getString("Ship_id","");
+        final String ship_id=sharedPreferences.getString("SHIP_ID","");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
             apicalling = new FetchData(new AsyncResponse() {

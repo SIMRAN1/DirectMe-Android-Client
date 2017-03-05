@@ -89,64 +89,36 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.imageViewisland1:
 
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
-                        R.anim.exit_to_right);
-                fragment = new UserDetailsFragment();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentInitialise();
                  sharedpreferences = DirectMe.getInstance().sharedPrefs;
                  editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,Constants.Banana_Island_id);
+                editor.putString(Constants.ISLAND_ID,Constants.BANANA_ISLAND_ID);
                 editor.commit();
 
                 break;
             case R.id.imageViewisland2:
+                 fragmentInitialise();
 
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
-                        R.anim.exit_to_right);
-                fragment = new UserDetailsFragment();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
                  sharedpreferences = DirectMe.getInstance().sharedPrefs;
                  editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,Constants.Coconut_Island_id);
+                editor.putString(Constants.ISLAND_ID,Constants.COCONUT_ISLAND_ID);
                 editor.commit();
 
                 break;
             case R.id.imageViewisland3:
 
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
-                        R.anim.exit_to_right);
-                fragment = new UserDetailsFragment();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentInitialise();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,Constants.Bamboo_Island_id);
+                editor.putString(Constants.ISLAND_ID,Constants.BAMBOO_ISLAND_ID);
                 editor.commit();
                 break;
             case R.id.imageViewisland4:
+                  fragmentInitialise();
 
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
-                        R.anim.exit_to_right);
-                fragment = new UserDetailsFragment();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,Constants.Timber_Island_id);
+                editor.putString(Constants.ISLAND_ID,Constants.TIMBER_ISLAND_ID);
                 editor.commit();
                 break;
 
@@ -154,11 +126,22 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,Constants.Pirate_Island_id);
+                editor.putString(Constants.ISLAND_ID,Constants.PIRATE_ISLAND_ID);
                 editor.commit();
 
                 break;
         }
+    }
+    void fragmentInitialise()
+    {fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                R.anim.exit_to_right);
+        fragment = new UserDetailsFragment();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
     }
 }
 

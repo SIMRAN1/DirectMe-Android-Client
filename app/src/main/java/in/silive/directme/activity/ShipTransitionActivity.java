@@ -68,7 +68,7 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
 
         startAnimation();
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
-        final String id=sharedPreferences.getString("Island_id","");
+        final String id=sharedPreferences.getString("ISLAND_ID","");
         islandImage(id);
          animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanimtransition);
 
@@ -77,7 +77,7 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
     }
     private void startBoatanimation()
     {
-        final String ship_img_url=sharedPreferences.getString("Ship_Image_Url","");
+        final String ship_img_url=sharedPreferences.getString("SHIP_IMAGE_URL","");
         Picasso.with(getApplicationContext())
                 .load(ship_img_url)
                 .into(iv_boat);

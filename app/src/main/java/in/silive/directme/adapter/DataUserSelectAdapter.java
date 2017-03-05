@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -82,7 +81,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
 
             SharedPreferences sharedpreferences = DirectMe.getInstance().sharedPrefs;
             SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putString(Constants.User_id,user_id);
+            editor.putString(Constants.USER_ID,user_id);
             editor.commit();
             Intent i=new Intent(context, ShipTransitionActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

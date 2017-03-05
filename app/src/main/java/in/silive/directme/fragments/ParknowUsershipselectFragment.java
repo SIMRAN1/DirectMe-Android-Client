@@ -7,12 +7,7 @@ package in.silive.directme.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,9 +21,6 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import in.silive.directme.R;
 import in.silive.directme.activity.ParkNowActivity;
@@ -182,8 +174,8 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
     public void onClick(View v) {
         SharedPreferences sharedpreferences = DirectMe.getInstance().sharedPrefs;
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(Constants.Ship_Image_Url, boatImageUrl);
-        editor.putString(Constants.Ship_id,id);
+        editor.putString(Constants.SHIP_IMAGE_URL, boatImageUrl);
+        editor.putString(Constants.SHIP_ID,id);
         editor.commit();
         Intent intent = new Intent(getActivity(), ParkNowActivity.class);
         startActivity(intent);
