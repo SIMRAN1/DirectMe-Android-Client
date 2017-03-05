@@ -96,7 +96,7 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
-
+    Bundle args;
 
     @Override
     public void onClick(View view) {
@@ -107,14 +107,14 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
                 parkedDetail("0");
                 if(status!=null) {
-                    port1status.setText("status");
+                    port1status.setText(status);
                 }
 
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                         R.anim.exit_to_right);
-                Bundle args = new Bundle();
+                 args = new Bundle();
                 args.putString("data", jsonObject.toString());
 
 
@@ -131,8 +131,22 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.port2:
                 parkedDetail("1");
                 if(status!=null) {
-                    port2status.setText("status");
+                    port2status.setText(status);
                 }
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                 args = new Bundle();
+                args.putString("data", jsonObject.toString());
+
+
+
+                fragment = new ParkingDetailsFragment();
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
 
 
@@ -140,8 +154,22 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.port3:
                 parkedDetail("2");
                 if(status!=null) {
-                    port3status.setText("status");
+                    port3status.setText(status);
                 }
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                args = new Bundle();
+                args.putString("data", jsonObject.toString());
+
+
+
+                fragment = new ParkingDetailsFragment();
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
 
 
@@ -149,16 +177,44 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.port4:
                 parkedDetail("3");
                 if(status!=null) {
-                    port4status.setText("status");
+                    port4status.setText(status);
                 }
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                args = new Bundle();
+                args.putString("data", jsonObject.toString());
+
+
+
+                fragment = new ParkingDetailsFragment();
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
 
                 break;
             case R.id.port5:
                 parkedDetail("4");
                 if(status!=null) {
-                    port5status.setText("status");
+                    port5status.setText(status);
                 }
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                        R.anim.exit_to_right);
+                args = new Bundle();
+                args.putString("data", jsonObject.toString());
+
+
+
+                fragment = new ParkingDetailsFragment();
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
 
                 break;

@@ -12,6 +12,11 @@ public class Constants {
     public static final String Ship_id="Ship_id";
     public static final String Island_id="Island_id";
     public static final String User_id="User_id";
+    public static final String Coconut_Island_id="1";
+    public static final String Banana_Island_id="3";
+    public static final String Timber_Island_id="2";
+    public static final String Pirate_Island_id="5";
+    public static final String Bamboo_Island_id="4";
 
 
     // global topic to receive app wide push notifications

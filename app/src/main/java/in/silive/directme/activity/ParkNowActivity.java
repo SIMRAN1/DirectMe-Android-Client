@@ -88,7 +88,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
 
             case R.id.imageViewisland1:
-                id="3";
+
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -99,12 +99,12 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.commit();
                  sharedpreferences = DirectMe.getInstance().sharedPrefs;
                  editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,id);
+                editor.putString(Constants.Island_id,Constants.Banana_Island_id);
                 editor.commit();
 
                 break;
             case R.id.imageViewisland2:
-                 id="1";
+
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -115,12 +115,12 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.commit();
                  sharedpreferences = DirectMe.getInstance().sharedPrefs;
                  editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,id);
+                editor.putString(Constants.Island_id,Constants.Coconut_Island_id);
                 editor.commit();
 
                 break;
             case R.id.imageViewisland3:
-                id="4";
+
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -131,11 +131,11 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.commit();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,id);
+                editor.putString(Constants.Island_id,Constants.Bamboo_Island_id);
                 editor.commit();
                 break;
             case R.id.imageViewisland4:
-                id="2";
+
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -146,15 +146,15 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.commit();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,id);
+                editor.putString(Constants.Island_id,Constants.Timber_Island_id);
                 editor.commit();
                 break;
 
             case R.id.imageViewpirateisland:
-                id="5";
+
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.Island_id,id);
+                editor.putString(Constants.Island_id,Constants.Pirate_Island_id);
                 editor.commit();
 
                 break;
