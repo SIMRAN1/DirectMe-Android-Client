@@ -53,12 +53,12 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
     NetworkUtils network;
     boolean network_available;
     DatabaseHandler db;
-    int comm[] = new int[5];
+   // int comm[] = new int[5];
     FetchData apiCalling;
-    TextView gold_coin_textview, banana_textview, coconut_textview, bamboo_textview, timber_textview;
-    Controller controller = new Controller();
+   // TextView gold_coin_textview, banana_textview, coconut_textview, bamboo_textview, timber_textview;
+   // Controller controller = new Controller();
     SharedPreferences sharedpreferences, sharedpreference;
-    String token;
+   // String token;
     String type;
     String id;
     TextView port1status,port2status,port3status,port4status,port5status;
