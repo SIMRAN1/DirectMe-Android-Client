@@ -1,4 +1,4 @@
-package in.silive.directme.activity;
+package in.silive.directme.fragments;
 
 /**
  * Created by Lenovo on 09-Nov-16.
@@ -13,10 +13,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -41,7 +44,7 @@ import in.silive.directme.utils.API_URL_LIST;
 import static android.R.attr.fragment;
 
 
-public class ParkedActivity extends AppCompatActivity implements View.OnClickListener {
+public class ParkedFragment extends Fragment implements View.OnClickListener {
 
     //    public static final String MyPREFERENCE = "MyPrefs";
 //    public static final String MyPREFERENCES = "UserName";
@@ -66,37 +69,35 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
     FragmentTransaction fragmentTransaction;
     ParkingDetailsFragment fragment;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.parked);
-        parkedShipDetial1 = (ConstraintLayout) findViewById(R.id.port1);
-        parkedShipDetial2 = (ConstraintLayout) findViewById(R.id.port2);
-        parkedShipDetial3 = (ConstraintLayout) findViewById(R.id.port3);
-        parkedShipDetial4 = (ConstraintLayout) findViewById(R.id.port4);
-        parkedShipDetial5 = (ConstraintLayout) findViewById(R.id.port5);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.parked, container,
+                false);
+        parkedShipDetial1 = (ConstraintLayout)rootView.findViewById(R.id.port1);
+        parkedShipDetial2 = (ConstraintLayout)rootView.findViewById(R.id.port2);
+        parkedShipDetial3 = (ConstraintLayout)rootView.findViewById(R.id.port3);
+        parkedShipDetial4 = (ConstraintLayout)rootView.findViewById(R.id.port4);
+        parkedShipDetial5 = (ConstraintLayout)rootView.findViewById(R.id.port5);
 
-        port1status=(TextView)findViewById(R.id.NamePort1);
-        port2status=(TextView)findViewById(R.id.NamePort2);
-        port3status=(TextView)findViewById(R.id.NamePort3);
-        port4status=(TextView)findViewById(R.id.NamePort4);
-        port5status=(TextView)findViewById(R.id.NamePort5);
+        port1status=(TextView)rootView.findViewById(R.id.NamePort1);
+        port2status=(TextView)rootView.findViewById(R.id.NamePort2);
+        port3status=(TextView)rootView.findViewById(R.id.NamePort3);
+        port4status=(TextView)rootView.findViewById(R.id.NamePort4);
+        port5status=(TextView)rootView.findViewById(R.id.NamePort5);
         sharedpreference = DirectMe.getInstance().sharedPrefs;
         parkedDetail("0");
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        db = new DatabaseHandler(getApplicationContext());
+        db = new DatabaseHandler(getActivity());
 
         parkedShipDetial1.setOnClickListener(this);
         parkedShipDetial2.setOnClickListener(this);
         parkedShipDetial3.setOnClickListener(this);
         parkedShipDetial4.setOnClickListener(this);
         parkedShipDetial5.setOnClickListener(this);
-
-
+        return  rootView;
     }
+
     Bundle args;
 
     @Override
@@ -155,7 +156,7 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
            /*case R.id.catchbutton:
-                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(ParkedActivity.this);
+                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(ParkedFragment.this);
                 alertDialog.setTitle("UNDOCK");
                 alertDialog.setMessage("Are you sure you want to this boat from your non parking area");
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -225,7 +226,7 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
     public void alertDialog(String title, String message) {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
         alertDialog.setPositiveButton("Settings",
@@ -251,7 +252,7 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
     void fragmentInitialise()
     {
-        fragmentManager = getSupportFragmentManager();
+        fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                 R.anim.exit_to_right);
@@ -262,8 +263,8 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
         fragment = new ParkingDetailsFragment();
         fragment.setArguments(args);
-        fragmentTransaction.replace(R.id.fragment, fragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+
         fragmentTransaction.commit();
 
     }

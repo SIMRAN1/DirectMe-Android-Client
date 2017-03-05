@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -27,6 +26,7 @@ import java.util.Observable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
+import in.silive.directme.fragments.ParkedFragment;
 import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
@@ -210,7 +210,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.imageviewparked:
-                Intent intent4 = new Intent(this, ParkedActivity.class);
+                Intent intent4 = new Intent(this, ParkedFragment.class);
                 startActivity(intent4);
                 break;
             case R.id.imageviewparking:
