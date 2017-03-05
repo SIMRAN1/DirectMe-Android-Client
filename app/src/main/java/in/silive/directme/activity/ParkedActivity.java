@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import in.silive.directme.Controller;
 import in.silive.directme.fragments.ParkingDetailsFragment;
 import in.silive.directme.fragments.UserDetailsFragment;
+import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
@@ -180,8 +181,8 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
     String user_id;
     JSONObject jsonObject;
     public void parkedDetail(final String parking_no) {
-        final String token = sharedpreference.getString("Authorization_Token", "");
-        user_id=sharedpreference.getString("USER_ID","");
+        final String token = sharedpreference.getString(Constants.AUTH_TOKEN, "");
+        user_id=sharedpreference.getString(Constants.USER_ID,"");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
 
@@ -247,25 +248,7 @@ public class ParkedActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void customdialog(String Username, String Type, String BoatName, String Time, String Commodity_Filled) {
 
-        final Dialog dialog = new Dialog(ParkedActivity.this);
-
-//        dialog.setContentView(R.layout.parked);
-        View view = View.inflate(this, R.layout.customdialog, null);
-        dialog.setContentView(view);
-        TextView BoatnameTextview = (TextView) dialog.findViewById(R.id.BOATNAMEVALUE);
-        BoatnameTextview.setText(BoatName);
-        TextView UsernameTextview = (TextView) dialog.findViewById(R.id.UserNameValue);
-        UsernameTextview.setText(Username);
-        TextView TypeTextView = (TextView) dialog.findViewById(R.id.TYPEVALUE);
-        TypeTextView.setText(Type);
-        TextView TimeTextView = (TextView) dialog.findViewById(R.id.TIMEVALUE);
-        TimeTextView.setText(Time);
-        TextView CommodityTextView = (TextView) dialog.findViewById(R.id.CommoditiesVALUE);
-        CommodityTextView.setText(Commodity_Filled);
-        dialog.show();
-    }
     void fragmentInitialise()
     {
         fragmentManager = getSupportFragmentManager();

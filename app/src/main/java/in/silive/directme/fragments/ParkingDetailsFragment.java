@@ -24,6 +24,7 @@ import in.silive.directme.application.DirectMe;
 import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
+import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.NetworkUtils;
 
 
@@ -116,8 +117,8 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
 
     }
     void connect() {
-        final String token = sharedPreferences.getString("Authorization_Token", "");
-        final String ship_id=sharedPreferences.getString("SHIP_ID","");
+        final String token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
+        final String ship_id=sharedPreferences.getString(Constants.SHIP_ID,"");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
             apicalling = new FetchData(new AsyncResponse() {

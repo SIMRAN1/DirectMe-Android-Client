@@ -46,7 +46,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
         //   Picasso.with(context).load(user_details.get(i).getUser_image_url()).resize(240, 120).into(viewHolder.usr_img);
         viewHolder.usr_img.setImageResource(R.drawable.ic_wood);
         userid=user_details.get(i).getUser_id();
-        viewHolder.setUser_id(userid);
+        viewHolder.setUserId(userid);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
 
 
 
-        public void setUser_id(String user_id) {
+        public void setUserId(String user_id) {
             this.user_id = user_id;
         }
 
@@ -77,7 +77,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
 
         @Override
         public void onClick(View v) {
-            String s=usr_name.getText().toString();
+
 
             SharedPreferences sharedpreferences = DirectMe.getInstance().sharedPrefs;
             SharedPreferences.Editor editor = sharedpreferences.edit();

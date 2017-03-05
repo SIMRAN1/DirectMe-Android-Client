@@ -27,6 +27,7 @@ import in.silive.directme.fragments.ParknowUsershipselectFragment;
 import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
+import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.NetworkUtils;
 
 
@@ -70,7 +71,7 @@ public class ParkNowShipActivity extends AppCompatActivity {
       connect();
     }
     void connect() {
-        final String token = sharedpreferences.getString("Authorization_Token", "");
+        final String token = sharedpreferences.getString(Constants.AUTH_TOKEN, "");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
             apicalling = new FetchData(new AsyncResponse() {

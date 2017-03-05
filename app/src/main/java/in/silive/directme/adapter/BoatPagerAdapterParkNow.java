@@ -38,12 +38,12 @@ public class BoatPagerAdapterParkNow extends FragmentPagerAdapter {
             try {
                 json_send = jArray.getJSONObject(position);
 
-                Log.d("shipapi", json_send.toString());
+
                 ParknowUsershipselectFragment parknowUsershipselectFragment = new ParknowUsershipselectFragment();
                 Bundle args = new Bundle();
                 args.putString("data", json_send.toString());
 
-                Log.d("args", args.toString());
+
                 parknowUsershipselectFragment.setArguments(args);
                 return parknowUsershipselectFragment;
 

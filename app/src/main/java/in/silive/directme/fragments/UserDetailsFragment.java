@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.adapter.DataUserSelectAdapter;
@@ -68,8 +69,8 @@ public class UserDetailsFragment extends Fragment {
     }
 
     void connect() {
-        final String token = sharedPreferences.getString("Authorization_Token", "");
-        final String id=sharedPreferences.getString("ISLAND_ID","");
+        final String token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
+        final String id=sharedPreferences.getString(Constants.ISLAND_ID,"");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
             apicalling = new FetchData(new AsyncResponse() {

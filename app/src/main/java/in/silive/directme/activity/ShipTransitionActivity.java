@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
 import in.silive.directme.utils.BitmapUtils;
+import in.silive.directme.utils.Constants;
 
 /**
  * Created by simran on 3/3/2017.
@@ -68,7 +69,7 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
 
         startAnimation();
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
-        final String id=sharedPreferences.getString("ISLAND_ID","");
+        final String id=sharedPreferences.getString(Constants.ISLAND_ID,"");
         islandImage(id);
          animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanimtransition);
 
@@ -93,7 +94,6 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
             // create animation programmatically
             final AnimationDrawable animation = new AnimationDrawable();
             animation.setOneShot(false); // repeat animation
-
             for (int i = 0; i < NB_FRAMES; i++) {
                 animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
                         FRAME_DURATION);
