@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.silive.directme.R;
+import in.silive.directme.application.DirectMe;
 import in.silive.directme.fragments.UserDetailsFragment;
+import in.silive.directme.utils.Constants;
 
 //// TODO: 2/22/2017 set animation in a method and uncomment
 
@@ -77,13 +79,16 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
-
+    String id;
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
 
             case R.id.imageViewisland1:
+                id="3";
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -92,10 +97,14 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                 editor = sharedpreferences.edit();
+                editor.putString(Constants.Island_id,id);
+                editor.commit();
 
                 break;
             case R.id.imageViewisland2:
-
+                 id="1";
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -104,10 +113,14 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                 editor = sharedpreferences.edit();
+                editor.putString(Constants.Island_id,id);
+                editor.commit();
 
                 break;
             case R.id.imageViewisland3:
-
+                id="4";
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -116,8 +129,13 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                editor = sharedpreferences.edit();
+                editor.putString(Constants.Island_id,id);
+                editor.commit();
                 break;
             case R.id.imageViewisland4:
+                id="2";
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
@@ -126,9 +144,18 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                editor = sharedpreferences.edit();
+                editor.putString(Constants.Island_id,id);
+                editor.commit();
                 break;
 
             case R.id.imageViewpirateisland:
+                id="5";
+                sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                editor = sharedpreferences.edit();
+                editor.putString(Constants.Island_id,id);
+                editor.commit();
 
                 break;
         }

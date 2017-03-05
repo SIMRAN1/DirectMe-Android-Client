@@ -8,6 +8,10 @@ public class Constants {
     public static final String LOG = "debugging";
     public static final String SHARED_PREFS = "directme_prefs";
     public static final String AUTH_TOKEN = "Authorization_Token";
+    public static final String Ship_Image_Url="Ship_Image_Url";
+    public static final String Ship_id="Ship_id";
+    public static final String Island_id="Island_id";
+    public static final String User_id="User_id";
 
 
     // global topic to receive app wide push notifications

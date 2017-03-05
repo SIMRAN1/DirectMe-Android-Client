@@ -3,6 +3,7 @@ package in.silive.directme.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,10 +17,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.R;
+import in.silive.directme.application.DirectMe;
 import in.silive.directme.utils.BitmapUtils;
 
 /**
@@ -45,7 +50,12 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
     ImageView iv_boat;
     @BindView(R.id.constraintLayout)
     ConstraintLayout rl;
+    @BindView(R.id.island)
+    ImageView island;
+    Animation animation_boat;
     private Thread thread;
+    private SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +67,21 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         startAnimation();
-        Animation animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanimtransition);
-        iv_boat.startAnimation(animation_boat);
+        sharedPreferences = DirectMe.getInstance().sharedPrefs;
+        final String id=sharedPreferences.getString("Island_id","");
+        islandImage(id);
+         animation_boat = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.boatanimtransition);
+
         animation_boat.setAnimationListener(this);
+       startBoatanimation();
+    }
+    private void startBoatanimation()
+    {
+        final String ship_img_url=sharedPreferences.getString("Ship_Image_Url","");
+        Picasso.with(getApplicationContext())
+                .load(ship_img_url)
+                .into(iv_boat);
+        iv_boat.startAnimation(animation_boat);
 
     }
     private void startAnimation() {
@@ -113,6 +135,25 @@ public class ShipTransitionActivity extends AppCompatActivity implements Animati
         alertDialog.setCancelable(false);
         alertDialog.show();
     }
+    void islandImage(String island_id)
+    {
+        int id=Integer.parseInt(island_id);
+        switch (id)
+        {
+            case 1:island.setImageResource(R.drawable.ic_coconut_island);
+                break;
+            case 2:island.setImageResource(R.drawable.ic_wood_island);
+                break;
+            case 3:island.setImageResource(R.drawable.ic_banana_island);
+                break;
+            case 4:island.setImageResource(R.drawable.ic_banboo_island);
+                break;
+            case 5:island.setImageResource(R.drawable.ic_pyrate_island);
+                break;
+        }
+
+    }
+
 
     @Override
     public void onAnimationStart(Animation animation) {
