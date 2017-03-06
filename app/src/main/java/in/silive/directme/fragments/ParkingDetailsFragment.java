@@ -39,7 +39,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
     private String type,id;
     SharedPreferences sharedPreferences;
     FetchData apicalling;
-
+     int flag=0;
     private boolean network_available;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
         TimeTextView = (TextView) v.findViewById(R.id.TIMEVALUE);
         Dock=(Button)v.findViewById(R.id.dock);
         Dock.setOnClickListener(this);
+
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         CommodityTextView = (TextView) v.findViewById(R.id.CommoditiesVALUE);
         try {
@@ -90,6 +91,21 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        if(flag==0)
+        {
+            Dock.setEnabled(true);
+            alertDialog();
+        }
+        else if(flag==1)
+        {
+            Dock.setEnabled(false);
+        }
+
+
+    }
+    void alertDialog()
+    {
+
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
         builder1.setMessage("Do you want to Dock your ship");
         builder1.setCancelable(true);
@@ -98,6 +114,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        flag=1;
                         connect();
                         Toast.makeText(getActivity(),"Your ship is docked succesfully",Toast.LENGTH_LONG).show();
                     }
@@ -107,6 +124,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                 "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        flag=0;
                         dialog.cancel();
                         Toast.makeText(getActivity(),"Your ship is not docked",Toast.LENGTH_LONG).show();
                     }
@@ -114,7 +132,6 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
-
     }
     void connect() {
         final String token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
