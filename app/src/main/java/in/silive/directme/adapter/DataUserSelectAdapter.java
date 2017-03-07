@@ -85,8 +85,8 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
         public void onClick(View v) {
             fragmentManager = parkNowActivity.getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
-                    R.anim.exit_to_right);
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,
+                    R.anim.exit_to_left);
             fragment = new ShipTransitionFragment();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
 

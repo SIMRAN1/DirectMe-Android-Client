@@ -70,6 +70,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="in.silive.directme.activity.ParkOnMineActivity"
+            android:screenOrientation="landscape">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+            </intent-filter>
+        </activity>
+        <activity
             android:name="in.silive.directme.activity.ParkNowShipActivity"
             android:screenOrientation="landscape">
 

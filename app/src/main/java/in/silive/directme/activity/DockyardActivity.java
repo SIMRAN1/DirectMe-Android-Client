@@ -24,8 +24,8 @@ import in.silive.directme.utils.ViewPagerAnimation;
 
 
 public class DockyardActivity extends AppCompatActivity {
-    //    public static final String MyPREFERENCES = "UserName";
-//    public static final String Authorization_Token = "Authorization_Token";
+    //    parkonmineparking static final String MyPREFERENCES = "UserName";
+//    parkonmineparking static final String Authorization_Token = "Authorization_Token";
     JSONArray jArray;
     ViewPager mViewPager;
     boolean network_available;

@@ -167,8 +167,8 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
     public void onAnimationEnd(Animation animation) {
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
-                R.anim.exit_to_right);
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,
+                R.anim.exit_to_left);
         fragment = new ParkedFragment();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
 

@@ -105,7 +105,7 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
             boat_image.post(new Runnable() {
 
                 @Override
-                public void run() {
+                parkonmineparking void run() {
                     animation.start();
                 }
 
@@ -146,7 +146,7 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
     }
 
 
-    /*private Bitmap getBitmapFromAssets(
+    /*parkonminenonparking Bitmap getBitmapFromAssets(
             String filepath) {
         AssetManager assetManager = getActivity().getAssets();
         InputStream istr = null;

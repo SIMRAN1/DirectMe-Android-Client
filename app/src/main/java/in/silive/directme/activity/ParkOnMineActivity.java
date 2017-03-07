@@ -1,29 +1,13 @@
-package in.silive.directme.fragments;
+package in.silive.directme.activity;
 
-/**
- * Created by Lenovo on 09-Nov-16.
- */
-
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,24 +15,20 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.silive.directme.Controller;
-import in.silive.directme.fragments.ParkingDetailsFragment;
-import in.silive.directme.fragments.UserDetailsFragment;
-import in.silive.directme.utils.Constants;
-import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
-import in.silive.directme.database.DatabaseHandler;
-import in.silive.directme.database.UserModel;
+import in.silive.directme.fragments.PortDetailsFragment;
 import in.silive.directme.listeners.AsyncResponse;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
+import in.silive.directme.utils.Constants;
+import in.silive.directme.utils.NetworkUtils;
 
-import static android.R.attr.fragment;
+/**
+ * Created by simran on 3/6/2017.
+ */
 
-
-public class ParkedFragment extends Fragment implements View.OnClickListener {
-
+public class ParkOnMineActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.parkingport1)
     ImageView parkingport1;
     @BindView(R.id.parkingport2)
@@ -63,30 +43,28 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
     // String token;
     String type;
     String id;
-    JSONObject jsonObject;
+    JSONObject jsonObject = null;
     FetchData apiCalling;
-    boolean network_available;
+     boolean network_available;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    ParkingDetailsFragment fragment;
+    PortDetailsFragment fragment;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.parkonmine, container,
-                false);
-        ButterKnife.bind(this,rootView);
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.parkonmine);
+        ButterKnife.bind(this);
         sharedpreference = DirectMe.getInstance().sharedPrefs;
-        parkedDetail("0");
+
         parkingport1.setOnClickListener(this);
         parkingport2.setOnClickListener(this);
         nonparkingport3.setOnClickListener(this);
         nonparkingport4.setOnClickListener(this);
         nonparkingport5.setOnClickListener(this);
-        return  rootView;
+
     }
-
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -112,20 +90,13 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
 
                 }
 
-
-
-
                 break;
             case R.id.nonparkingport3:
                 parkedDetail("2");
-
                 if(jsonObject!=null) {
                     fragmentInitialise();
 
                 }
-
-
-
 
                 break;
             case R.id.nonparkingport4:
@@ -137,15 +108,14 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                 }
 
 
-
                 break;
             case R.id.nonparkingport5:
                 parkedDetail("4");
+
                 if(jsonObject!=null) {
                     fragmentInitialise();
 
                 }
-
 
 
                 break;
@@ -155,7 +125,7 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
     }
     public void parkedDetail(final String parking_no) {
         final String token = sharedpreference.getString(Constants.AUTH_TOKEN, "");
-        final String user_id=sharedpreference.getString(Constants.USER_ID,"");
+
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
 
@@ -169,27 +139,24 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                 public void processFinish(String output) {
                     try {
                         JSONArray user = new JSONArray(output);
+                         if(parking_no!=null) {
+                             jsonObject = user.getJSONObject(Integer.parseInt(parking_no));
+                             type = jsonObject.get("type").toString();
+                             id = jsonObject.get("id").toString();
+                             JSONArray logs = jsonObject.getJSONArray("logs");
+                             if (logs.length() > 0) {
 
-                        jsonObject = user.getJSONObject(Integer.parseInt(parking_no));
-                        type = jsonObject.get("type").toString();
-                        id=jsonObject.get("id").toString();
-                        JSONArray logs=jsonObject.getJSONArray("logs");
-                        if(logs.length()>0)
-                        {
+                             } else {
 
-                        }
-                        else
-                        {
-
-                        }
-
+                             }
+                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             });
-            apiCalling.setArgs(API_URL_LIST.PORTS_URL+user_id+"/", token, "");
+            apiCalling.setArgs(API_URL_LIST.PORTS_URL, token, "");
             apiCalling.execute();
 
 
@@ -198,7 +165,7 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
     Bundle args;
     void fragmentInitialise()
     {
-        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,
                 R.anim.exit_to_left);
@@ -207,7 +174,7 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
 
 
 
-        fragment = new ParkingDetailsFragment();
+        fragment = new PortDetailsFragment();
         fragment.setArguments(args);
         fragmentTransaction.replace(R.id.fragment_container, fragment);
 
@@ -217,4 +184,3 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
 
 
 }
-
