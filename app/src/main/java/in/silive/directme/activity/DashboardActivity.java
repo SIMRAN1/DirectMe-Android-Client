@@ -210,10 +210,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String user_id = jsonObject.getString(Keys.user_id);
                         String island_id = jsonObject.getString(Keys.island_id);
                         String island_name = jsonObject.getString(Keys.island_name);
-                        editor.putString(Keys.username,username);
-                        editor.putString(Keys.user_id,user_id);
-                        editor.putString(Keys.island_id,island_id);
-                        editor.putString(Keys.island_name,island_name);
+                        editor.putString(Keys.username, username);
+                        editor.putString(Keys.user_id, user_id);
+                        editor.putString(Keys.island_id, island_id);
+                        editor.putString(Keys.island_name, island_name);
                         JSONArray things = jsonObject.getJSONArray(Keys.inventory);
                         for (i = 0; i < 5; i++) {
                             JSONObject jsonObject1 = things.getJSONObject(i);
@@ -297,6 +297,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+
     @Override
     public void onAnimationStart(Animation animation) {
 
@@ -311,4 +312,5 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onAnimationRepeat(Animation animation) {
 
     }
+
 }
