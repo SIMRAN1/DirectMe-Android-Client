@@ -298,6 +298,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+
     @Override
     public void onAnimationStart(Animation animation) {
 
@@ -312,5 +313,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onAnimationRepeat(Animation animation) {
 
     }
+
 
 }
