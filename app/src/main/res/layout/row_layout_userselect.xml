@@ -59,9 +59,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
+
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/img_wood"
+
+
+
+           
             android:id="@+id/img_user"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

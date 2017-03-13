@@ -111,6 +111,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout wave13;
     @BindView(R.id.wave14)
     RelativeLayout wave14;
+
     @BindView(R.id.userprofile)
     ImageView avatar;
 
@@ -127,7 +128,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         parking.setOnClickListener(this);
         garage.setOnClickListener(this);
         showroom.setOnClickListener(this);
+
         avatar.setOnClickListener(this);
+
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
@@ -229,14 +232,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             JSONObject jsonObject1 = things.getJSONObject(i);
                             commod[i] = Integer.parseInt(jsonObject1.getString(Keys.count));
 
-
                             //putting values
                             editor.putString(co[i], Integer.toString(commod[i]));
                             editor.apply();
                             controller.setBambooCount(commod[3]);
                             controller.setBananaCount(commod[2]);
-                            controller.setTimberCount(commod[1]);
-                            controller.setCoconutCount(commod[0]);
+                            controller.setTimberCount(commod[0]);
+                            controller.setCoconutCount(commod[1]);
                             controller.setGoldCoinCount(commod[4]);
                         }
                     } catch (JSONException e) {
@@ -254,8 +256,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             }
             controller.setBambooCount(commod[3]);
             controller.setBananaCount(commod[2]);
-            controller.setTimberCount(commod[1]);
-            controller.setCoconutCount(commod[0]);
+            controller.setTimberCount(commod[0]);
+            controller.setCoconutCount(commod[1]);
             controller.setGoldCoinCount(commod[4]);
         }
     }
@@ -312,6 +314,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+
     @Override
     public void onAnimationStart(Animation animation) {
 
@@ -326,6 +329,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onAnimationRepeat(Animation animation) {
 
     }
+
     void fragmentInitialise()
     {fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -337,4 +341,5 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         fragmentTransaction.commit();
 
     }
+
 }
