@@ -34,6 +34,7 @@ import java.util.Observable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
+import in.silive.directme.fragments.ParkingDetailsFragment;
 import in.silive.directme.fragments.UserDetailsFragment;
 import in.silive.directme.fragments.UserProfileFragment;
 import in.silive.directme.utils.Keys;
@@ -49,8 +50,8 @@ import in.silive.directme.utils.ToasterUtils;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer,Animation.AnimationListener {
 
-    public static final String[] co = new String[5];
-    public int[] commod = new int[5];
+    public static final String[] co = new String[7];
+    public int[] commod = new int[7];
     String token;
     int i;
     SharedPreferences sharedpreferences;
@@ -114,6 +115,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     @BindView(R.id.userprofile)
     ImageView avatar;
+     Bundle args;
+    JSONObject jsonObject;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +133,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         showroom.setOnClickListener(this);
 
         avatar.setOnClickListener(this);
+        avatar.setEnabled(false);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
         animation.setFillAfter(true);
@@ -218,29 +222,35 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 public void processFinish(String output) {
                     try {
                         SharedPreferences.Editor editor = sharedpreferences.edit();
-                        JSONObject jsonObject = new JSONObject(output);
+                        jsonObject = new JSONObject(output);
                         String username = jsonObject.getString(Keys.username);
                         String user_id = jsonObject.getString(Keys.user_id);
                         String island_id = jsonObject.getString(Keys.island_id);
                         String island_name = jsonObject.getString(Keys.island_name);
+                        String first_name=jsonObject.getString(Keys.firstname);
+                        String experience=jsonObject.getString(Keys.experience);
                         editor.putString(Keys.username, username);
                         editor.putString(Keys.user_id, user_id);
                         editor.putString(Keys.island_id, island_id);
                         editor.putString(Keys.island_name, island_name);
+                        editor.putString(Keys.firstname,first_name);
+                        editor.putString(Keys.experience,experience);
                         JSONArray things = jsonObject.getJSONArray(Keys.inventory);
-                        for (i = 0; i < 5; i++) {
-                            JSONObject jsonObject1 = things.getJSONObject(i);
-                            commod[i] = Integer.parseInt(jsonObject1.getString(Keys.count));
+                            for(i=0;i<5;i++) {
+                                JSONObject jsonObject1 = things.getJSONObject(i);
+                                commod[i] = Integer.parseInt(jsonObject1.getString(Keys.count));
 
-                            //putting values
-                            editor.putString(co[i], Integer.toString(commod[i]));
-                            editor.apply();
-                            controller.setBambooCount(commod[3]);
+                                //putting values
+                                editor.putString(Keys.co[i], Integer.toString(commod[i]));
+                                editor.commit();
+                                avatar.setEnabled(true);
+                            }
+                            controller.setBambooCount(commod[1]);
                             controller.setBananaCount(commod[2]);
-                            controller.setTimberCount(commod[0]);
-                            controller.setCoconutCount(commod[1]);
-                            controller.setGoldCoinCount(commod[4]);
-                        }
+                            controller.setTimberCount(commod[3]);
+                            controller.setCoconutCount(commod[4]);
+                            controller.setGoldCoinCount(commod[0]);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -250,15 +260,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             apicalling.execute();
         } else {
             for (i = 0; i < 5; i++) {
-                if (sharedpreferences.contains(DashboardActivity.co[i])) {
-                    commod[i] = Integer.parseInt(sharedpreferences.getString(DashboardActivity.co[i], ""));
-                }
+
+                    commod[i] = Integer.parseInt(sharedpreferences.getString(Keys.co[i], ""));
+
             }
-            controller.setBambooCount(commod[3]);
+            controller.setBambooCount(commod[1]);
             controller.setBananaCount(commod[2]);
-            controller.setTimberCount(commod[0]);
-            controller.setCoconutCount(commod[1]);
-            controller.setGoldCoinCount(commod[4]);
+            controller.setTimberCount(commod[3]);
+            controller.setCoconutCount(commod[4]);
+            controller.setGoldCoinCount(commod[0]);
         }
     }
 
@@ -287,8 +297,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(in);
                 break;
             case R.id.userprofile:
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_LONG).show();
-               fragmentInitialise();
+
+                    fragmentInitialise();
+
                 break;
         }
     }
@@ -335,7 +346,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                 R.anim.exit_to_right);
+
+
+
         fragment = new UserProfileFragment();
+
+
         fragmentTransaction.replace(R.id.fragment_container, fragment);
 
         fragmentTransaction.commit();
