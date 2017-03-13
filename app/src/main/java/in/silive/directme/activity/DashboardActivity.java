@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -31,6 +34,8 @@ import java.util.Observable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
+import in.silive.directme.fragments.UserDetailsFragment;
+import in.silive.directme.fragments.UserProfileFragment;
 import in.silive.directme.utils.Keys;
 import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
@@ -51,6 +56,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     SharedPreferences sharedpreferences;
     Controller controller = new Controller();
     boolean network_available;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    UserProfileFragment fragment;
     BroadcastReceiver mRegistrationBroadcastReceiver;
     FetchData apicalling;
 
@@ -103,7 +111,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout wave13;
     @BindView(R.id.wave14)
     RelativeLayout wave14;
-
+    @BindView(R.id.userprofile)
+    ImageView avatar;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +127,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         parking.setOnClickListener(this);
         garage.setOnClickListener(this);
         showroom.setOnClickListener(this);
+        avatar.setOnClickListener(this);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
@@ -274,6 +284,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 Intent in = new Intent(DashboardActivity.this, DockyardActivity.class);
                 startActivity(in);
                 break;
+            case R.id.userprofile:
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_LONG).show();
+               fragmentInitialise();
+                break;
         }
     }
 
@@ -312,5 +326,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onAnimationRepeat(Animation animation) {
 
     }
+    void fragmentInitialise()
+    {fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                R.anim.exit_to_right);
+        fragment = new UserProfileFragment();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
 
+        fragmentTransaction.commit();
+
+    }
 }
