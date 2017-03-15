@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@drawable/background"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    android:background="@drawable/background"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        tools:layout_conversion_absoluteX="80"
+        tools:layout_conversion_absoluteY="80p"
+        tools:layout_conversion_absoluteWidth="470dp"
+        tools:layout_conversion_absoluteHeight="30dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
 
-        <RelativeLayout
-            android:id="@+id/button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="#006400"
-            android:elevation="2dp"/>
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/showroom"
             android:layout_width="130dp"
             android:layout_height="30dp"
@@ -33,22 +32,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:text="Dashboard"
                 android:textColor="#ffffff"
-                android:id="@+id/textView" />
+                android:id="@+id/textView"
+                tools:layout_conversion_absoluteX="35dp"
+                tools:layout_conversion_absoluteY="6dp"
+                tools:layout_conversion_absoluteWidth="68dp"
+                tools:layout_conversion_absoluteHeight="16dp" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignEnd="@+id/textView"
-                android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/textView"
-                android:layout_marginTop="40dp">
 
-            </FrameLayout>
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <RelativeLayout
             android:id="@+id/gold_show"
@@ -187,25 +180,29 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="576dp"
         android:layout_height="120dp"
 
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="215dp"
+        tools:layout_conversion_absoluteWidth="592dp"
+        tools:layout_conversion_absoluteHeight="120dp"
+        tools:layout_editor_absoluteY="215dp"
+        tools:layout_editor_absoluteX="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:id="@+id/wave1"
+                android:background="@drawable/wave1" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal"
-            android:id="@+id/wave1"
-            android:background="@drawable/wave1"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -213,7 +210,8 @@
                 android:id="@+id/wave2"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave2"/>
+                android:background="@drawable/wave2" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -221,7 +219,8 @@
                 android:id="@+id/wave3"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave3"/>
+                android:background="@drawable/wave3" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -229,7 +228,8 @@
                 android:id="@+id/wave4"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave4"/>
+                android:background="@drawable/wave4" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -237,7 +237,8 @@
                 android:id="@+id/wave5"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave1"/>
+                android:background="@drawable/wave1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -245,7 +246,8 @@
                 android:id="@+id/wave6"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave2"/>
+                android:background="@drawable/wave2" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -253,7 +255,8 @@
                 android:id="@+id/wave7"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave3"/>
+                android:background="@drawable/wave3" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -261,7 +264,8 @@
                 android:id="@+id/wave8"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave4"/>
+                android:background="@drawable/wave4" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -269,7 +273,8 @@
                 android:id="@+id/wave9"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave1"/>
+                android:background="@drawable/wave1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -277,7 +282,8 @@
                 android:id="@+id/wave10"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave2"/>
+                android:background="@drawable/wave2" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -285,7 +291,8 @@
                 android:id="@+id/wave11"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave3"/>
+                android:background="@drawable/wave3" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -293,7 +300,8 @@
                 android:id="@+id/wave12"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave4"/>
+                android:background="@drawable/wave4" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -301,7 +309,8 @@
                 android:id="@+id/wave13"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave1"/>
+                android:background="@drawable/wave1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -309,7 +318,7 @@
                 android:id="@+id/wave14"
                 android:orientation="horizontal"
 
-                android:background="@drawable/wave2"/>
+                android:background="@drawable/wave2" />
 
             <RelativeLayout
                 android:layout_width="80dp"
@@ -407,7 +416,7 @@
             </RelativeLayout>
 
 
-</RelativeLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -415,23 +424,27 @@
         android:id="@+id/userprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout"
-        android:layout_marginTop="26dp"
-        app:srcCompat="@drawable/avatar" />
+        app:srcCompat="@drawable/avatar"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="56dp"
+        tools:layout_conversion_absoluteWidth="49dp"
+        tools:layout_conversion_absoluteHeight="49dp"
+        tools:layout_editor_absoluteY="-19dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:id="@+id/fragment_container"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="0dp"
+        tools:layout_conversion_absoluteWidth="592dp"
+        tools:layout_conversion_absoluteHeight="335dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
 
     </FrameLayout>
 
 
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -43,41 +43,45 @@ public class UserProfileFragment extends Fragment {
     int Coconut_Count;
      int Wood_Count;
      int Experience_Count;
-
+   String commodity[]=new String[5];
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.user_profile, container,
                 false);
         ButterKnife.bind(this,rootView);
         sharedpreference = DirectMe.getInstance().sharedPrefs;
-        if(DirectMe.getInstance().getBananaCount()!="") {
-            this.Banana_Count = Integer.parseInt(DirectMe.getInstance().getBananaCount());
+        for(int i=0;i<5;i++)
+        {
+            commodity[i]=sharedpreference.getString(Keys.co[i],"");
+        }
+
+            this.Banana_Count = Integer.parseInt(commodity[2]);
 
             progressBar_banana.setMax(1000);
             progressBar_banana.setProgress(Banana_Count);
-        }
-         if(DirectMe.getInstance().getBananaCount()!="") {
-             this.Bamboo_Count = Integer.parseInt(DirectMe.getInstance().getBambooCount());
+
+
+             this.Bamboo_Count = Integer.parseInt(commodity[1]);
              progressBar_bamboo.setMax(1000);
 
 
              progressBar_bamboo.setProgress(Bamboo_Count);
-         }
-         if(DirectMe.getInstance().getCoinCount()!="") {
-             this.Gold_Count = Integer.parseInt(DirectMe.getInstance().getCoinCount());
+
+
+             this.Gold_Count = Integer.parseInt(commodity[0]);
              progressBar_gold.setMax(1000);
              progressBar_gold.setProgress(Gold_Count);
-         }
-         if (DirectMe.getInstance().getCoconutCount()!="") {
-             this.Coconut_Count = Integer.parseInt(DirectMe.getInstance().getCoconutCount());
+
+
+             this.Coconut_Count = Integer.parseInt(commodity[4]);
              progressBar_coconut.setMax(1000);
              progressBar_coconut.setProgress(Coconut_Count);
-         }
-         if(DirectMe.getInstance().getTimberCount()!="") {
-             this.Wood_Count = Integer.parseInt(DirectMe.getInstance().getTimberCount());
+
+
+             this.Wood_Count = Integer.parseInt(commodity[3]);
              progressBar_wood.setMax(1000);
              progressBar_wood.setProgress(Wood_Count);
-         }
+
         final String expreience=sharedpreference.getString(Keys.experience,"");
         Experience_Count =Integer.parseInt(expreience);
         progressBar_experience.setMax(1000);
