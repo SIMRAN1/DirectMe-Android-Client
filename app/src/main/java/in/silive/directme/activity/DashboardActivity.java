@@ -73,7 +73,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     TextView timber;
     @BindView(R.id.tvGold)
     TextView gold_coin;
-
+    @BindView(R.id.tvExperience)
+    TextView experiencetxtview;
     @BindView(R.id.imageviewpark)
     ImageView park;
     @BindView(R.id.imageviewparked)
@@ -229,6 +230,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String island_name = jsonObject.getString(Keys.island_name);
                         String first_name=jsonObject.getString(Keys.firstname);
                         String experience=jsonObject.getString(Keys.experience);
+                        experiencetxtview.setText(experience);
                         editor.putString(Keys.username, username);
                         editor.putString(Keys.user_id, user_id);
                         editor.putString(Keys.island_id, island_id);

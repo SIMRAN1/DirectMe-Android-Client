@@ -57,34 +57,34 @@ public class UserProfileFragment extends Fragment {
 
             this.Banana_Count = Integer.parseInt(commodity[2]);
 
-            progressBar_banana.setMax(1000);
+            progressBar_banana.setMax(10000);
             progressBar_banana.setProgress(Banana_Count);
 
 
              this.Bamboo_Count = Integer.parseInt(commodity[1]);
-             progressBar_bamboo.setMax(1000);
+             progressBar_bamboo.setMax(10000);
 
 
              progressBar_bamboo.setProgress(Bamboo_Count);
 
 
              this.Gold_Count = Integer.parseInt(commodity[0]);
-             progressBar_gold.setMax(1000);
+             progressBar_gold.setMax(10000);
              progressBar_gold.setProgress(Gold_Count);
 
 
              this.Coconut_Count = Integer.parseInt(commodity[4]);
-             progressBar_coconut.setMax(1000);
+             progressBar_coconut.setMax(10000);
              progressBar_coconut.setProgress(Coconut_Count);
 
 
              this.Wood_Count = Integer.parseInt(commodity[3]);
-             progressBar_wood.setMax(1000);
+             progressBar_wood.setMax(10000);
              progressBar_wood.setProgress(Wood_Count);
 
         final String expreience=sharedpreference.getString(Keys.experience,"");
         Experience_Count =Integer.parseInt(expreience);
-        progressBar_experience.setMax(1000);
+        progressBar_experience.setMax(10000);
         progressBar_experience.setProgress(Experience_Count);
         final  String username=sharedpreference.getString(Keys.username,"");
         user_name.setText(username);
