@@ -3,12 +3,14 @@ package in.silive.directme.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -51,6 +53,7 @@ import in.silive.directme.utils.ToasterUtils;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer,Animation.AnimationListener {
 
     public static final String[] co = new String[7];
+
     public int[] commod = new int[7];
     String token;
     int i;
@@ -325,7 +328,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         count();
 
     }
+    @Override
+    public void onBackPressed() {
 
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        }
+        else
+        {
+            super.onBackPressed();
+        }
+    }
 
 
     @Override
@@ -355,9 +368,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }
+
 
 }

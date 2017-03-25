@@ -1,5 +1,6 @@
 package in.silive.directme.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +37,11 @@ import in.silive.directme.utils.API_URL_LIST;
  * Created by simran on 2/24/2017.
  */
 
-public class UserDetailsFragment extends Fragment {
+public class UserDetailsFragment extends Fragment implements View.OnClickListener{
     public  String user_names[] ;
     public  String user_id[];
     RecyclerView recyclerView;
+    ImageView refresh;
     SharedPreferences sharedPreferences;
     FetchData apicalling;
     RecyclerView.LayoutManager layoutManager;
@@ -49,12 +53,15 @@ public class UserDetailsFragment extends Fragment {
                 false);
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         recyclerView = (RecyclerView) v.findViewById(R.id.card_recycler_view);
-
+        refresh=(ImageView) v.findViewById(R.id.refresh);
+        refresh.setVisibility(View.INVISIBLE);
+        refresh.setOnClickListener(this);
         connect();
         return v;
     }
 
     private void initViews() {
+        refresh.setVisibility(View.VISIBLE);
 
         recyclerView.setHasFixedSize(true);
         if(arr.length()<5) {
@@ -139,5 +146,12 @@ public class UserDetailsFragment extends Fragment {
             user_details.add(userDetailsList);
         }
         return user_details;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        connect();
+
     }
 }

@@ -34,6 +34,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
     ImageView cloud1, cloud2;
     String token;
 
+
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor1;
     Thread thread;
@@ -67,22 +68,12 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         pirate_Island.setOnClickListener(this);
 
 
-        final ImageView animImageView = (ImageView) findViewById(R.id.water);
-
-        animImageView.setBackgroundResource(R.drawable.animation);
-        animImageView.post(new Runnable() {
-            @Override
-            public void run() {
-                AnimationDrawable frameAnimation =
-                        (AnimationDrawable) animImageView.getBackground();
-                frameAnimation.start();
-            }
-        });
-
     }
+
     String id;
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
+
     @Override
     public void onClick(View view) {
 
@@ -91,18 +82,18 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imageViewisland1:
 
                 fragmentInitialise();
-                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
-                 editor = sharedpreferences.edit();
-                editor.putString(Constants.ISLAND_ID,Constants.BANANA_ISLAND_ID);
+                sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                editor = sharedpreferences.edit();
+                editor.putString(Constants.ISLAND_ID, Constants.BANANA_ISLAND_ID);
                 editor.commit();
 
                 break;
             case R.id.imageViewisland2:
-                 fragmentInitialise();
+                fragmentInitialise();
 
-                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
-                 editor = sharedpreferences.edit();
-                editor.putString(Constants.ISLAND_ID,Constants.COCONUT_ISLAND_ID);
+                sharedpreferences = DirectMe.getInstance().sharedPrefs;
+                editor = sharedpreferences.edit();
+                editor.putString(Constants.ISLAND_ID, Constants.COCONUT_ISLAND_ID);
                 editor.commit();
 
                 break;
@@ -111,15 +102,15 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 fragmentInitialise();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.ISLAND_ID,Constants.BAMBOO_ISLAND_ID);
+                editor.putString(Constants.ISLAND_ID, Constants.BAMBOO_ISLAND_ID);
                 editor.commit();
                 break;
             case R.id.imageViewisland4:
-                  fragmentInitialise();
+                fragmentInitialise();
 
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.ISLAND_ID,Constants.TIMBER_ISLAND_ID);
+                editor.putString(Constants.ISLAND_ID, Constants.TIMBER_ISLAND_ID);
                 editor.commit();
                 break;
 
@@ -127,60 +118,71 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
-                editor.putString(Constants.ISLAND_ID,Constants.PIRATE_ISLAND_ID);
+                editor.putString(Constants.ISLAND_ID, Constants.PIRATE_ISLAND_ID);
                 editor.commit();
 
                 break;
         }
     }
-    void fragmentInitialise()
-    {fragmentManager = getSupportFragmentManager();
+
+
+
+    void fragmentInitialise() {
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                 R.anim.exit_to_right);
         fragment = new UserDetailsFragment();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Do you want to Go Back ");
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent intent=new Intent(getApplicationContext(),DashboardActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        finish();
-                        startActivity(intent);
 
 
-                    }
-                });
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        }
 
-        builder1.setNegativeButton(
-                "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+         else {
 
-                    }
-                });
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Do you want to Go Back ");
+            builder1.setCancelable(true);
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            finish();
+                            startActivity(intent);
 
+
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+        }
     }
+
 }
-
-
 
 
 

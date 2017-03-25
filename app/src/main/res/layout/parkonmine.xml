@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:clickable="true"
-    android:background="@drawable/ic_parked_on_mine"
+    android:background="@drawable/parkonmine_back"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
