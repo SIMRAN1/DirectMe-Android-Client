@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +58,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
     @BindView(R.id.logout)
     ImageView logout ;
+    @BindView(R.id.avatar)
+    ImageView avatar ;
 
 
     public SharedPreferences sharedPrefs;
@@ -117,6 +120,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         user_name.setText(username);
         final String island_id=sharedpreference.getString(Keys.island_id,"");
         islandImage(island_id);
+        final String gravatar=sharedpreference.getString(Keys.gravatar,"");
+        Picasso.with(getActivity()).load(gravatar).into(avatar);
         return rootView;
     }
     void islandImage(String island_id)

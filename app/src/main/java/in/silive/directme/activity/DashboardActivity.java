@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -238,6 +239,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String island_name = jsonObject.getString(Keys.island_name);
                         String first_name=jsonObject.getString(Keys.firstname);
                         String experience=jsonObject.getString(Keys.experience);
+                        String gravatar=jsonObject.getString(Keys.gravatar);
                         experiencetxtview.setText(experience);
                         editor.putString(Keys.username, username);
                         editor.putString(Keys.user_id, user_id);
@@ -245,6 +247,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         editor.putString(Keys.island_name, island_name);
                         editor.putString(Keys.firstname,first_name);
                         editor.putString(Keys.experience,experience);
+                        editor.putString(Keys.gravatar,gravatar);
+                        Picasso.with(getApplicationContext()).load(gravatar).into(avatar);
                         JSONArray things = jsonObject.getJSONArray(Keys.inventory);
                             for(i=0;i<5;i++) {
                                 JSONObject jsonObject1 = things.getJSONObject(i);
