@@ -335,7 +335,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             getSupportFragmentManager().popBackStack();
         }
         else
-        {
+        {super.onBackPressed();
             finish();
 
         }

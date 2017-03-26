@@ -259,7 +259,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 getActivity().finish();
-                
+
              ;
                 pwindo.dismiss();
             }
