@@ -113,14 +113,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout wave9;
     @BindView(R.id.wave10)
     RelativeLayout wave10;
-    @BindView(R.id.wave11)
-    RelativeLayout wave11;
-    @BindView(R.id.wave12)
-    RelativeLayout wave12;
-    @BindView(R.id.wave13)
-    RelativeLayout wave13;
-    @BindView(R.id.wave14)
-    RelativeLayout wave14;
+
 
     @BindView(R.id.userprofile)
     ImageView avatar;
@@ -159,10 +152,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
         wave10.startAnimation(animation);
-        wave11.startAnimation(animation);
-        wave12.startAnimation(animation);
-        wave13.startAnimation(animation);
-        wave14.startAnimation(animation);
+
 
 
         controller.addObserver(DashboardActivity.this);

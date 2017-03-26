@@ -90,7 +90,7 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
             type = json_data.get("type").toString();
             if(type.equals("parking"))
             {
-                Catch.setEnabled(false);
+                Catch.setVisibility(View.INVISIBLE);
             }
             else
             {
