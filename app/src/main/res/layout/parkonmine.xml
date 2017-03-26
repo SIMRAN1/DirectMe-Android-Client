@@ -19,6 +19,7 @@
         android:id="@+id/parkingport1"
         android:layout_width="50dp"
         android:layout_height="0dp"
+
         app:srcCompat="@drawable/parkonmineparking"
         app:layout_constraintRight_toLeftOf="@+id/guideline52"
         android:layout_marginRight="8dp"

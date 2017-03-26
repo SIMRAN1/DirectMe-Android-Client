@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +29,8 @@ import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
 import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.NetworkUtils;
+
+import static in.silive.directme.R.id.boat;
 
 
 public class ParkedFragment extends Fragment implements View.OnClickListener {
@@ -148,6 +152,9 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                         id = jsonObject.get("id").toString();
                         JSONArray logs = jsonObject.getJSONArray("logs");
                         if (logs.length() > 0) {
+                            //JSONObject logdetails=logs.getJSONObject(0);
+                           // String ship_img_url = logdetails.get("ship_image").toString();
+                           // showPort(parking_no , ship_img_url);
 
                         } else {
 
@@ -165,7 +172,38 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
 
         }
     }
+    void showPort(int position , String ship_url ){
 
+        switch (position){
+            case 0:
+
+                Picasso.with(getActivity())
+                        .load(ship_url)
+                        .into(parkingport1);
+
+                break;
+            case 1:
+                Picasso.with(getActivity())
+                        .load(ship_url)
+                        .into(parkingport2);
+                break;
+            case 2:
+                Picasso.with(getActivity())
+                        .load(ship_url)
+                        .into(nonparkingport3);
+                break;
+            case 3:
+                Picasso.with(getActivity())
+                        .load(ship_url)
+                        .into(nonparkingport4);
+                break;
+            case 5:
+                Picasso.with(getActivity())
+                        .load(ship_url)
+                        .into(nonparkingport5);
+                break;
+        }
+    }
     void fragmentInitialise() {
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -178,7 +216,7 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
         fragment = new ParkingDetailsFragment();
         fragment.setArguments(args);
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }

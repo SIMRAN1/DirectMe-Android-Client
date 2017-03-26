@@ -107,7 +107,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                         .into(boat);
 
                 UsernameTextview.setText(username);
-                Dock.setEnabled(false);
+                Dock.setVisibility(View.GONE);
             }
             else
             {

@@ -50,6 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:srcCompat="@drawable/avatar"
+
         app:layout_constraintRight_toLeftOf="@+id/guideline78"
         app:layout_constraintLeft_toLeftOf="@+id/guideline35"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
