@@ -80,48 +80,29 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                 parkedDetail(0);
 
 
-                if (jsonObject != null) {
-                    fragmentInitialise();
 
-                }
 
 
                 break;
             case R.id.parkingport2:
                 parkedDetail(1);
-                if (jsonObject != null) {
-                    fragmentInitialise();
-
-                }
 
 
                 break;
             case R.id.nonparkingport3:
                 parkedDetail(2);
 
-                if (jsonObject != null) {
-                    fragmentInitialise();
-
-                }
-
 
                 break;
             case R.id.nonparkingport4:
                 parkedDetail(3);
 
-                if (jsonObject != null) {
-                    fragmentInitialise();
 
-                }
 
 
                 break;
             case R.id.nonparkingport5:
                 parkedDetail(4);
-                if (jsonObject != null) {
-                    fragmentInitialise();
-
-                }
 
 
                 break;
@@ -164,6 +145,7 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    fragmentInitialise();
                 }
             });
             apiCalling.setArgs(API_URL_LIST.PORTS_URL + user_id + "/", token, "");

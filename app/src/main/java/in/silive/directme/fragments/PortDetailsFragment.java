@@ -88,9 +88,9 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
             json_data= new JSONObject(getArguments().getString("data", ""));
 
             type = json_data.get("type").toString();
-            if(type.equals("parking"))
+            if(type.equals("Parking"))
             {
-                Catch.setVisibility(View.INVISIBLE);
+                Catch.setVisibility(View.GONE);
             }
             else
             {
@@ -137,7 +137,7 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
 
             // create animation programmatically
             final AnimationDrawable animation = new AnimationDrawable();
-            animation.setOneShot(false); // repeat animation
+            animation.setOneShot(false); // r1epeat animation
             for (int i = 0; i < NB_FRAMES; i++) {
                 animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
                         FRAME_DURATION);
