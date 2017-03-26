@@ -238,6 +238,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             finish();
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
 
                         }
