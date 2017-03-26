@@ -3,6 +3,7 @@ package in.silive.directme.fragments;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +47,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
     ImageView refresh;
     SharedPreferences sharedPreferences;
     FetchData apicalling;
+    ConstraintLayout back;
     RecyclerView.LayoutManager layoutManager;
 
 
@@ -53,6 +55,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recycler_view_userselect, container,
                 false);
+
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         recyclerView = (RecyclerView) v.findViewById(R.id.card_recycler_view);
         refresh=(ImageView) v.findViewById(R.id.refresh);
@@ -63,6 +66,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
     }
 
     private void initViews() {
+
         refresh.setVisibility(View.VISIBLE);
 
         recyclerView.setHasFixedSize(true);
