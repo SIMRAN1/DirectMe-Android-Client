@@ -37,7 +37,9 @@ import in.silive.directme.utils.API_URL_LIST;
  * Created by simran on 2/24/2017.
  */
 
+
 public class UserDetailsFragment extends Fragment implements View.OnClickListener{
+
     public  String user_names[] ;
     public  String user_id[];
     RecyclerView recyclerView;

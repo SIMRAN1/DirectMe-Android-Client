@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +37,7 @@ import java.util.Observable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
+import in.silive.directme.fragments.LeaderBoardFragment;
 import in.silive.directme.fragments.ParkingDetailsFragment;
 import in.silive.directme.fragments.UserDetailsFragment;
 import in.silive.directme.fragments.UserProfileFragment;
@@ -88,6 +90,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ImageView garage;
     @BindView(R.id.imageviewshowroom)
     ImageView showroom;
+    @BindView(R.id.leaderboard)
+    ImageView iv_leader_board;
     @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
@@ -135,6 +139,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         parking.setOnClickListener(this);
         garage.setOnClickListener(this);
         showroom.setOnClickListener(this);
+        iv_leader_board.setOnClickListener(this);
 
         avatar.setOnClickListener(this);
         avatar.setEnabled(false);
@@ -302,11 +307,24 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(in);
                 break;
             case R.id.userprofile:
-
                     fragmentInitialise();
-
                 break;
+            case R.id.leaderboard:
+                leaderBoardFragment();
+                break;
+
         }
+    }
+
+    private void leaderBoardFragment() {
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
+                R.anim.exit_to_right);
+        Fragment fragment = new LeaderBoardFragment();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 
@@ -358,20 +376,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
     void fragmentInitialise()
-    {fragmentManager = getSupportFragmentManager();
+    {
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,
                 R.anim.exit_to_right);
-
-
-
         fragment = new UserProfileFragment();
-
-
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
     }
 
 

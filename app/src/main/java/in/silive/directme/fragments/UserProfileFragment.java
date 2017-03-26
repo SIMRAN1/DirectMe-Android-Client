@@ -54,17 +54,21 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     TextView wood_count;
     @BindView(R.id.island)
     ImageView island;
+
     @BindView(R.id.logout)
     ImageView logout ;
 
+
+    public SharedPreferences sharedPrefs;
     String Banana_Count;
     String Bamboo_Count;
     String Gold_Count;
-    public SharedPreferences sharedPrefs;
+
     String Coconut_Count;
     String Wood_Count;
     int Experience_Count;
     String commodity[]=new String[5];
+
     private GoogleApiClient mGoogleApiClient;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +97,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
 
 
+
+
         this.Gold_Count = commodity[0];
         gold_count.setText(Gold_Count);
 
@@ -101,8 +107,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         coconut_count.setText(Coconut_Count);
 
 
-        this.Wood_Count = commodity[3];
-        wood_count.setText(Wood_Count);
+
 
         final String expreience=sharedpreference.getString(Keys.experience,"");
         Experience_Count =Integer.parseInt(expreience);
@@ -130,6 +135,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             case 5:island.setImageResource(R.drawable.pirate_island);
                 break;
         }
+
 
     }
 
@@ -191,6 +197,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                         startActivity(intent);
                     }
                 });
+
 
     }
 }
