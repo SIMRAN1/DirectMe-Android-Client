@@ -336,7 +336,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         else
         {
-            super.onBackPressed();
+            finish();
+
         }
     }
 

@@ -88,10 +88,6 @@
         android:id="@+id/experience_show"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
-        android:background="#FFFFFF"
-        android:alpha="0.7"
-
         app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintLeft_toLeftOf="@+id/guideline81"
         app:layout_constraintRight_toLeftOf="@+id/guideline79"

@@ -254,7 +254,13 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
         public void onClick(View v) {
             if(dock_status==1) {
                 Intent i = new Intent(getActivity(), DashboardActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                getActivity().finish();
+                
+             ;
                 pwindo.dismiss();
             }
             else
