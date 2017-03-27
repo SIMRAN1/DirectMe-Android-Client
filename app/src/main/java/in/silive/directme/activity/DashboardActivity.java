@@ -149,7 +149,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
         wave1.startAnimation(animation);
-
         wave2.startAnimation(animation);
         wave3.startAnimation(animation);
         wave4.startAnimation(animation);
@@ -163,7 +162,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         wave12.startAnimation(animation);
         wave13.startAnimation(animation);
         wave14.startAnimation(animation);
-
 
         controller.addObserver(DashboardActivity.this);
         token = sharedpreferences.getString(Constants.AUTH_TOKEN, "");
@@ -183,7 +181,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                     @Override
                     public void processFinish(String output) {
-
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString(Constants.FIREBASE_ID_SENT, "1");//1 means firebase id is registered
                         editor.commit();
@@ -210,7 +207,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     FirebaseMessaging.getInstance().subscribeToTopic(Constants.TOPIC_GLOBAL);
                 } else if (intent.getAction().equals(Constants.PUSH_NOTIFICATION)) {
                     // new push notification is received
-
                     String message = intent.getStringExtra("message");
                     ToasterUtils.toaster("Push notification: " + message);
                 }
@@ -221,7 +217,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void count() {
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
-
             apicalling = new FetchData(new FetchDataListener() {
                 @Override
                 public void processStart() {
@@ -264,7 +259,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             controller.setTimberCount(commod[3]);
                             controller.setCoconutCount(commod[4]);
                             controller.setGoldCoinCount(commod[0]);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -274,9 +268,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             apicalling.execute();
         } else {
             for (i = 0; i < 5; i++) {
-
                     commod[i] = Integer.parseInt(sharedpreferences.getString(Keys.co[i], ""));
-
             }
             controller.setBambooCount(commod[1]);
             controller.setBananaCount(commod[2]);
@@ -316,7 +308,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             case R.id.leaderboard:
                 leaderBoardFragment();
                 break;
-
         }
     }
 
@@ -348,21 +339,19 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     protected void onResume() {
         super.onResume();
         count();
-
     }
+    
     @Override
     public void onBackPressed() {
-
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
         }
         else
-        {super.onBackPressed();
+        {
+            super.onBackPressed();
             finish();
-
         }
     }
-
 
     @Override
     public void onAnimationStart(Animation animation) {
@@ -390,6 +379,4 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-
 }
