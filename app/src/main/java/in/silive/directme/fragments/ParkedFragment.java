@@ -145,7 +145,9 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    fragmentInitialise();
+                    if(jsonObject!=null) {
+                        fragmentInitialise();
+                    }
                 }
             });
             apiCalling.setArgs(API_URL_LIST.PORTS_URL + user_id + "/", token, "");

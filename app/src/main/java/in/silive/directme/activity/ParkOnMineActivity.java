@@ -141,7 +141,10 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    fragmentInitialise();
+                    if(jsonObject!=null) {
+                        fragmentInitialise();
+                    }
+
                 }
             });
             apiCalling.setArgs(API_URL_LIST.PORTS_URL, token, "");
