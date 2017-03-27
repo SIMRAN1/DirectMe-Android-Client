@@ -161,7 +161,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         }
         else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Going back will cancel this docking");
+            builder1.setMessage(getResources().getString(R.string.cancel_docking));
             builder1.setCancelable(true);
             builder1.setPositiveButton(
                     "Yes",
