@@ -13,24 +13,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.R;
 import in.silive.directme.activity.LoginActivity;
-import in.silive.directme.activity.SplashActivity;
 import in.silive.directme.application.DirectMe;
 import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.Keys;
-import in.silive.directme.utils.LoggerUtils;
+
 
 /**
  * Created by simran on 3/12/2017.
@@ -38,7 +34,6 @@ import in.silive.directme.utils.LoggerUtils;
 
 public class UserProfileFragment extends Fragment implements View.OnClickListener{
     SharedPreferences sharedpreference;
-
     @BindView(R.id.circularProgressbar)
     ProgressBar progressBar_experience;
     @BindView(R.id.username)
@@ -55,25 +50,19 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     TextView wood_count;
     @BindView(R.id.island)
     ImageView island;
-
     @BindView(R.id.logout)
     ImageView logout ;
     @BindView(R.id.avatar)
     ImageView avatar ;
-
-
     public SharedPreferences sharedPrefs;
     String Banana_Count;
     String Bamboo_Count;
     String Gold_Count;
-
     String Coconut_Count;
     String Wood_Count;
     int Experience_Count;
     String commodity[]=new String[5];
-
     private GoogleApiClient mGoogleApiClient;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.user_profile, container,
@@ -86,32 +75,14 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         {
             commodity[i]=sharedpreference.getString(Keys.co[i],"");
         }
-
         this.Banana_Count = commodity[2];
         banana_count.setText(Banana_Count);
-
-
-
-
         this.Bamboo_Count = commodity[1];
         bamboo_count.setText(Bamboo_Count);
-
-
-
-
-
-
-
         this.Gold_Count = commodity[0];
         gold_count.setText(Gold_Count);
-
-
         this.Coconut_Count = commodity[4];
         coconut_count.setText(Coconut_Count);
-
-
-
-
         final String expreience=sharedpreference.getString(Keys.experience,"");
         Experience_Count =Integer.parseInt(expreience);
         progressBar_experience.setMax(10000);
@@ -140,16 +111,10 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             case 5:island.setImageResource(R.drawable.pirate_island);
                 break;
         }
-
-
     }
-
     @Override
     public void onClick(View v) {
-        alertDialog("Do you want to log out");
-
-
-
+        alertDialog(getResources().getString(R.string.logout));
     }
     void alertDialog(String message)
     {
@@ -169,11 +134,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                    removeToken();
-
-
                     }
                 });
-
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
@@ -190,7 +152,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     }
     private void removeToken() {
         SharedPreferences.Editor editor=sharedPrefs.edit();
-        
         editor.clear();
         editor.commit();
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
@@ -199,10 +160,11 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     public void onResult(Status status) {
                         // ...
                         Intent intent=new Intent(getActivity(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 });
-
-
     }
 }

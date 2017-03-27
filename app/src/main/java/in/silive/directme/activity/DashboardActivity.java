@@ -3,7 +3,6 @@ package in.silive.directme.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,36 +10,26 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.Key;
 import java.util.Observable;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
 import in.silive.directme.fragments.LeaderBoardFragment;
-import in.silive.directme.fragments.ParkingDetailsFragment;
-import in.silive.directme.fragments.UserDetailsFragment;
 import in.silive.directme.fragments.UserProfileFragment;
 import in.silive.directme.utils.Keys;
 import in.silive.directme.utils.NetworkUtils;
@@ -126,8 +115,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         ButterKnife.bind(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//to make screen full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//to make screen full screen
         sharedpreferences = DirectMe.getInstance().sharedPrefs;
         park.setOnClickListener(this);
         parked.setOnClickListener(this);
@@ -185,7 +173,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 // checking for type intent filter
                 if (intent.getAction().equals(Constants.REGISTRATION_COMPLETE)) {
                     // fcm successfully registered

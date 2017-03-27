@@ -3,7 +3,6 @@ package in.silive.directme.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -16,11 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.R;
@@ -28,22 +22,7 @@ import in.silive.directme.application.DirectMe;
 import in.silive.directme.fragments.UserDetailsFragment;
 import in.silive.directme.utils.Constants;
 
-//// TODO: 2/22/2017 set animation in a method and uncomment
-
 public class ParkNowActivity extends AppCompatActivity implements View.OnClickListener {
-
-    public static final String times = "null";
-    HashMap<String, String> queryValues;
-    ArrayList<HashMap<String, String>> users;
-    ImageView cloud1, cloud2;
-    String token;
-
-
-    SharedPreferences sharedPreferences, sharedPreferences1;
-    SharedPreferences.Editor editor1;
-    Thread thread;
-    Animation animation, animationb;
-    View frag;
     @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
@@ -77,21 +56,13 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     UserDetailsFragment fragment;
-   int offsetValue=0;
-
+    int offsetValue=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.parknow);
         ButterKnife.bind(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //  lvUsers =(ListView) findViewById(R.id.listviewusers);
-
-        //     llUserList = (LinearLayout) findViewById(R.id.linearLayoutUserList);
-        //    removeuserList = (Button) findViewById(R.id.buttonRemoveUserList);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         island1.setOnClickListener(this);
         island2.setOnClickListener(this);
         island3.setOnClickListener(this);
@@ -100,39 +71,27 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimationparknow);
         animation.setFillAfter(true);
         animation.setAnimationListener(new Animation.AnimationListener(){
-
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
             @Override
             public void onAnimationEnd(Animation animation) {
                 if(offsetValue>=10000) {
                     offsetValue=0;
-                    offsetValue = offsetValue + 1000;
+                    offsetValue=offsetValue+1000;
                     animation.setStartOffset(offsetValue);
-
                 }
                 else
                 {
-                    offsetValue = offsetValue + 1000;
+                    offsetValue=offsetValue+1000;
                     animation.setStartOffset(offsetValue);
-
-
                 }
-
             }
-
             @Override
             public void onAnimationRepeat(Animation animation) {
-
-
             }
-
         });
-
         wave1.startAnimation(animation);
-
         wave2.startAnimation(animation);
         wave3.startAnimation(animation);
         wave4.startAnimation(animation);
@@ -142,39 +101,28 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
         wave10.startAnimation(animation);
-
-
     }
-
     String id;
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
-
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
-
             case R.id.imageViewisland1:
-
                 fragmentInitialise();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
                 editor.putString(Constants.ISLAND_ID, Constants.BANANA_ISLAND_ID);
                 editor.commit();
-
                 break;
             case R.id.imageViewisland2:
                 fragmentInitialise();
-
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
                 editor.putString(Constants.ISLAND_ID, Constants.COCONUT_ISLAND_ID);
                 editor.commit();
-
                 break;
             case R.id.imageViewisland3:
-
                 fragmentInitialise();
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
@@ -183,26 +131,19 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.imageViewisland4:
                 fragmentInitialise();
-
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
                 editor.putString(Constants.ISLAND_ID, Constants.TIMBER_ISLAND_ID);
                 editor.commit();
                 break;
-
             case R.id.imageViewpirateisland:
-
                 sharedpreferences = DirectMe.getInstance().sharedPrefs;
                 editor = sharedpreferences.edit();
                 editor.putString(Constants.ISLAND_ID, Constants.PIRATE_ISLAND_ID);
                 editor.commit();
-
                 break;
         }
     }
-
-
-
     void fragmentInitialise() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -212,23 +153,16 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
     }
-
     @Override
     public void onBackPressed() {
-
-
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
         }
-
-         else {
-
+        else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Do you want to Go Back ");
+            builder1.setMessage("Going back will cancel this docking");
             builder1.setCancelable(true);
-
             builder1.setPositiveButton(
                     "Yes",
                     new DialogInterface.OnClickListener() {
@@ -239,11 +173,8 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
                             finish();
                             startActivity(intent);
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-
                         }
                     });
-
             builder1.setNegativeButton(
                     "No",
                     new DialogInterface.OnClickListener() {
@@ -252,13 +183,10 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
 
                         }
                     });
-
             AlertDialog alert11 = builder1.create();
             alert11.show();
-
         }
     }
-
 }
 
 

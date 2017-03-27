@@ -465,9 +465,4 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="24dp" />
-
-
-
-
-
 </android.support.constraint.ConstraintLayout>
