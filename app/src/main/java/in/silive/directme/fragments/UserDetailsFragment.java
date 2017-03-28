@@ -10,13 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-import android.widget.Button;
 import android.widget.ImageView;
 
-=======
-import android.widget.ImageView;
->>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,17 +34,9 @@ import in.silive.directme.utils.NetworkUtils;
  * Created by simran on 2/24/2017.
  */
 
-
-<<<<<<< HEAD
-public class UserDetailsFragment extends Fragment implements View.OnClickListener{
-
-    public  String user_names[] ;
-    public  String user_id[];
-=======
 public class UserDetailsFragment extends Fragment implements View.OnClickListener {
     public String user_names[];
     public String user_id[];
->>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
     RecyclerView recyclerView;
     ImageView refresh;
     SharedPreferences sharedPreferences;
@@ -61,14 +48,9 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recycler_view_userselect, container,
                 false);
-
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         recyclerView = (RecyclerView) v.findViewById(R.id.card_recycler_view);
-<<<<<<< HEAD
-        refresh=(ImageView) v.findViewById(R.id.refresh);
-=======
         refresh = (ImageView) v.findViewById(R.id.refresh);
->>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
         refresh.setVisibility(View.INVISIBLE);
         refresh.setOnClickListener(this);
         connect();
@@ -76,9 +58,6 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
     }
     private void initViews() {
         refresh.setVisibility(View.VISIBLE);
-
-        refresh.setVisibility(View.VISIBLE);
-
         recyclerView.setHasFixedSize(true);
         if (arr.length() < 5) {
             layoutManager = new GridLayoutManager(getActivity(), arr.length());
@@ -146,17 +125,9 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
         }
         return user_details;
     }
-<<<<<<< HEAD
-
-
     @Override
     public void onClick(View v) {
         connect();
 
-=======
-    @Override
-    public void onClick(View v) {
-        connect();
->>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
     }
 }
