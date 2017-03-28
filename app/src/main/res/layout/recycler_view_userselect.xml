@@ -29,6 +29,7 @@
         android:id="@+id/guideline9"
         app:layout_constraintGuide_percent="0.1"
         android:orientation="vertical"
+
         />
 
     <android.support.constraint.Guideline
@@ -75,6 +76,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp" />
 
+
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -89,6 +91,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="32dp" />
+
 
 
 </android.support.constraint.ConstraintLayout>

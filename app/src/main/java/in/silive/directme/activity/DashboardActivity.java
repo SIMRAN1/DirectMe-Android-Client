@@ -3,7 +3,6 @@ package in.silive.directme.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,36 +10,26 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.Key;
 import java.util.Observable;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
 import in.silive.directme.fragments.LeaderBoardFragment;
-import in.silive.directme.fragments.ParkingDetailsFragment;
-import in.silive.directme.fragments.UserDetailsFragment;
 import in.silive.directme.fragments.UserProfileFragment;
 import in.silive.directme.utils.Keys;
 import in.silive.directme.utils.NetworkUtils;
@@ -54,9 +43,7 @@ import in.silive.directme.utils.ToasterUtils;
 
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer,Animation.AnimationListener {
-
     public static final String[] co = new String[7];
-
     public int[] commod = new int[7];
     String token;
     int i;
@@ -68,7 +55,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     UserProfileFragment fragment;
     BroadcastReceiver mRegistrationBroadcastReceiver;
     FetchData apicalling;
-
     @BindView(R.id.tvBamboo)
     TextView bamboo;
     @BindView(R.id.tvBanana)
@@ -113,36 +99,36 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout wave9;
     @BindView(R.id.wave10)
     RelativeLayout wave10;
-
-
+    @BindView(R.id.wave11)
+    RelativeLayout wave11;
+    @BindView(R.id.wave12)
+    RelativeLayout wave12;
+    @BindView(R.id.wave13)
+    RelativeLayout wave13;
+    @BindView(R.id.wave14)
+    RelativeLayout wave14;
     @BindView(R.id.userprofile)
     ImageView avatar;
      Bundle args;
     JSONObject jsonObject;
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         ButterKnife.bind(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//to make screen full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//to make screen full screen
         sharedpreferences = DirectMe.getInstance().sharedPrefs;
-
         park.setOnClickListener(this);
         parked.setOnClickListener(this);
         parking.setOnClickListener(this);
         garage.setOnClickListener(this);
         showroom.setOnClickListener(this);
         iv_leader_board.setOnClickListener(this);
-
         avatar.setOnClickListener(this);
         avatar.setEnabled(false);
-
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
         wave1.startAnimation(animation);
-
         wave2.startAnimation(animation);
         wave3.startAnimation(animation);
         wave4.startAnimation(animation);
@@ -152,28 +138,23 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
         wave10.startAnimation(animation);
-
-
-
+        wave11.startAnimation(animation);
+        wave12.startAnimation(animation);
+        wave13.startAnimation(animation);
+        wave14.startAnimation(animation);
         controller.addObserver(DashboardActivity.this);
         token = sharedpreferences.getString(Constants.AUTH_TOKEN, "");
-
         count();
-
         if (NetworkUtils.isNetConnected()) {
             String firebase_id_send_to_server_or_not = sharedpreferences.getString(Constants.FIREBASE_ID_SENT, "");
             if (firebase_id_send_to_server_or_not.equals("0")) {
                 String Firebase_token = sharedpreferences.getString("regId", "");
-
                 FetchData fetchData = new FetchData(new FetchDataListener() {
                     @Override
                     public void processStart() {
-
                     }
-
                     @Override
                     public void processFinish(String output) {
-
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString(Constants.FIREBASE_ID_SENT, "1");//1 means firebase id is registered
                         editor.commit();
@@ -192,7 +173,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 // checking for type intent filter
                 if (intent.getAction().equals(Constants.REGISTRATION_COMPLETE)) {
                     // fcm successfully registered
@@ -200,24 +180,20 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     FirebaseMessaging.getInstance().subscribeToTopic(Constants.TOPIC_GLOBAL);
                 } else if (intent.getAction().equals(Constants.PUSH_NOTIFICATION)) {
                     // new push notification is received
-
                     String message = intent.getStringExtra("message");
                     ToasterUtils.toaster("Push notification: " + message);
                 }
             }
         };
     }
-
     public void count() {
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
-
             apicalling = new FetchData(new FetchDataListener() {
                 @Override
                 public void processStart() {
 
                 }
-
                 @Override
                 public void processFinish(String output) {
                     try {
@@ -254,7 +230,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             controller.setTimberCount(commod[3]);
                             controller.setCoconutCount(commod[4]);
                             controller.setGoldCoinCount(commod[0]);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -264,9 +239,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             apicalling.execute();
         } else {
             for (i = 0; i < 5; i++) {
-
                     commod[i] = Integer.parseInt(sharedpreferences.getString(Keys.co[i], ""));
-
             }
             controller.setBambooCount(commod[1]);
             controller.setBananaCount(commod[2]);
@@ -275,8 +248,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             controller.setGoldCoinCount(commod[0]);
         }
     }
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -306,10 +277,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             case R.id.leaderboard:
                 leaderBoardFragment();
                 break;
-
         }
     }
-
     private void leaderBoardFragment() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -320,8 +289,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-
     @Override
     //updating values through observer
     public void update(Observable observable, Object o) {
@@ -333,16 +300,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         timber.setText(String.valueOf(controller.getTimberCount()));
         gold_coin.setText(String.valueOf(controller.getGoldCoinCount()));
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         count();
-
     }
+
     @Override
     public void onBackPressed() {
-
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
         }
@@ -352,23 +317,18 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         }
     }
-
-
     @Override
     public void onAnimationStart(Animation animation) {
 
     }
-
     @Override
     public void onAnimationEnd(Animation animation) {
 
     }
-
     @Override
     public void onAnimationRepeat(Animation animation) {
 
     }
-
     void fragmentInitialise()
     {
         fragmentManager = getSupportFragmentManager();
@@ -380,6 +340,4 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-
 }

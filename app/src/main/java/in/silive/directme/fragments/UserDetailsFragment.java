@@ -10,28 +10,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.Button;
 import android.widget.ImageView;
 
+=======
+import android.widget.ImageView;
+>>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-
-import in.silive.directme.activity.ParkNowActivity;
-import in.silive.directme.utils.Constants;
-import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.R;
+import in.silive.directme.activity.ParkNowActivity;
 import in.silive.directme.adapter.DataUserSelectAdapter;
 import in.silive.directme.application.DirectMe;
 import in.silive.directme.listeners.FetchDataListener;
 import in.silive.directme.model.UserDetailsList;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
-
+import in.silive.directme.utils.Constants;
+import in.silive.directme.utils.NetworkUtils;
 
 
 /**
@@ -39,18 +40,23 @@ import in.silive.directme.utils.API_URL_LIST;
  */
 
 
+<<<<<<< HEAD
 public class UserDetailsFragment extends Fragment implements View.OnClickListener{
 
     public  String user_names[] ;
     public  String user_id[];
+=======
+public class UserDetailsFragment extends Fragment implements View.OnClickListener {
+    public String user_names[];
+    public String user_id[];
+>>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
     RecyclerView recyclerView;
     ImageView refresh;
     SharedPreferences sharedPreferences;
     FetchData apicalling;
     ConstraintLayout back;
     RecyclerView.LayoutManager layoutManager;
-
-
+    JSONArray arr;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recycler_view_userselect, container,
@@ -58,40 +64,36 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
 
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         recyclerView = (RecyclerView) v.findViewById(R.id.card_recycler_view);
+<<<<<<< HEAD
         refresh=(ImageView) v.findViewById(R.id.refresh);
+=======
+        refresh = (ImageView) v.findViewById(R.id.refresh);
+>>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
         refresh.setVisibility(View.INVISIBLE);
         refresh.setOnClickListener(this);
         connect();
         return v;
     }
-
     private void initViews() {
+        refresh.setVisibility(View.VISIBLE);
 
         refresh.setVisibility(View.VISIBLE);
 
         recyclerView.setHasFixedSize(true);
-        if(arr.length()<5) {
+        if (arr.length() < 5) {
             layoutManager = new GridLayoutManager(getActivity(), arr.length());
-        }
-        else if(arr.length()>=5)
-        {
+        } else if (arr.length() >= 5) {
             layoutManager = new GridLayoutManager(getActivity(), 5);
         }
-
         recyclerView.setLayoutManager(layoutManager);
-
         ArrayList<UserDetailsList> user_details = prepareData();
         DataUserSelectAdapter adapter = new DataUserSelectAdapter(getActivity(), user_details, (ParkNowActivity) getContext());
         recyclerView.setAdapter(adapter);
-
-
-
     }
-    JSONArray arr;
     void connect() {
         boolean network_available;
         final String token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
-        final String id=sharedPreferences.getString(Constants.ISLAND_ID,"");
+        final String id = sharedPreferences.getString(Constants.ISLAND_ID, "");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
             apicalling = new FetchData(new FetchDataListener() {
@@ -99,25 +101,21 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
                 public void processStart() {
 
                 }
-
                 @Override
                 public void processFinish(String output) {
                     try {
-
                         // Extract JSON array from the response
                         arr = new JSONArray(output);
-                        user_names= new String[arr.length()];
-                        user_id=new String[arr.length()];
+                        user_names = new String[arr.length()];
+                        user_id = new String[arr.length()];
                         // If no of array elements is not zero
                         if (arr.length() != 0) {
-
                             // Loop through each array element, get JSON object which has userid and username
                             for (int i = 0; i < arr.length(); i++) {
                                 // Get JSON object
                                 JSONObject obj = (JSONObject) arr.get(i);
-
                                 user_names[i] = obj.get("name").toString();
-                                user_id[i]=obj.get("user_id").toString();
+                                user_id[i] = obj.get("user_id").toString();
                                 initViews();
                             }
                         }
@@ -134,16 +132,11 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
             }
             apicalling.setArgs(API_URL_LIST.GET_USER_LIST, token, post_data);
             apicalling.execute();
-
         }
     }
-
     private ArrayList<UserDetailsList> prepareData() {
-
-
-
         ArrayList<UserDetailsList> user_details = new ArrayList<>();
-        for (int i=0;i<user_names.length;i++) {
+        for (int i = 0; i < user_names.length; i++) {
             UserDetailsList userDetailsList = new UserDetailsList();
             userDetailsList.setUser_name(user_names[i]);
             userDetailsList.setUser_id(user_id[i]);
@@ -153,11 +146,17 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
         }
         return user_details;
     }
+<<<<<<< HEAD
 
 
     @Override
     public void onClick(View v) {
         connect();
 
+=======
+    @Override
+    public void onClick(View v) {
+        connect();
+>>>>>>> 1b42f01c4e2f9e3629e315a6d6012e5268f4bec5
     }
 }
