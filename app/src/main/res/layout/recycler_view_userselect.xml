@@ -81,7 +81,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:id="@+id/refresh"
-        android:src="@drawable/ic_arrowleft"
+        android:src="@android:drawable/ic_menu_rotate"
         app:layout_constraintRight_toLeftOf="@+id/guideline9"
         app:layout_constraintLeft_toLeftOf="@+id/guideline5"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
