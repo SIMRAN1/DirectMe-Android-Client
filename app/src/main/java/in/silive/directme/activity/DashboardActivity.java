@@ -29,6 +29,7 @@ import java.util.Observable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
+import in.silive.directme.dialog.AlertDialog;
 import in.silive.directme.fragments.LeaderBoardFragment;
 import in.silive.directme.fragments.UserProfileFragment;
 import in.silive.directme.utils.Keys;
@@ -147,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         editor.putString(Constants.FIREBASE_ID_SENT, "1");//1 means firebase id is registered
                         editor.commit();
                     }
-                });
+                }, this);
                 String post_data = "";
                 try {
                     post_data = URLEncoder.encode(Keys.fcm_token, "UTF-8") + "=" + URLEncoder.encode(Firebase_token, "UTF-8");
@@ -157,6 +158,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 fetchData.setArgs(API_URL_LIST.FIREBASE_TOKEN_UPDATE, token, post_data);
                 fetchData.execute();
             }
+        }else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.alertDialog(this);
         }
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -222,7 +226,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         e.printStackTrace();
                     }
                 }
-            });
+            }, this);
             apicalling.setArgs(API_URL_LIST.COMODITY_URL, token, "");
             apicalling.execute();
         } else {
@@ -265,6 +269,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             case R.id.leaderboard:
                 leaderBoardFragment();
                 break;
+
         }
     }
     private void leaderBoardFragment() {
@@ -281,7 +286,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     //updating values through observer
     public void update(Observable observable, Object o) {
         controller = (Controller) observable;
-        System.out.println(controller.getBananaCount());
         bamboo.setText(String.valueOf(controller.getBambooCount()));
         coconut.setText(String.valueOf(controller.getCoconutCount()));
         banana.setText(String.valueOf(controller.getBananaCount()));

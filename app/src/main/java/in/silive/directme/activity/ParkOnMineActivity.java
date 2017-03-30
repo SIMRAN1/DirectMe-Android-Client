@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
+import in.silive.directme.dialog.AlertDialog;
 import in.silive.directme.fragments.PortDetailsFragment;
 import in.silive.directme.listeners.FetchDataListener;
 import in.silive.directme.network.FetchData;
@@ -41,9 +42,6 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.nonparkingport5)
     ImageView nonparkingport5;
     SharedPreferences sharedpreference;
-    // String token;
-    String type;
-    String id;
     JSONObject jsonObject = null;
     FetchData apiCalling;
     boolean network_available;
@@ -71,41 +69,21 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.parkingport1:
-
                 parkedDetail("0");
-
-
-
-
-
                 break;
             case R.id.parkingport2:
                 parkedDetail("1");
-
-
                 break;
             case R.id.nonparkingport3:
                 parkedDetail("2");
-
-
                 break;
             case R.id.nonparkingport4:
                 parkedDetail("3");
-
-
-
-
                 break;
             case R.id.nonparkingport5:
                 parkedDetail("4");
-
-
-
-
                 break;
-
         }
 
     }
@@ -128,16 +106,7 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                         JSONArray user = new JSONArray(output);
                         if (parking_no != null) {
                             jsonObject = user.getJSONObject(Integer.parseInt(parking_no));
-                            type = jsonObject.get("type").toString();
-                            id = jsonObject.get("id").toString();
-                            JSONArray logs = jsonObject.getJSONArray("logs");
-                            if (logs.length() > 0) {
-
-                            } else {
-
-                            }
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -146,11 +115,13 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                     }
 
                 }
-            });
+            }, this);
             apiCalling.setArgs(API_URL_LIST.PORTS_URL, token, "");
             apiCalling.execute();
 
-
+        }else{
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.alertDialog(this);
         }
     }
 
@@ -161,8 +132,6 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                 R.anim.exit_to_left);
         args = new Bundle();
         args.putString("data", jsonObject.toString());
-
-
         fragment = new PortDetailsFragment();
         fragment.setArguments(args);
         fragmentTransaction.replace(R.id.fragment_container, fragment);

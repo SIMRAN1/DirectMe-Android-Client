@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.R;
 import in.silive.directme.application.DirectMe;
+import in.silive.directme.dialog.AlertDialog;
 import in.silive.directme.listeners.FetchDataListener;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
@@ -38,8 +39,6 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.nonparkingport5)
     ImageView nonparkingport5;
     SharedPreferences sharedpreference;
-    String type;
-    String id;
     JSONObject jsonObject;
     FetchData apiCalling;
     boolean network_available;
@@ -98,7 +97,7 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void processFinish(String output) {
                     try {
-                         user = new JSONArray(output);
+                        user = new JSONArray(output);
                         for (int i = 0; i < 5; i++) {
                             jsonObject = user.getJSONObject(i);
                             JSONArray logs = jsonObject.getJSONArray("logs");
@@ -115,9 +114,13 @@ public class ParkedFragment extends Fragment implements View.OnClickListener {
                     }
 
                 }
-            });
+            }, getContext());
             apiCalling.setArgs(API_URL_LIST.PORTS_URL + user_id + "/", token, "");
             apiCalling.execute();
+
+        }else{
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.alertDialog(getContext());
         }
     }
 

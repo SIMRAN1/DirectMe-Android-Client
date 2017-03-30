@@ -24,7 +24,14 @@
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="57dp"
         tools:layout_editor_absoluteX="0dp" />
-
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline251"
+        app:layout_constraintGuide_percent="0.15"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="57dp"
+        tools:layout_editor_absoluteX="0dp" />
 
 
     <android.support.constraint.Guideline
@@ -44,19 +51,58 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="47dp" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/avatar"
+        app:layout_constraintRight_toLeftOf="@+id/guideline78"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline35"
+        app:layout_constraintBottom_toTopOf="@+id/guideline251"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"
+        >
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline781"
+            app:layout_constraintGuide_percent="0"
+            android:orientation="vertical"
+            />
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline782"
+            app:layout_constraintGuide_percent="1"
+            android:orientation="vertical"
+            />
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline783"
+            app:layout_constraintGuide_percent="0"
+            android:orientation="horizontal"
+            />
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline784"
+            app:layout_constraintGuide_percent="1"
+            android:orientation="horizontal"
+            />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+        <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userprofile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:srcCompat="@drawable/avatar"
-
-        app:layout_constraintRight_toLeftOf="@+id/guideline78"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline35"
-        app:layout_constraintBottom_toTopOf="@+id/guideline25"
-        app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guideline782"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline781"
+        app:layout_constraintBottom_toTopOf="@+id/guideline784"
+        app:layout_constraintTop_toTopOf="@+id/guideline783"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.0" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -103,8 +149,6 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-
-
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             app:srcCompat="@drawable/expicon" />
@@ -133,12 +177,9 @@
 
         app:layout_constraintLeft_toLeftOf="@+id/guideline79"
         app:layout_constraintRight_toLeftOf="@+id/guideline83"
-
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         android:background="@android:color/transparent"
-
         app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="parent">
@@ -176,9 +217,7 @@
 
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         android:background="@android:color/transparent"
-
         app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="parent">
@@ -780,7 +819,6 @@
         android:orientation="horizontal" />
 
     <ImageView
-
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:srcCompat="@drawable/docknow"
@@ -823,9 +861,6 @@
         android:id="@+id/guideline100"
         app:layout_constraintGuide_percent="0.90"
         android:orientation="horizontal" />
-
-
-
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -838,7 +873,6 @@
         android:id="@+id/guideline101"
         app:layout_constraintGuide_percent="0.63"
         android:orientation="horizontal" />
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"

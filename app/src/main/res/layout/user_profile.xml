@@ -225,14 +225,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.07" />
-
         <android.support.constraint.Guideline
             android:id="@+id/guideline41"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.10" />
-
         <android.support.constraint.Guideline
             android:id="@+id/guideline42"
             android:layout_width="wrap_content"
