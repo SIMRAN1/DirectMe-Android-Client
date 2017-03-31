@@ -62,7 +62,7 @@
         android:layout_marginRight="112dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline37"
+        app:layout_constraintBottom_toBottomOf="@id/dock_status"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="@+id/guideline76"
         app:layout_constraintHorizontal_bias="0.983"

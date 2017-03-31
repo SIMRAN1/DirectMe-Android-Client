@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -74,6 +75,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     int Experience_Count;
     String commodity[]=new String[5];
     private GoogleApiClient mGoogleApiClient;
+    Typeface type;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +90,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         {
             commodity[i]=sharedpreference.getString(Keys.co[i],"");
         }
+        type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
         this.Banana_Count = commodity[2];
         banana_count.setText(Banana_Count);
         this.Bamboo_Count = commodity[1];
@@ -328,6 +331,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         TextView message_textview=(TextView)dialogView.findViewById(R.id.message);
         message_textview.setText(message);
         message_textview.setTextSize(30);
+        message_textview.setTypeface(type);
         Button yes=(Button)dialogView.findViewById(R.id.yes);
         Button no=(Button)dialogView.findViewById(R.id.No);
         yes.setOnClickListener(new View.OnClickListener() {
