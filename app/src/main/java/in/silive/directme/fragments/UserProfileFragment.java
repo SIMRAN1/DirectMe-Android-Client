@@ -58,6 +58,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     TextView wood_count;
     @BindView(R.id.level)
     TextView level;
+    @BindView(R.id.welcome)
+    TextView welcome;
     @BindView(R.id.island_name)
     TextView island_name;
     @BindView(R.id.island)
@@ -66,6 +68,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     ImageView logout ;
     @BindView(R.id.avatar)
     ImageView avatar ;
+    @BindView(R.id.dme_icon)
+    ImageView dme_icon_imgview;
     public SharedPreferences sharedPrefs;
     String Banana_Count;
     String Bamboo_Count;
@@ -76,6 +80,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     String commodity[]=new String[5];
     private GoogleApiClient mGoogleApiClient;
     Typeface type;
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +96,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             commodity[i]=sharedpreference.getString(Keys.co[i],"");
         }
         type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        level.setTypeface(type);
+        welcome.setTypeface(type);
         this.Banana_Count = commodity[2];
         banana_count.setText(Banana_Count);
         this.Bamboo_Count = commodity[1];
@@ -99,6 +106,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         gold_count.setText(Gold_Count);
         this.Coconut_Count = commodity[4];
         coconut_count.setText(Coconut_Count);
+        this.Wood_Count=commodity[3];
+        wood_count.setText(Wood_Count);
         final String expreience=sharedpreference.getString(Keys.experience,"");
         Experience_Count =Integer.parseInt(expreience);
        setExperiencelevel(expreience);
@@ -111,6 +120,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         final String gravatar=sharedpreference.getString(Keys.gravatar,"");
         Picasso.with(getActivity()).load(gravatar).into(avatar);
         avatar.setOnClickListener(this);
+        dme_icon_imgview.setOnClickListener(this);
         return rootView;
     }
     void setExperiencelevel(String experience)
@@ -119,127 +129,127 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL1);
            progressBar_experience.setProgress(count);
-           level.setText("Level1");
+           level.setText("Level-1");
        }
        else if(count>Constants.XPCOUNT_LEVEL1&&count<=Constants.XPCOUNT_LEVEL2)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL2);
            progressBar_experience.setProgress(count);
-           level.setText("Level1");
+           level.setText("Level-1");
        }
        else if(count>Constants.XPCOUNT_LEVEL2&&count<=Constants.XPCOUNT_LEVEL3)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL3);
            progressBar_experience.setProgress(count);
-           level.setText("Level2");
+           level.setText("Level-2");
        }
        else if(count>Constants.XPCOUNT_LEVEL3&&count<=Constants.XPCOUNT_LEVEL4)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL4);
            progressBar_experience.setProgress(count);
-           level.setText("Level3");
+           level.setText("Level-3");
        }
         else if(count>Constants.XPCOUNT_LEVEL4&&count<=Constants.XPCOUNT_LEVEL5)
         {
             progressBar_experience.setMax(Constants.XPCOUNT_LEVEL5);
             progressBar_experience.setProgress(count);
-            level.setText("Level4");
+            level.setText("Level-4");
         }
         else if(count>Constants.XPCOUNT_LEVEL5&&count<=Constants.XPCOUNT_LEVEL6)
         {
             progressBar_experience.setMax(Constants.XPCOUNT_LEVEL6);
             progressBar_experience.setProgress(count);
-            level.setText("Level5");
+            level.setText("Level-5");
         }
        else if(count>Constants.XPCOUNT_LEVEL6&&count<=Constants.XPCOUNT_LEVEL7)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL7);
            progressBar_experience.setProgress(count);
-           level.setText("Level6");
+           level.setText("Level-6");
        }
        else if(count>Constants.XPCOUNT_LEVEL7&&count<=Constants.XPCOUNT_LEVEL8)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL8);
            progressBar_experience.setProgress(count);
-           level.setText("Level7");
+           level.setText("Level-7");
        }
        else if(count>Constants.XPCOUNT_LEVEL8&&count<=Constants.XPCOUNT_LEVEL9)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL9);
            progressBar_experience.setProgress(count);
-           level.setText("Level8");
+           level.setText("Level-8");
        }
        else if(count>Constants.XPCOUNT_LEVEL9&&count<=Constants.XPCOUNT_LEVEL10)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL10);
            progressBar_experience.setProgress(count);
-           level.setText("Level9");
+           level.setText("Level-9");
        }
        else if(count>Constants.XPCOUNT_LEVEL10&&count<=Constants.XPCOUNT_LEVEL11)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL11);
            progressBar_experience.setProgress(count);
-           level.setText("Level10");
+           level.setText("Level-10");
        }
        else if(count>Constants.XPCOUNT_LEVEL11&&count<=Constants.XPCOUNT_LEVEL12)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL12);
            progressBar_experience.setProgress(count);
-           level.setText("Level11");
+           level.setText("Level-11");
        }
        else if(count>Constants.XPCOUNT_LEVEL12&&count<=Constants.XPCOUNT_LEVEL13)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL13);
            progressBar_experience.setProgress(count);
-           level.setText("Level12");
+           level.setText("Level-12");
        }
        else if(count>Constants.XPCOUNT_LEVEL13&&count<=Constants.XPCOUNT_LEVEL14)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL14);
            progressBar_experience.setProgress(count);
-           level.setText("Level13");
+           level.setText("Level-13");
        }
        else if(count>Constants.XPCOUNT_LEVEL14&&count<=Constants.XPCOUNT_LEVEL15)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL15);
            progressBar_experience.setProgress(count);
-           level.setText("Level14");
+           level.setText("Level-14");
        }
        else if(count>Constants.XPCOUNT_LEVEL15&&count<=Constants.XPCOUNT_LEVEL16)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL16);
            progressBar_experience.setProgress(count);
-           level.setText("Level15");
+           level.setText("Level-15");
        }
        else if(count>Constants.XPCOUNT_LEVEL16&&count<=Constants.XPCOUNT_LEVEL17)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL17);
            progressBar_experience.setProgress(count);
-           level.setText("Level16");
+           level.setText("Level-16");
        }
        else if(count>Constants.XPCOUNT_LEVEL17&&count<=Constants.XPCOUNT_LEVEL18)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL18);
            progressBar_experience.setProgress(count);
-           level.setText("Level17");
+           level.setText("Level-17");
        }
        else if(count>Constants.XPCOUNT_LEVEL18&&count<=Constants.XPCOUNT_LEVEL19)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL19);
            progressBar_experience.setProgress(count);
-           level.setText("Level18");
+           level.setText("Level-18");
        }
        else if(count>Constants.XPCOUNT_LEVEL19&&count<=Constants.XPCOUNT_LEVEL20)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL20);
            progressBar_experience.setProgress(count);
-           level.setText("Level19");
+           level.setText("Level-19");
        }
        else if(count>Constants.XPCOUNT_LEVEL20)
        {
            progressBar_experience.setMax(Constants.XPCOUNT_LEVEL20);
            progressBar_experience.setProgress(count);
-           level.setText("Level20");
+           level.setText("Level-20");
        }
     }
     void islandImage(String island_id)
@@ -316,7 +326,13 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                                 .build()
                 ).show();
                     break;
-
+                case R.id.dme_icon:Intent intent=new Intent(getActivity(),DashboardActivity.class);
+                                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                   startActivity(intent);
+                                   getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                                   getActivity().finish();
+             break;
             }
         }
     }
