@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -64,6 +65,7 @@ public class ParkingUserPortViewFragment extends Fragment {
     TextView parkingTypeTextView, userNameTextview;
     SharedPreferences sharedPreferences;
     Boolean network_available;
+    Typeface typeface;
 
     @Nullable
     @Override
@@ -77,6 +79,8 @@ public class ParkingUserPortViewFragment extends Fragment {
         parkingType = bundle.getString("parkingType");
         userNameTextview = (TextView) view.findViewById(R.id.username);
         parkingTypeTextView = (TextView) view.findViewById(R.id.type);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        parkingTypeTextView.setTypeface(typeface);
         btDock.setBackgroundResource(R.drawable.undock);
         startAnimation();
 

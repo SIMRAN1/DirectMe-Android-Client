@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -69,6 +70,8 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
     private static final int FRAME_DURATION = 150; // in ms !
     // frame duration
     View v;
+    Typeface typeface;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.portdetails, container,
                 false);
@@ -79,6 +82,8 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
         r1=(ConstraintLayout)v.findViewById(R.id.background);
         Dock=(Button)v.findViewById(R.id.catchbutton);
         Dock.setOnClickListener(this);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        TypeTextView.setTypeface(typeface);
         Dock.setBackgroundResource(R.drawable.dock);
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         try {
@@ -102,6 +107,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
             else
             {
                 UsernameTextview.setText("N-A");
+                UsernameTextview.setTypeface(typeface);
                 TypeTextView.setText(type);
                 Dock.setEnabled(true);
             }
@@ -146,6 +152,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                         flag=0;
                         dialog.cancel();
                         Toast.makeText(getActivity(),"Your ship is not docked",Toast.LENGTH_LONG).show();
+                        Dock.setEnabled(true);
                     }
                 });
         AlertDialog alert11 = builder1.create();
@@ -212,6 +219,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
             ok.setOnClickListener(cancel_button_click_listener);
             TextView message=(TextView) layout.findViewById(R.id.dock_status);
             message.setText(message_status);
+            message.setTypeface(typeface);
         } catch (Exception e) {
             e.printStackTrace();
         }

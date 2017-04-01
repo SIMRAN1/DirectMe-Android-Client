@@ -51,7 +51,6 @@ public class ParkingPortFragment extends Fragment implements View.OnClickListene
 
         Bundle bundle = getArguments();
         user_id =  bundle.getString("user_id");
-
         iv_port1 = (ImageView) view.findViewById(R.id.parkingport1);
         iv_port2 = (ImageView) view.findViewById(R.id.parkingport2);
         iv_port3 = (ImageView) view.findViewById(R.id.nonparkingport3);

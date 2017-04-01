@@ -45,7 +45,7 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline114"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="16dp"
-        android:textSize="15dp"
+        android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="@+id/guideline76"
         app:layout_constraintTop_toTopOf="@+id/guideline36"
         android:layout_marginTop="40dp"

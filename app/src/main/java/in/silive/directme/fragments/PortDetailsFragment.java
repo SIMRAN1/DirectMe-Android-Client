@@ -3,6 +3,7 @@ package in.silive.directme.fragments;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -66,6 +67,7 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
     private static final int COUNT_Y = 4;
     // we can slow animation by changing frame duration
     private static final int FRAME_DURATION = 150; // in ms !
+    Typeface typeface;
     // frame duration
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +78,8 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
         TypeTextView = (TextView) v.findViewById(R.id.type);
         land=(ImageView)v.findViewById(R.id.land);
         boat=(ImageView)v.findViewById(R.id.boat);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        TypeTextView.setTypeface(typeface);
         Catch=(Button) v.findViewById(R.id.catchbutton);
         r1=(ConstraintLayout)v.findViewById(R.id.background);
         Catch.setOnClickListener(this);
@@ -113,6 +117,7 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
             {
                 UsernameTextview.setText("N-A");
                 UsernameTextview.setGravity(Gravity.CENTER);
+                UsernameTextview.setTypeface(typeface);
                 TypeTextView.setText(type);
                 Catch.setEnabled(false);
             }

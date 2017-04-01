@@ -6,6 +6,7 @@ package in.silive.directme.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -55,8 +56,9 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
     private String userid;
     @Override
     public void onBindViewHolder(DataUserSelectAdapter.ViewHolder viewHolder, int i) {
-
+        Typeface typeface = Typeface.createFromAsset(parkNowActivity.getAssets(),"fonts/CarnevaleeFreakshow.ttf");
         viewHolder.usr_name.setText(user_details.get(i).getUser_name());
+        viewHolder.usr_name.setTypeface(typeface);
         //   Picasso.with(context).load(user_details.get(i).getUser_image_url()).resize(240, 120).into(viewHolder.usr_img);
         viewHolder.usr_img.setImageResource(R.drawable.img_wood);
         userid=user_details.get(i).getUser_id();
