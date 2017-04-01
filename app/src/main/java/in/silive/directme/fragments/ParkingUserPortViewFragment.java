@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,7 @@ public class ParkingUserPortViewFragment extends Fragment {
     SharedPreferences sharedPreferences;
     Boolean network_available;
     Typeface typeface;
+    ImageView boat;
 
     @Nullable
     @Override
@@ -77,6 +79,7 @@ public class ParkingUserPortViewFragment extends Fragment {
         Bundle bundle = getArguments();
         port_jsonObject = bundle.getString("port_jsonObject");
         parkingType = bundle.getString("parkingType");
+        boat=(ImageView)view.findViewById(R.id.boat);
         userNameTextview = (TextView) view.findViewById(R.id.username);
         parkingTypeTextView = (TextView) view.findViewById(R.id.type);
         typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
@@ -140,6 +143,10 @@ public class ParkingUserPortViewFragment extends Fragment {
                 }
             }
         });
+        final String ship_image=sharedPreferences.getString(Constants.SHIP_IMAGE_URL,"");
+        Picasso.with(getContext())
+                .load(ship_image)
+                .into(boat);
         return view;
     }
 
@@ -153,8 +160,10 @@ public class ParkingUserPortViewFragment extends Fragment {
                 "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if (flag == 0)
+                        if (flag == 0) {
+                            boat.setVisibility(View.GONE);
                             sendToSuperWorld();
+                        }
                         else
                             dialog.dismiss();
                     }
