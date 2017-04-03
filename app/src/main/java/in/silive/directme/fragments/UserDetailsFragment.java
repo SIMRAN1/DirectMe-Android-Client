@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,7 @@ import in.silive.directme.utils.NetworkUtils;
 public class UserDetailsFragment extends Fragment implements View.OnClickListener {
     public String user_names[];
     public String user_id[];
+    public String user_img_url[];
     RecyclerView recyclerView;
     ImageView refresh;
     SharedPreferences sharedPreferences;
@@ -88,6 +90,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
                         arr = new JSONArray(output);
                         user_names = new String[arr.length()];
                         user_id = new String[arr.length()];
+                        user_img_url=new String[arr.length()];
                         // If no of array elements is not zero
                         if (arr.length() != 0) {
                             // Loop through each array element, get JSON object which has userid and username
@@ -96,6 +99,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
                                 JSONObject obj = (JSONObject) arr.get(i);
                                 user_names[i] = obj.get("name").toString();
                                 user_id[i] = obj.get("user_id").toString();
+                                user_img_url[i]=obj.get("gravatar").toString();
                                 initViews();
                             }
                         }
@@ -124,8 +128,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
             UserDetailsList userDetailsList = new UserDetailsList();
             userDetailsList.setUser_name(user_names[i]);
             userDetailsList.setUser_id(user_id[i]);
-            //// TODO: 3/4/2017 add image url
-            userDetailsList.setUser_image_url("simran");
+            userDetailsList.setUser_image_url(user_img_url[i]);
             user_details.add(userDetailsList);
         }
         return user_details;

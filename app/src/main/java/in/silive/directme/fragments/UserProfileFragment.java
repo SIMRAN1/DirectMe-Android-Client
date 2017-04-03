@@ -342,7 +342,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView= inflater.inflate(R.layout.alert_label_editor, null);
         builder1.setView(dialogView);
-        builder1.setCancelable(false);
+        builder1.setCancelable(true);
         final AlertDialog alertDialog = builder1.create();
         TextView message_textview=(TextView)dialogView.findViewById(R.id.message);
         message_textview.setText(message);

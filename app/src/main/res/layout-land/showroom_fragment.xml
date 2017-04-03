@@ -78,7 +78,6 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
 
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -275,7 +274,6 @@
         tools:layout_editor_absoluteY="308dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/third"
         android:layout_width="683dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -284,7 +282,6 @@
         tools:layout_editor_absoluteY="343dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/first"
         android:layout_width="683dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -293,7 +290,6 @@
         tools:layout_editor_absoluteY="273dp" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -475,7 +471,6 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
-        android:id="@+id/vert_value3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -484,7 +479,6 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/vert_value2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -493,7 +487,6 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/vert_value1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

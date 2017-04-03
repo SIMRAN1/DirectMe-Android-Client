@@ -15,7 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,12 +59,24 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
     }
     private String userid;
     @Override
-    public void onBindViewHolder(DataUserSelectAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final DataUserSelectAdapter.ViewHolder viewHolder, int i) {
         Typeface typeface = Typeface.createFromAsset(parkNowActivity.getAssets(),"fonts/CarnevaleeFreakshow.ttf");
         viewHolder.usr_name.setText(user_details.get(i).getUser_name());
         viewHolder.usr_name.setTypeface(typeface);
-        //   Picasso.with(context).load(user_details.get(i).getUser_image_url()).resize(240, 120).into(viewHolder.usr_img);
-        viewHolder.usr_img.setImageResource(R.drawable.img_wood);
+
+            Picasso.with(context).load(user_details.get(i).getUser_image_url()).resize(240, 120).into(viewHolder.usr_img, new Callback() {
+                @Override
+                public void onSuccess() {
+                    viewHolder.pb.setVisibility(View.GONE);
+
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+
         userid=user_details.get(i).getUser_id();
         viewHolder.setUserId(userid);
     }
@@ -73,6 +89,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView usr_name;
         private ImageView usr_img;
+        private ProgressBar pb;
         private String user_id;
         private ConstraintLayout back;
         FragmentManager fragmentManager;
@@ -90,6 +107,7 @@ public class DataUserSelectAdapter extends RecyclerView.Adapter<DataUserSelectAd
 
             usr_name = (TextView)view.findViewById(R.id.usr_name);
             usr_img = (ImageView) view.findViewById(R.id.img_user);
+            pb=(ProgressBar)view.findViewById(R.id.progressbar);
             back=(ConstraintLayout)view.findViewById(R.id.constraint);
             back.setOnClickListener(this);
         }

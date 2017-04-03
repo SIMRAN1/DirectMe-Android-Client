@@ -121,7 +121,6 @@
 
     <RadioGroup
         android:checkedButton="@+id/offer"
-        android:id="@+id/toggle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/guidelinegarage25"
@@ -145,7 +144,6 @@
             android:textColor="@android:color/white" />
 
         <RadioButton
-            android:id="@+id/radioButtonGoldCoins2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -163,7 +161,6 @@
         android:text="Gold Coins"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:id="@+id/textViewGarageUpgradeTimber"
         app:layout_constraintTop_toTopOf="@id/guidelinegarage25"
         app:layout_constraintBottom_toBottomOf="@+id/guidelinegarage34"
         app:layout_constraintLeft_toLeftOf="@+id/guideline18"

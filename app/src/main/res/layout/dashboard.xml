@@ -152,7 +152,6 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline80"
         app:layout_constraintGuide_begin="20dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
@@ -180,7 +179,6 @@
         android:layout_marginTop="0dp">
 
         <ImageView
-            android:id="@+id/experience"
 
             android:layout_width="20dp"
             android:layout_height="wrap_content"
@@ -221,7 +219,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/coin"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -259,7 +256,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView4"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -308,7 +304,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView5"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -350,7 +345,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView6"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -398,7 +392,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView7"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -417,7 +410,6 @@
     <ImageView
         app:layout_constraintLeft_toLeftOf="@+id/guideline87"
         app:layout_constraintRight_toLeftOf="@+id/guideline88"
-        android:id="@+id/setting"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
@@ -470,7 +462,6 @@
     <ImageView
         app:layout_constraintLeft_toLeftOf="@+id/guideline87"
         app:layout_constraintRight_toLeftOf="@+id/guideline88"
-        android:id="@+id/software_incubator"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
@@ -836,8 +827,7 @@
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline95"
         app:layout_constraintVertical_bias="0.0"
-        android:layout_marginLeft="0dp"
-        android:id="@+id/constraintLayout5">
+        android:layout_marginLeft="0dp">
 
     </android.support.constraint.ConstraintLayout>
 

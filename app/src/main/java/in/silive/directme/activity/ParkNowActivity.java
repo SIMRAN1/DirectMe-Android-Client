@@ -180,7 +180,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
             LayoutInflater inflater = this.getLayoutInflater();
             final View dialogView= inflater.inflate(R.layout.alert_label_editor, null);
             builder1.setView(dialogView);
-            builder1.setCancelable(false);
+            builder1.setCancelable(true);
             final AlertDialog alertDialog = builder1.create();
             Button yes=(Button)dialogView.findViewById(R.id.yes);
             Button no=(Button)dialogView.findViewById(R.id.No);

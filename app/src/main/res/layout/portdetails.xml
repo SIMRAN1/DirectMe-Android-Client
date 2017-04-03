@@ -32,7 +32,6 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline63"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="1.0"
         />
@@ -147,11 +146,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="TextView"
+
             android:textSize="15dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="0dp"
             app:layout_constraintRight_toRightOf="@id/guideline671"
             android:layout_marginLeft="24dp"
+
             app:layout_constraintLeft_toLeftOf="@+id/guideline670"
             app:layout_constraintBottom_toBottomOf="@+id/guideline659"
             android:layout_marginBottom="0dp"
@@ -163,7 +164,6 @@
         android:id="@+id/boat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
@@ -180,7 +180,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/guideline65"
         app:layout_constraintGuide_percent="1"
-
         android:orientation="vertical" />
 
     <android.support.constraint.Guideline
@@ -217,7 +216,6 @@
         android:id="@+id/catchbutton"
         android:layout_width="120dp"
         android:layout_height="0dp"
-
         android:background="@drawable/catchbutton"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="@+id/guideline61"

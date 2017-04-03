@@ -113,8 +113,7 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:id="@+id/constraintLayout2">
+        tools:layout_constraintTop_creator="1">
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,7 +192,6 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline22"
         app:layout_constraintGuide_percent="0.1"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
@@ -270,7 +268,6 @@
         tools:layout_editor_absoluteX="296dp" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
@@ -431,7 +428,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="16dp" />
         <ImageView
-            android:id="@+id/xpimg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
