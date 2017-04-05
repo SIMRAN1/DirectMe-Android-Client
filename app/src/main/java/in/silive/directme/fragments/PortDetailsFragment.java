@@ -144,11 +144,7 @@ public class PortDetailsFragment extends Fragment implements View.OnClickListene
             }
 
             // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                r1.setBackgroundDrawable(animation);
-            } else {
-                r1.setBackground(animation);
-            }
+            r1.setBackground(animation);
 
             // start animation on image
             r1.post(new Runnable() {

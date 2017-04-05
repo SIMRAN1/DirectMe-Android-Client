@@ -100,11 +100,7 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
             }
 
             // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                rl.setBackgroundDrawable(animation);
-            } else {
-                rl.setBackground(animation);
-            }
+            rl.setBackground(animation);
 
             // start animation on image
             rl.post(new Runnable() {
@@ -171,7 +167,6 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
                 R.anim.exit_to_left);
         fragment = new ParkedFragment();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-
         fragmentTransaction.commit();
 
     }

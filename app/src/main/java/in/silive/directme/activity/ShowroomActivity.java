@@ -46,7 +46,7 @@ public class ShowroomActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setPageTransformer(false , new ViewPagerAnimation());
-
+        mViewPager.setOffscreenPageLimit(count-1);
         sharedpreferences = DirectMe.getInstance().sharedPrefs;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -103,4 +103,6 @@ public class ShowroomActivity extends AppCompatActivity {
             alertDialog.alertDialog(this);
         }
     }
+
+
 }

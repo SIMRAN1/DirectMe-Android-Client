@@ -3,6 +3,7 @@ package in.silive.directme.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import in.silive.directme.fragments.ParkingWorldViewFragment;
 
@@ -10,7 +11,7 @@ import in.silive.directme.fragments.ParkingWorldViewFragment;
  * Created by Shobhit-pc on 3/6/2017.
  */
 
-public class ParkingPagerAdapter extends FragmentPagerAdapter {
+public class ParkingPagerAdapter extends FragmentStatePagerAdapter {
 
     public ParkingPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -26,4 +27,5 @@ public class ParkingPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 1;
     }
+
 }

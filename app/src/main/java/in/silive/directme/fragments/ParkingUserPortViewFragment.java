@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,7 +184,19 @@ public class ParkingUserPortViewFragment extends Fragment {
         Intent i = new Intent(getActivity() , DashboardActivity.class);
         startActivity(i);
         getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        removeFragment();
         getActivity().finish();
+    }
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    ParkingUserPortViewFragment fragment;
+    void removeFragment()
+    {
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = new ParkingUserPortViewFragment();
+        fragmentTransaction.remove(fragment);
+        fragmentTransaction.commit();
     }
 
     private void startAnimation() {
@@ -200,11 +214,7 @@ public class ParkingUserPortViewFragment extends Fragment {
             }
 
             // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                clBackground.setBackgroundDrawable(animation);
-            } else {
-                clBackground.setBackground(animation);
-            }
+            clBackground.setBackground(animation);
 
             // start animation on image
             clBackground.post(new Runnable() {

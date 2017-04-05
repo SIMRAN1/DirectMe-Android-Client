@@ -52,7 +52,7 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
     android.support.constraint.ConstraintLayout cluserList;
     private String status;
     private String island_id;
-    @BindView(R.id.wave1)
+/*    @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
     RelativeLayout wave2;
@@ -72,7 +72,7 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
     RelativeLayout wave9;
     @BindView(R.id.wave10)
     RelativeLayout wave10;
-    int offsetValue=0;
+    int offsetValue=0;*/
 
     @Nullable
     @Override
@@ -97,7 +97,7 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
         jsonArrayIslanad2 = new JSONArray();
         jsonArrayIslanad3 = new JSONArray();
         jsonArrayIslanad4 = new JSONArray();
-        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.waveanimationparknow);
+    /*   Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.waveanimationparknow);
         animation.setFillAfter(true);
         animation.setAnimationListener(new Animation.AnimationListener(){
 
@@ -131,7 +131,7 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
         wave7.startAnimation(animation);
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
-        wave10.startAnimation(animation);
+        wave10.startAnimation(animation);*/
 
         apiCalling();
 

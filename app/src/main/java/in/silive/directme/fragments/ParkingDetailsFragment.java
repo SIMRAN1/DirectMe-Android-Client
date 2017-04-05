@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -237,6 +239,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                removeFragment();
                 getActivity().finish();
                 pwindo.dismiss();
             }
@@ -260,11 +263,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                         FRAME_DURATION);
             }
             // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                r1.setBackgroundDrawable(animation);
-            } else {
-                r1.setBackground(animation);
-            }
+            r1.setBackground(animation);
             // start animation on image
             r1.post(new Runnable() {
                 @Override
@@ -273,5 +272,16 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                 }
             });
         }
+    }
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    ParkingDetailsFragment fragment;
+    void removeFragment()
+    {
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = new ParkingDetailsFragment();
+        fragmentTransaction.remove(fragment);
+        fragmentTransaction.commit();
     }
 }

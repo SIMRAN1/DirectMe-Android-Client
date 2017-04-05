@@ -82,7 +82,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ImageView showroom;
     @BindView(R.id.leaderboard)
     ImageView iv_leader_board;
-    @BindView(R.id.wave1)
+   /* @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
     RelativeLayout wave2;
@@ -101,7 +101,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     @BindView(R.id.wave9)
     RelativeLayout wave9;
     @BindView(R.id.wave10)
-    RelativeLayout wave10;
+    RelativeLayout wave10;*/
     @BindView(R.id.userprofile)
     ImageView avatar;
     @BindView(R.id.progressbar)
@@ -122,7 +122,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         iv_leader_board.setOnClickListener(this);
         avatar.setOnClickListener(this);
         avatar.setEnabled(false);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
+       /* Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
         wave1.startAnimation(animation);
@@ -134,7 +134,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         wave7.startAnimation(animation);
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
-        wave10.startAnimation(animation);
+        wave10.startAnimation(animation);*/
         controller.addObserver(DashboardActivity.this);
         token = sharedpreferences.getString(Constants.AUTH_TOKEN, "");
         count();

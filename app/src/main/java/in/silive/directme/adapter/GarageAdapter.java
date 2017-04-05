@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,14 +19,14 @@ import in.silive.directme.fragments.DockyardFargment;
  * Created by Shobhit-pc on 3/3/2017.
  */
 
-public class GarageAdapter extends FragmentPagerAdapter {
+public class GarageAdapter extends FragmentStatePagerAdapter {
 
     int slot = 0;
     JSONArray jArray;
     int count;
 
 
-    public GarageAdapter(FragmentManager fm , JSONArray jsonArray , int c) {
+    public GarageAdapter(FragmentManager fm, JSONArray jsonArray, int c) {
 
         super(fm);
         jArray = jsonArray;
@@ -59,5 +62,14 @@ public class GarageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return count;
 
+    }
+
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if (position >= getCount()) {
+            FragmentManager manager = ((Fragment) object).getFragmentManager();
+            FragmentTransaction trans = manager.beginTransaction();
+            trans.remove((Fragment) object);
+            trans.commit();
+        }
     }
 }

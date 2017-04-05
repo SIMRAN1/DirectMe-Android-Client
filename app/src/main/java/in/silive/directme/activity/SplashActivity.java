@@ -90,11 +90,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
                 animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
                         FRAME_DURATION);
             }
-            if (Build.VERSION.SDK_INT < 16) {
-                rl.setBackgroundDrawable(animation);
-            } else {
-                rl.setBackground(animation);
-            }
+            rl.setBackground(animation);
             rl.post(new Runnable() {
 
                 @Override

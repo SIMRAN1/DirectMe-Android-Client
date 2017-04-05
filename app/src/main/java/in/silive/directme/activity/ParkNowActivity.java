@@ -30,7 +30,7 @@ import in.silive.directme.utils.Constants;
 
 public class ParkNowActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String times = "null";
-    @BindView(R.id.wave1)
+   /* @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
     RelativeLayout wave2;
@@ -49,7 +49,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.wave9)
     RelativeLayout wave9;
     @BindView(R.id.wave10)
-    RelativeLayout wave10;
+    RelativeLayout wave10;*/
     @BindView(R.id.imageViewisland1)
     ImageView  island1;
     @BindView(R.id.imageViewisland2)
@@ -78,7 +78,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         island4.setOnClickListener(this);
         pirate_Island.setOnClickListener(this);
         type = Typeface.createFromAsset(getAssets(),"fonts/CarnevaleeFreakshow.ttf");
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimationparknow);
+        /*Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimationparknow);
         animation.setFillAfter(true);
         animation.setAnimationListener(new Animation.AnimationListener(){
 
@@ -112,7 +112,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         wave7.startAnimation(animation);
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
-        wave10.startAnimation(animation);
+        wave10.startAnimation(animation);*/
     }
     String id;
     SharedPreferences sharedpreferences;
