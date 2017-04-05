@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 import in.silive.directme.R;
 import in.silive.directme.activity.DashboardActivity;
 import in.silive.directme.application.DirectMe;
-import in.silive.directme.fragments.ParkedFragment;
 import in.silive.directme.utils.BitmapUtils;
 import in.silive.directme.utils.Constants;
 
@@ -35,7 +34,7 @@ import in.silive.directme.utils.Constants;
  * Created by simran on 3/3/2017.
  */
 
-public class ShipTransitionFragment extends Fragment implements Animation.AnimationListener{
+public class ShipTransitionFragment extends Fragment implements Animation.AnimationListener {
     // frame width
     private static final int FRAME_W = 300;
     // frame height
@@ -57,6 +56,9 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
     @BindView(R.id.island)
     ImageView island;
     Animation animation_boat;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    ParkedFragment fragment;
     private Thread thread;
     private SharedPreferences sharedPreferences;
 
@@ -64,27 +66,27 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.transitionparknow, container,
                 false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
         startAnimation();
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
-        final String id=sharedPreferences.getString(Constants.ISLAND_ID,"");
+        final String id = sharedPreferences.getString(Constants.ISLAND_ID, "");
         islandImage(id);
         animation_boat = AnimationUtils.loadAnimation(getActivity(), R.anim.boatanimtransition);
 
         animation_boat.setAnimationListener(this);
         startBoatanimation();
-        return  rootView;
+        return rootView;
     }
 
-    private void startBoatanimation()
-    {
-        final String ship_img_url=sharedPreferences.getString("SHIP_IMAGE_URL","");
+    private void startBoatanimation() {
+        final String ship_img_url = sharedPreferences.getString("SHIP_IMAGE_URL", "");
         Picasso.with(getActivity())
                 .load(ship_img_url)
                 .into(iv_boat);
         iv_boat.startAnimation(animation_boat);
 
     }
+
     private void startAnimation() {
         Bitmap waterbmp = BitmapUtils.getBitmapFromAssets("splashh.png");
         if (waterbmp != null) {
@@ -118,15 +120,15 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
 
         }
     }
-    void alertdialog()
-    {
+
+    void alertdialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("Congratulation");
         alertDialog.setMessage("Ship parked succesfully");
         alertDialog.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent i=new Intent(getActivity(),DashboardActivity.class);
+                        Intent i = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(i);
 
                     }
@@ -135,33 +137,33 @@ public class ShipTransitionFragment extends Fragment implements Animation.Animat
         alertDialog.setCancelable(false);
         alertDialog.show();
     }
-    void islandImage(String island_id)
-    {
-        int id=Integer.parseInt(island_id);
-        switch (id)
-        {
-            case 1:island.setImageResource(R.drawable.coconut_island);
+
+    void islandImage(String island_id) {
+        int id = Integer.parseInt(island_id);
+        switch (id) {
+            case 1:
+                island.setImageResource(R.drawable.coconut_island);
                 break;
-            case 2:island.setImageResource(R.drawable.wood_island);
+            case 2:
+                island.setImageResource(R.drawable.wood_island);
                 break;
-            case 3:island.setImageResource(R.drawable.banana_island);
+            case 3:
+                island.setImageResource(R.drawable.banana_island);
                 break;
-            case 4:island.setImageResource(R.drawable.bamboo_island);
+            case 4:
+                island.setImageResource(R.drawable.bamboo_island);
                 break;
-            case 5:island.setImageResource(R.drawable.pirate_island);
+            case 5:
+                island.setImageResource(R.drawable.pirate_island);
                 break;
         }
 
     }
 
-
     @Override
     public void onAnimationStart(Animation animation) {
 
     }
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    ParkedFragment fragment;
 
     @Override
     public void onAnimationEnd(Animation animation) {

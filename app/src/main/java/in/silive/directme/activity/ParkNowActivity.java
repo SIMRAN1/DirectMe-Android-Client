@@ -1,5 +1,5 @@
 package in.silive.directme.activity;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -18,9 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.R;
@@ -51,54 +49,57 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.wave10)
     RelativeLayout wave10;
     @BindView(R.id.imageViewisland1)
-    ImageView  island1;
+    ImageView island1;
     @BindView(R.id.imageViewisland2)
-    ImageView  island2;
+    ImageView island2;
     @BindView(R.id.imageViewisland3)
-    ImageView  island3;
+    ImageView island3;
     @BindView(R.id.imageViewisland4)
-    ImageView  island4;
+    ImageView island4;
     @BindView(R.id.imageViewpirateisland)
-    ImageView  pirate_Island;
+    ImageView pirate_Island;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     UserDetailsFragment fragment;
-    int offsetValue=0;
+    int offsetValue = 0;
     Typeface type;
+    String id;
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.parknow);
         ButterKnife.bind(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         island1.setOnClickListener(this);
         island2.setOnClickListener(this);
         island3.setOnClickListener(this);
         island4.setOnClickListener(this);
         pirate_Island.setOnClickListener(this);
-        type = Typeface.createFromAsset(getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        type = Typeface.createFromAsset(getAssets(), "fonts/CarnevaleeFreakshow.ttf");
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimationparknow);
         animation.setFillAfter(true);
-        animation.setAnimationListener(new Animation.AnimationListener(){
+        animation.setAnimationListener(new Animation.AnimationListener() {
 
             @Override
             public void onAnimationStart(Animation animation) {
 
             }
+
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(offsetValue>=10000) {
-                    offsetValue=0;
+                if (offsetValue >= 10000) {
+                    offsetValue = 0;
                     offsetValue = offsetValue + 1000;
                     animation.setStartOffset(offsetValue);
-                }
-                else
-                {
+                } else {
                     offsetValue = offsetValue + 1000;
                     animation.setStartOffset(offsetValue);
                 }
             }
+
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
@@ -114,9 +115,7 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         wave9.startAnimation(animation);
         wave10.startAnimation(animation);
     }
-    String id;
-    SharedPreferences sharedpreferences;
-    SharedPreferences.Editor editor;
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -158,7 +157,6 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-
     void fragmentInitialise() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -170,21 +168,21 @@ public class ParkNowActivity extends AppCompatActivity implements View.OnClickLi
         fragmentTransaction.commit();
 
     }
+
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
-        }
-        else {
+        } else {
             final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
-            final View dialogView= inflater.inflate(R.layout.alert_label_editor, null);
+            final View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
             builder1.setView(dialogView);
             builder1.setCancelable(false);
             final AlertDialog alertDialog = builder1.create();
-            Button yes=(Button)dialogView.findViewById(R.id.yes);
-            Button no=(Button)dialogView.findViewById(R.id.No);
-            TextView message=(TextView)dialogView.findViewById(R.id.message);
+            Button yes = (Button) dialogView.findViewById(R.id.yes);
+            Button no = (Button) dialogView.findViewById(R.id.No);
+            TextView message = (TextView) dialogView.findViewById(R.id.message);
             message.setTypeface(type);
             yes.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -23,10 +23,8 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.Key;
 
 import in.silive.directme.R;
-import in.silive.directme.activity.DashboardActivity;
 import in.silive.directme.application.DirectMe;
 import in.silive.directme.dialog.AlertDialog;
 import in.silive.directme.listeners.FetchDataListener;
@@ -42,18 +40,18 @@ import in.silive.directme.utils.NetworkUtils;
 
 public class BuyShipGoldCoins extends Fragment {
 
+    public int[] commod = new int[5];
     JSONObject json_data;
-    int goldCoinCost =0;
+    int goldCoinCost = 0;
     int user_gold_coin_count;
     SharedPreferences sharedPreferences;
-    public int[] commod = new int[5];
     TextView tvGoldCoinCount, tv_ship_name;
     SeekBar sbGoldCoin;
     RadioButton rb_resources;
     ImageView iv_buy_ship, iv_ship_image;
     ProgressBar pb_ship;
-    int upgradeFlag =0;
-    String boatName,boatImageUrl;
+    int upgradeFlag = 0;
+    String boatName, boatImageUrl;
 
     @Nullable
     @Override
@@ -77,7 +75,7 @@ public class BuyShipGoldCoins extends Fragment {
         iv_ship_image = (ImageView) view.findViewById(R.id.imageViewBuyShipImage2);
         tv_ship_name = (TextView) view.findViewById(R.id.textViewShowroomBuyShipName2);
         pb_ship = (ProgressBar) view.findViewById(R.id.progressBarShowroomBoat2);
-        tv_ship_name.setText("Buy Ship "+boatName);
+        tv_ship_name.setText("Buy Ship " + boatName);
 
         sbGoldCoin.setEnabled(false);
 
@@ -99,33 +97,32 @@ public class BuyShipGoldCoins extends Fragment {
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
         //getting user inventories from shared preferences
         for (int i = 0; i < 5; i++) {
-                commod[i] = Integer.parseInt(sharedPreferences.getString(Keys.co[i], ""));
+            commod[i] = Integer.parseInt(sharedPreferences.getString(Keys.co[i], ""));
         }
 
-        user_gold_coin_count =commod[0];
+        user_gold_coin_count = commod[0];
 
         sbGoldCoin.setMax(goldCoinCost);
 
         int gold_coin_req;
         gold_coin_req = goldCoinCost - user_gold_coin_count;
 
-        if(gold_coin_req <= 0) {
+        if (gold_coin_req <= 0) {
             tvGoldCoinCount.setText("0");
             sbGoldCoin.setProgress(goldCoinCost);
-        }
-        else {
+        } else {
             upgradeFlag = 1;
-            tvGoldCoinCount.setText("+"+gold_coin_req);
+            tvGoldCoinCount.setText("+" + gold_coin_req);
             sbGoldCoin.setProgress(user_gold_coin_count);
         }
 
-        if(upgradeFlag == 1)
+        if (upgradeFlag == 1)
             iv_buy_ship.setImageAlpha(30);
 
         iv_buy_ship.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(upgradeFlag == 0){
+                if (upgradeFlag == 0) {
                     buyShip();
                 }
             }
@@ -165,29 +162,25 @@ public class BuyShipGoldCoins extends Fragment {
             String post_data = "";
 
             try {
-                post_data= URLEncoder.encode("pay_type", "UTF-8") + "=" + URLEncoder.encode(String.valueOf("gold_coin"), "UTF-8");
-
+                post_data = URLEncoder.encode("pay_type", "UTF-8") + "="
+                        + URLEncoder.encode(String.valueOf("gold_coin"), "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             fetchData.setArgs(API_URL_LIST.BUY_SHIP, token, post_data);
             fetchData.execute();
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(getContext());
         }
     }
 
-    void buyShipResponse()
-    {
-        final String Response=sharedPreferences.getString(Constants.RESPONSE_CODE,"");
-
+    void buyShipResponse() {
+        final String Response = sharedPreferences.getString(Constants.RESPONSE_CODE, "");
         if (Response.equals("200")) {
             Toast.makeText(getActivity(), "Your bought ship", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity(), "Sorry your cannot buy ship", Toast.LENGTH_LONG).show();
         }
-
     }
-
 }

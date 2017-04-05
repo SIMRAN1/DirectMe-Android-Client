@@ -18,11 +18,10 @@ import in.silive.directme.fragments.ShowroomFragment;
 
 public class ShowroomAdapter extends FragmentPagerAdapter {
 
-    JSONArray jArray;
-    int count;
+    private JSONArray jArray;
+    private int count;
 
-
-    public ShowroomAdapter(FragmentManager fm , JSONArray jsonArray , int c) {
+    public ShowroomAdapter(FragmentManager fm, JSONArray jsonArray, int c) {
         super(fm);
         count = c;
         jArray = jsonArray;
@@ -39,7 +38,7 @@ public class ShowroomAdapter extends FragmentPagerAdapter {
                 ShowroomFragment ships_fragment = new ShowroomFragment();
                 Bundle args = new Bundle();
                 args.putString("data", json_send.toString());
-               // args.putInt("slot", slot);
+                // args.putInt("slot", slot);
                 Log.d("args", args.toString());
                 ships_fragment.setArguments(args);
                 return ships_fragment;
@@ -47,7 +46,6 @@ public class ShowroomAdapter extends FragmentPagerAdapter {
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;
-
             }
         } else
             return null;

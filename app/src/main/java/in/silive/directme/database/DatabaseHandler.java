@@ -26,21 +26,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String Api_id = "_api_id";
     private static final String Name = "_name";
-    private static final String Filling_speed= "_filling_speed";
+    private static final String Filling_speed = "_filling_speed";
     private static final String Parking_time = "_Parking_time";
     private static final String Boat_filled = "_Boat_filled";
     private static final String Coin_earn = "_coins_earn";
     private static final String User_name = "_user_name";
     private static final String island = "_island";
-    private static final String Cost_multiplier= "_Cost_multiplier";
-    private static final String Table_User="user";
-    private static final String Key_user="id";
+    private static final String Cost_multiplier = "_Cost_multiplier";
+    private static final String Table_User = "user";
+    private static final String Key_user = "id";
     private static final String Type = "type";
-    private static final String boatpark= "boatpark";
+    private static final String boatpark = "boatpark";
     private static final String owner = "owner";
-    private static final String boatname= "boatname";
-    private static final String Time="time";
-
+    private static final String boatname = "boatname";
+    private static final String Time = "time";
 
 
     public DatabaseHandler(Context context) {
@@ -51,12 +50,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_SHIP + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + Api_id + " TEXT,"+ Name + " TEXT,"+ Filling_speed + " TEXT,"+ Parking_time + " TEXT,"
-                + Boat_filled + " TEXT,"+ Coin_earn + " TEXT,"+ User_name + " TEXT,"+ island + " TEXT,"
-                + Cost_multiplier+ " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + Api_id + " TEXT," + Name + " TEXT," + Filling_speed + " TEXT," + Parking_time + " TEXT,"
+                + Boat_filled + " TEXT," + Coin_earn + " TEXT," + User_name + " TEXT," + island + " TEXT,"
+                + Cost_multiplier + " TEXT" + ")";
         String CREATE_CONTACTS_Users = "CREATE TABLE " + Table_User + "("
-                + Key_user + " INTEGER PRIMARY KEY," + Type + " TEXT,"+ boatpark + " TEXT,"+ owner + " TEXT,"+ boatname+ " TEXT,"
-                + Time+ " TEXT" + ")";
+                + Key_user + " INTEGER PRIMARY KEY," + Type + " TEXT," + boatpark + " TEXT," + owner + " TEXT," + boatname + " TEXT,"
+                + Time + " TEXT" + ")";
 
         db.execSQL(CREATE_CONTACTS_TABLE);
         db.execSQL(CREATE_CONTACTS_Users);
@@ -67,40 +66,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SHIP);
-        db.execSQL("Drop table if exsist"+Table_User);
+        db.execSQL("Drop table if exsist" + Table_User);
         // Create tables again
         onCreate(db);
         onCreate(db);
     }
+
     // Adding new ship
     public void addShip(ShipModel ship) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(Api_id, ship.get_api_id()); // Contact Name
-        values.put(Name,ship.get_name());
-        values.put(Filling_speed,ship.get_filling_speed());
-        values.put(Parking_time,ship.get_Parking_time());
-        values.put(Boat_filled,ship.get_Boat_filled());
-        values.put(Coin_earn,ship.get_coins_earn());
-        values.put(User_name,ship.get_user_name());
-        values.put(island,ship.get_island());
-        values.put(Cost_multiplier,ship.get_Cost_multiplier());
+        values.put(Name, ship.get_name());
+        values.put(Filling_speed, ship.get_filling_speed());
+        values.put(Parking_time, ship.get_Parking_time());
+        values.put(Boat_filled, ship.get_Boat_filled());
+        values.put(Coin_earn, ship.get_coins_earn());
+        values.put(User_name, ship.get_user_name());
+        values.put(island, ship.get_island());
+        values.put(Cost_multiplier, ship.get_Cost_multiplier());
 
         // Inserting Row
         db.insert(TABLE_SHIP, null, values);
         db.close(); // Closing database connection
     }
+
     public void addPort(UserModel user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(Type, user.get_Type()); // Contact Name
-        values.put(boatpark,user.get_boatpark());
-        values.put(owner,user.get_owner());
-        values.put(boatname,user.get_boatname());
+        values.put(boatpark, user.get_boatpark());
+        values.put(owner, user.get_owner());
+        values.put(boatname, user.get_boatname());
 
-        values.put(Time,user.get_Time());
+        values.put(Time, user.get_Time());
 
 
         // Inserting Row
@@ -112,35 +113,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ShipModel getShip(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_SHIP, new String[] { KEY_ID, Api_id,Name,Filling_speed,
-                        Parking_time,Boat_filled,Coin_earn,User_name,island,Cost_multiplier }, KEY_ID + "=?",
-                new String[] { id }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_SHIP, new String[]{KEY_ID, Api_id, Name, Filling_speed,
+                        Parking_time, Boat_filled, Coin_earn, User_name, island, Cost_multiplier}, KEY_ID + "=?",
+                new String[]{id}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
 
-
-
-        ShipModel ship= new ShipModel(cursor.getString(0),
-                cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),
-                cursor.getString(7),cursor.getString(8),cursor.getString(9));
+        ShipModel ship = new ShipModel(cursor.getString(0),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),
+                cursor.getString(7), cursor.getString(8), cursor.getString(9));
         // return ship
         return ship;
     }
+
     public UserModel getUser(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(Table_User, new String[] { Key_user, boatname,boatpark,Type,
-                        owner,Time}, KEY_ID + "=?",
-                new String[] { id }, null, null, null, null);
+        Cursor cursor = db.query(Table_User, new String[]{Key_user, boatname, boatpark, Type,
+                        owner, Time}, KEY_ID + "=?",
+                new String[]{id}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
 
-
-
-        UserModel user= new UserModel(cursor.getString(0),
-                cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4));
+        UserModel user = new UserModel(cursor.getString(0),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
         // return user
         return user;
     }
@@ -178,6 +176,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return value of ship list
         return shipList;
     }
+
     public List<UserModel> getAllUser() {
         List<UserModel> UserList = new ArrayList<UserModel>();
         // Select All Query
@@ -216,6 +215,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
+
     public int getuserCount() {
         String countQuery = "SELECT  * FROM " + Table_User;
         SQLiteDatabase db = this.getReadableDatabase();

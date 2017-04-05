@@ -8,8 +8,7 @@ import android.util.Log;
 
 public class LoggerUtils {
 
-    public static void logger(String message)
-    {
+    public static void logger(String message) {
         Log.d(Constants.LOG, message);
     }
 }

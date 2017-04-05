@@ -17,9 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,9 +41,6 @@ import in.silive.directme.utils.NetworkUtils;
 
 public class ParkingUserPortViewFragment extends Fragment {
 
-    ConstraintLayout clBackground;
-    Button btDock;
-
     // frame width
     private static final int FRAME_W = 300;
     // frame height
@@ -59,8 +53,10 @@ public class ParkingUserPortViewFragment extends Fragment {
     private static final int COUNT_Y = 4;
     // we can slow animation by changing frame duration
     private static final int FRAME_DURATION = 150; // in ms !
+    ConstraintLayout clBackground;
+    Button btDock;
     // frame duration
-    String port_jsonObject , parkingType, userName, user_id, token, ship_id;
+    String port_jsonObject, parkingType, userName, user_id, token, ship_id;
     TextView parkingTypeTextView, userNameTextview;
     SharedPreferences sharedPreferences;
     Boolean network_available;
@@ -69,9 +65,9 @@ public class ParkingUserPortViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.portdetails , container ,false);
-        clBackground=(ConstraintLayout) view.findViewById(R.id.background);
-        btDock=(Button) view.findViewById(R.id.catchbutton);
+        View view = inflater.inflate(R.layout.portdetails, container, false);
+        clBackground = (ConstraintLayout) view.findViewById(R.id.background);
+        btDock = (Button) view.findViewById(R.id.catchbutton);
         btDock.setBackgroundResource(R.drawable.undock);
         Bundle bundle = getArguments();
         port_jsonObject = bundle.getString("port_jsonObject");
@@ -99,11 +95,11 @@ public class ParkingUserPortViewFragment extends Fragment {
         btDock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(user_id.equals(sharedPreferences.getString(Keys.user_id , ""))){
+                if (user_id.equals(sharedPreferences.getString(Keys.user_id, ""))) {
                     network_available = NetworkUtils.isNetConnected();
                     token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
                     if (network_available) {
-                      FetchData  apicalling = new FetchData(new FetchDataListener() {
+                        FetchData apicalling = new FetchData(new FetchDataListener() {
                             @Override
                             public void processStart() {
 
@@ -111,14 +107,11 @@ public class ParkingUserPortViewFragment extends Fragment {
 
                             @Override
                             public void processFinish(String output) {
-                                final String responsecode=sharedPreferences.getString(Constants.RESPONSE_CODE,"");
-                                if (Integer.parseInt(responsecode)== 200)
-                                {
-                                    alertDialog("You have successfully undock your ship",0);
-                                }
-                                else
-                                {
-                                    alertDialog("Sorry your ship is not undocked. Try again!",1);
+                                final String responsecode = sharedPreferences.getString(Constants.RESPONSE_CODE, "");
+                                if (Integer.parseInt(responsecode) == 200) {
+                                    alertDialog("You have successfully undock your ship", 0);
+                                } else {
+                                    alertDialog("Sorry your ship is not undocked. Try again!", 1);
                                 }
 
                             }
@@ -126,7 +119,7 @@ public class ParkingUserPortViewFragment extends Fragment {
                         String post_data = "";
 
                         try {
-                            post_data= URLEncoder.encode("ship_id", "UTF-8") + "=" + URLEncoder.encode(ship_id, "UTF-8");
+                            post_data = URLEncoder.encode("ship_id", "UTF-8") + "=" + URLEncoder.encode(ship_id, "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
@@ -140,8 +133,7 @@ public class ParkingUserPortViewFragment extends Fragment {
         return view;
     }
 
-    void alertDialog(String message, final int flag)
-    {
+    void alertDialog(String message, final int flag) {
         final AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
         builder1.setMessage(message);
         builder1.setCancelable(false);
@@ -164,9 +156,9 @@ public class ParkingUserPortViewFragment extends Fragment {
     }
 
     private void sendToSuperWorld() {
-        Intent i = new Intent(getActivity() , DashboardActivity.class);
+        Intent i = new Intent(getActivity(), DashboardActivity.class);
         startActivity(i);
-        getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         getActivity().finish();
     }
 
@@ -185,11 +177,7 @@ public class ParkingUserPortViewFragment extends Fragment {
             }
 
             // load animation on image
-            if (Build.VERSION.SDK_INT < 16) {
-                clBackground.setBackgroundDrawable(animation);
-            } else {
-                clBackground.setBackground(animation);
-            }
+            clBackground.setBackground(animation);
 
             // start animation on image
             clBackground.post(new Runnable() {

@@ -67,7 +67,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
                     pref = DirectMe.getInstance().sharedPrefs;
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("FirebaseIdSendToServer", "1");//1 means firebase id is registered
-                    editor.commit();
+                    editor.apply();
 
                 }
             }, getApplicationContext());
@@ -82,7 +82,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
             fetchData.execute();
 
             Log.e(TAG, "sendRegistrationToServer: " + token);
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(getApplicationContext());
         }
@@ -93,6 +93,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("regId", token);
         editor.putString("FirebaseIdSendToServer", "0");//0 means firebase id is not updated to server
-        editor.commit();
+        editor.apply();
     }
 }

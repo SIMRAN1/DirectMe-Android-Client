@@ -6,9 +6,9 @@ package in.silive.directme.model;
 
 public class ParkingUserListModel {
 
-    String userName, user_id;
+    private String userName, user_id;
 
-   public ParkingUserListModel(String userName , String user_id){
+    public ParkingUserListModel(String userName, String user_id) {
         this.userName = userName;
         this.user_id = user_id;
     }

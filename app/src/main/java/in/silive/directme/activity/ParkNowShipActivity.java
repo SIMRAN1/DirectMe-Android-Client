@@ -32,11 +32,10 @@ public class ParkNowShipActivity extends AppCompatActivity {
     ViewPager mViewPager;
     int count = 1;
     ImageView left, right;
-    private SharedPreferences sharedpreferences;
     boolean network_available;
-    private FetchData apicalling;
     JSONArray jArray;
     JSONArray jsonArray;
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,28 +61,24 @@ public class ParkNowShipActivity extends AppCompatActivity {
                 mViewPager.arrowScroll(View.FOCUS_RIGHT);
             }
         });
-      connect();
+        connect();
 
-        if((!mViewPager.arrowScroll(View.FOCUS_LEFT))&&(!mViewPager.arrowScroll(View.FOCUS_RIGHT)))
-       {
-           left.setVisibility(View.INVISIBLE);
-           right.setVisibility(View.INVISIBLE);
-       }
-        else if(!mViewPager.arrowScroll(View.FOCUS_RIGHT))
-        {
+        if ((!mViewPager.arrowScroll(View.FOCUS_LEFT)) && (!mViewPager.arrowScroll(View.FOCUS_RIGHT))) {
+            left.setVisibility(View.INVISIBLE);
             right.setVisibility(View.INVISIBLE);
-        }
-        else if(!mViewPager.arrowScroll(View.FOCUS_LEFT))
-        {
+        } else if (!mViewPager.arrowScroll(View.FOCUS_RIGHT)) {
+            right.setVisibility(View.INVISIBLE);
+        } else if (!mViewPager.arrowScroll(View.FOCUS_LEFT)) {
             left.setVisibility(View.INVISIBLE);
         }
 
     }
+
     void connect() {
         final String token = sharedpreferences.getString(Constants.AUTH_TOKEN, "");
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
-            apicalling = new FetchData(new FetchDataListener() {
+            FetchData apicalling = new FetchData(new FetchDataListener() {
                 @Override
                 public void processStart() {
 
@@ -95,10 +90,10 @@ public class ParkNowShipActivity extends AppCompatActivity {
                         jArray = new JSONArray(output);
                         String ship_status;
                         jsonArray = new JSONArray();
-                        for(int i =0; i<jArray.length(); i++) {
+                        for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jsonObject = jArray.getJSONObject(i);
                             ship_status = jsonObject.getString("ship_status");
-                            if(!ship_status.equals("null"))
+                            if (!ship_status.equals("null"))
                                 jsonArray.put(jsonObject);
                         }
                         count = jsonArray.length();
@@ -111,14 +106,15 @@ public class ParkNowShipActivity extends AppCompatActivity {
             apicalling.setArgs(API_URL_LIST.GARAGE_SHIPS_URL, token, "");
             apicalling.execute();
 
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(this);
         }
     }
+
     void startfragments() {
         mViewPager.setAdapter(new BoatPagerAdapterParkNow(
-                getSupportFragmentManager() , jsonArray , count));
+                getSupportFragmentManager(), jsonArray, count));
     }
 
 

@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.constraint.ConstraintLayout;
@@ -16,7 +14,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,20 +39,15 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-
         ButterKnife.bind(this);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         startWaterAnimation();
 
         if (NetworkUtils.isGooglePlayServicesAvailable()) {
             if (NetworkUtils.isNetConnected()) {
-
                 Animation animation = AnimationUtils.loadAnimation(this, R.anim.boatanim);
                 animation.setFillAfter(true);
                 animation.setAnimationListener(this);
@@ -90,11 +82,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
                 animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
                         FRAME_DURATION);
             }
-            if (Build.VERSION.SDK_INT < 16) {
-                rl.setBackgroundDrawable(animation);
-            } else {
-                rl.setBackground(animation);
-            }
+            rl.setBackground(animation);
             rl.post(new Runnable() {
 
                 @Override
@@ -157,7 +145,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
         if (!DirectMe.getInstance().sharedPrefs.getString(Constants.AUTH_TOKEN, "").equals("")) {
             intent = new Intent(this, DashboardActivity.class);
         } else {
-          intent = new Intent(this, LoginActivity.class);
+            intent = new Intent(this, LoginActivity.class);
         }
         startActivity(intent);
     }

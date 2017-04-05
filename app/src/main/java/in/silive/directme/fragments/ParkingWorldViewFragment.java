@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -50,8 +49,6 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
     String token;
     JSONArray jsonArrayIslanad1, jsonArrayIslanad2, jsonArrayIslanad3, jsonArrayIslanad4;
     android.support.constraint.ConstraintLayout cluserList;
-    private String status;
-    private String island_id;
     @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
@@ -72,14 +69,16 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
     RelativeLayout wave9;
     @BindView(R.id.wave10)
     RelativeLayout wave10;
-    int offsetValue=0;
+    int offsetValue = 0;
+    private String status;
+    private String island_id;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.parknow, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         iv_island1 = (ImageView) view.findViewById(R.id.imageViewisland1marker);
         iv_island2 = (ImageView) view.findViewById(R.id.imageViewisland2marker);
         iv_island3 = (ImageView) view.findViewById(R.id.imageViewisland3marker);
@@ -99,25 +98,25 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
         jsonArrayIslanad4 = new JSONArray();
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.waveanimationparknow);
         animation.setFillAfter(true);
-        animation.setAnimationListener(new Animation.AnimationListener(){
+        animation.setAnimationListener(new Animation.AnimationListener() {
 
             @Override
             public void onAnimationStart(Animation animation) {
 
             }
+
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(offsetValue>=10000) {
-                    offsetValue=0;
+                if (offsetValue >= 10000) {
+                    offsetValue = 0;
                     offsetValue = offsetValue + 1000;
                     animation.setStartOffset(offsetValue);
-                }
-                else
-                {
+                } else {
                     offsetValue = offsetValue + 1000;
                     animation.setStartOffset(offsetValue);
                 }
             }
+
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
@@ -149,6 +148,7 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
                 public void processStart() {
 
                 }
+
                 @Override
                 public void processFinish(String output) {
                     try {
@@ -172,7 +172,7 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
             fetchData.setArgs(API_URL_LIST.PARKING_DOCKS_URL, token, "");
             fetchData.execute();
 
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(getContext());
         }
@@ -266,10 +266,10 @@ public class ParkingWorldViewFragment extends Fragment implements View.OnClickLi
 
     void showUserList(final ArrayList<ParkingUserListModel> parkingUserList) {
         ParkingUserListAdapter parkingUserListAdapter = new ParkingUserListAdapter(parkingUserList, getContext());
-         final Dialog dialog = new Dialog(getActivity());
-          dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-           dialog.setContentView(R.layout.recycler_view_user);
-           RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.card_recycler_view);
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.recycler_view_user);
+        RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.card_recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

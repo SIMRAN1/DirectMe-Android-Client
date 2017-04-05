@@ -17,7 +17,6 @@ public class NetworkUtils {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-
     public static boolean isGooglePlayServicesAvailable() {
         GoogleApiAvailability gApi = GoogleApiAvailability.getInstance();
         int resultCode = gApi.isGooglePlayServicesAvailable(DirectMe.getInstance());
@@ -28,5 +27,4 @@ public class NetworkUtils {
         }
         return true;
     }
-
 }

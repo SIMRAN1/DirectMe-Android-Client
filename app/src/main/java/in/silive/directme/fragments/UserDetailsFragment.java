@@ -1,6 +1,5 @@
 package in.silive.directme.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -15,9 +14,11 @@ import android.widget.ImageView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+
 import in.silive.directme.R;
 import in.silive.directme.activity.ParkNowActivity;
 import in.silive.directme.adapter.DataUserSelectAdapter;
@@ -45,6 +46,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
     ConstraintLayout back;
     RecyclerView.LayoutManager layoutManager;
     JSONArray arr;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recycler_view_userselect, container,
@@ -57,6 +59,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
         connect();
         return v;
     }
+
     private void initViews() {
         refresh.setVisibility(View.VISIBLE);
         recyclerView.setHasFixedSize(true);
@@ -70,6 +73,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
         DataUserSelectAdapter adapter = new DataUserSelectAdapter(getActivity(), user_details, (ParkNowActivity) getContext());
         recyclerView.setAdapter(adapter);
     }
+
     void connect() {
         boolean network_available;
         final String token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
@@ -81,6 +85,7 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
                 public void processStart() {
 
                 }
+
                 @Override
                 public void processFinish(String output) {
                     try {
@@ -113,11 +118,12 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
             apicalling.setArgs(API_URL_LIST.GET_USER_LIST, token, post_data);
             apicalling.execute();
 
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(getContext());
         }
     }
+
     private ArrayList<UserDetailsList> prepareData() {
         ArrayList<UserDetailsList> user_details = new ArrayList<>();
         for (int i = 0; i < user_names.length; i++) {
@@ -130,9 +136,9 @@ public class UserDetailsFragment extends Fragment implements View.OnClickListene
         }
         return user_details;
     }
+
     @Override
     public void onClick(View v) {
         connect();
-
     }
 }

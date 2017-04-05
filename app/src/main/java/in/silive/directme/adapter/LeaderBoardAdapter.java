@@ -24,19 +24,6 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     private List<LeaderBoardObject> leaderBoardUserLists;
     private Context context;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_userName,tv_rank;
-        ImageView tv_userIcon;
-
-        public MyViewHolder(View view) {
-            super(view);
-            tv_userName = (TextView) view.findViewById(R.id.textViewLeaderBoardUserName);
-            tv_rank = (TextView) view.findViewById(R.id.textViewLeaderBoardRank);
-            tv_userIcon = (ImageView) view.findViewById(R.id.imageViewLeaderBoardAvatar);
-        }
-    }
-
-
     public LeaderBoardAdapter(List<LeaderBoardObject> leaderBoardObjects, Context context) {
         this.leaderBoardUserLists = leaderBoardObjects;
         this.context = context;
@@ -63,5 +50,17 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     @Override
     public int getItemCount() {
         return leaderBoardUserLists.size();
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_userName, tv_rank;
+        ImageView tv_userIcon;
+
+        MyViewHolder(View view) {
+            super(view);
+            tv_userName = (TextView) view.findViewById(R.id.textViewLeaderBoardUserName);
+            tv_rank = (TextView) view.findViewById(R.id.textViewLeaderBoardRank);
+            tv_userIcon = (ImageView) view.findViewById(R.id.imageViewLeaderBoardAvatar);
+        }
     }
 }

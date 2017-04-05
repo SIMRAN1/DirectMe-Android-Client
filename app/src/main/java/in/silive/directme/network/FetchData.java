@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,12 +25,12 @@ import in.silive.directme.utils.ToasterUtils;
 
 public class FetchData extends AsyncTask<String, String, String> {
 
+    private ProgressDialog progressDialog;
     private String token = null;
     private FetchDataListener delegate = null;
     private String post_data = null;
     private String urlString = "";
     private Context mContext;
-    ProgressDialog progressDialog;
 
     public FetchData(FetchDataListener fetchDataListener, Context context) {
         delegate = fetchDataListener;
@@ -79,9 +78,9 @@ public class FetchData extends AsyncTask<String, String, String> {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
 
-                    bufferedWriter.write(post_data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
 
             }
 
@@ -90,7 +89,7 @@ public class FetchData extends AsyncTask<String, String, String> {
             SharedPreferences sharedpreferences = DirectMe.getInstance().sharedPrefs;
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString(Constants.RESPONSE_CODE, Integer.toString(responseCode));
-            editor.commit();
+            editor.apply();
             if (responseCode == HttpsURLConnection.HTTP_OK) {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

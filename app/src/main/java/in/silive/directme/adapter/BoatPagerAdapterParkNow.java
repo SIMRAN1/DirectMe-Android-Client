@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import in.silive.directme.fragments.DockyardFargment;
 import in.silive.directme.fragments.ParknowUsershipselectFragment;
 
 /**
@@ -18,13 +16,10 @@ import in.silive.directme.fragments.ParknowUsershipselectFragment;
  */
 
 public class BoatPagerAdapterParkNow extends FragmentPagerAdapter {
+    private JSONArray jArray;
+    private int count;
 
-    int slot = 0;
-    JSONArray jArray;
-    int count;
-
-
-    public BoatPagerAdapterParkNow(FragmentManager fm , JSONArray jsonArray , int c) {
+    public BoatPagerAdapterParkNow(FragmentManager fm, JSONArray jsonArray, int c) {
 
         super(fm);
         jArray = jsonArray;
@@ -33,24 +28,18 @@ public class BoatPagerAdapterParkNow extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        JSONObject json_send = null;
+        JSONObject json_send;
         if (jArray != null) {
             try {
                 json_send = jArray.getJSONObject(position);
-
-
                 ParknowUsershipselectFragment parknowUsershipselectFragment = new ParknowUsershipselectFragment();
                 Bundle args = new Bundle();
                 args.putString("data", json_send.toString());
-
-
                 parknowUsershipselectFragment.setArguments(args);
                 return parknowUsershipselectFragment;
-
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;
-
             }
         } else
             return null;
@@ -59,6 +48,5 @@ public class BoatPagerAdapterParkNow extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return count;
-
     }
 }
