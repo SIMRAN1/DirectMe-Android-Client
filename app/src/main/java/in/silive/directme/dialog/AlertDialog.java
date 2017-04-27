@@ -1,16 +1,13 @@
 package in.silive.directme.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
 import in.silive.directme.R;
-import in.silive.directme.activity.DashboardActivity;
 
 /**
  * Created by Shobhit-pc on 3/28/2017.
@@ -33,6 +30,5 @@ public class AlertDialog {
             }
         });
         dialog.show();
-
     }
 }

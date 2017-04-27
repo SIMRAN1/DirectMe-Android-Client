@@ -1,10 +1,8 @@
 package in.silive.directme.activity;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -57,7 +56,8 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
     PortDetailsFragment fragment;
     Bundle args;
     Typeface type;
-    final Context context=this;
+    JSONArray user,logs,logs1;
+    JSONObject jsonObject1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,9 +72,8 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
         nonparkingport3.setOnClickListener(this);
         nonparkingport4.setOnClickListener(this);
         nonparkingport5.setOnClickListener(this);
-        type = Typeface.createFromAsset(getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        type = Typeface.createFromAsset(getAssets(), "fonts/CarnevaleeFreakshow.ttf");
         api_calling();
-
     }
 
     @Override
@@ -96,10 +95,8 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                 parkedDetail(4);
                 break;
         }
-
     }
 
-    JSONArray user,logs;
     public void api_calling() {
         final String token = sharedpreference.getString(Constants.AUTH_TOKEN, "");
         network_available = NetworkUtils.isNetConnected();
@@ -115,7 +112,7 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                         user = new JSONArray(output);
                         for (int i = 0; i < 5; i++) {
                             jsonObject = user.getJSONObject(i);
-                             logs = jsonObject.getJSONArray("logs");
+                            logs = jsonObject.getJSONArray("logs");
                             if (logs.length() > 0) {
 
                                 JSONObject logdetails = logs.getJSONObject(0);
@@ -127,54 +124,47 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
             }, this);
             apiCalling.setArgs(API_URL_LIST.PORTS_URL, token, "");
             apiCalling.execute();
 
-        }else{
+        } else {
             in.silive.directme.dialog.AlertDialog alertDialog = new in.silive.directme.dialog.AlertDialog();
             alertDialog.alertDialog(this);
         }
     }
 
-    JSONObject jsonObject1;
     public void parkedDetail(final int parking_no) {
-
         try {
-            jsonObject1= user.getJSONObject(parking_no);
+            jsonObject1 = user.getJSONObject(parking_no);
+            logs1 = jsonObject1.getJSONArray("logs");
 
-        } catch(JSONException e)
-        {
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(jsonObject1!=null&&logs.length()>0)
-
-        {
+        if (jsonObject1 != null && logs1.length()>0) {
             fragmentInitialise();
-        }
-        else
-        {
+        } else {
             alertDialog("Port is empty");
         }
-
     }
-    void alertDialog(String message)
-    {
+
+    void alertDialog(String message) {
         final android.support.v7.app.AlertDialog.Builder builder1 = new android.support.v7.app.AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView= inflater.inflate(R.layout.alert_label_editor, null);
+        final View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
         builder1.setView(dialogView);
         builder1.setCancelable(false);
         final android.support.v7.app.AlertDialog alertDialog = builder1.create();
-        TextView message_textview=(TextView)dialogView.findViewById(R.id.message);
+        TextView message_textview = (TextView) dialogView.findViewById(R.id.message);
         message_textview.setText(message);
         message_textview.setTextSize(30);
         message_textview.setTypeface(type);
-        Button yes=(Button)dialogView.findViewById(R.id.yes);
+        Button yes = (Button) dialogView.findViewById(R.id.yes);
         yes.setVisibility(View.GONE);
-        Button no=(Button)dialogView.findViewById(R.id.No);
+        Button no = (Button) dialogView.findViewById(R.id.No);
 
         no.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,14 +176,11 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
         builder1.setCancelable(true);
 
         alertDialog.show();
-
-
-
     }
 
 
-    void showPort(int position , String ship_url ){
-        switch (position){
+    void showPort(int position, String ship_url) {
+        switch (position) {
             case 0:
                 Picasso.with(getApplicationContext()).load(ship_url).into(parkingport1);
                 break;
@@ -224,8 +211,5 @@ public class ParkOnMineActivity extends AppCompatActivity implements View.OnClic
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
     }
-
-
 }

@@ -39,18 +39,20 @@ public class ParkingPortFragment extends Fragment implements View.OnClickListene
     FetchData fetchData;
     JSONArray user_port_jsonArray;
     int count;
-    ImageView iv_port1 , iv_port2, iv_port3, iv_port4, iv_port5;
-    JSONObject jsonObject_port1, jsonObject_port2,jsonObject_port3, jsonObject_port4, jsonObject_port5;
+    ImageView iv_port1, iv_port2, iv_port3, iv_port4, iv_port5;
+    JSONObject jsonObject_port1, jsonObject_port2,
+            jsonObject_port3, jsonObject_port4, jsonObject_port5;
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view =inflater.inflate(R.layout.parkonmine, container , false);
+        View view = inflater.inflate(R.layout.parkonmine, container, false);
 
         Bundle bundle = getArguments();
+
         user_id =  bundle.getString("user_id");
+
         iv_port1 = (ImageView) view.findViewById(R.id.parkingport1);
         iv_port2 = (ImageView) view.findViewById(R.id.parkingport2);
         iv_port3 = (ImageView) view.findViewById(R.id.nonparkingport3);
@@ -86,10 +88,10 @@ public class ParkingPortFragment extends Fragment implements View.OnClickListene
                         user_port_jsonArray = new JSONArray(output);
                         count = user_port_jsonArray.length();
 
-                        for(int i=0; i<count; i++ ){
+                        for (int i = 0; i < count; i++) {
                             JSONObject jsonObject = user_port_jsonArray.getJSONObject(i);
                             JSONArray jsonArray1 = jsonObject.getJSONArray("logs");
-                            if(jsonArray1.length() != 0) {
+                            if (jsonArray1.length() != 0) {
                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(0);
                                 String ship_image = jsonObject1.getString("ship_image");
 
@@ -101,54 +103,55 @@ public class ParkingPortFragment extends Fragment implements View.OnClickListene
                     }
                 }
             }, getContext());
-            fetchData.setArgs(API_URL_LIST.OTHER_USER_PORT_URL+user_id+"/", token, "");
+            fetchData.setArgs(API_URL_LIST.OTHER_USER_PORT_URL + user_id + "/", token, "");
             fetchData.execute();
 
-        }else{
+        } else {
             in.silive.directme.dialog.AlertDialog alertDialog = new in.silive.directme.dialog.AlertDialog();
             alertDialog.alertDialog(getContext());
         }
     }
 
-    void showPort(int position , String ship_url , JSONObject jsonObject){
+    void showPort(int position, String ship_url, JSONObject jsonObject) {
 
-        switch (position){
+        switch (position) {
             case 1:
                 jsonObject_port1 = jsonObject;
                 Picasso.with(DirectMe.getInstance())
                         .load(ship_url)
                         .into(iv_port1);
 
-                        break;
+                break;
             case 2:
                 jsonObject_port2 = jsonObject;
                 Picasso.with(DirectMe.getInstance())
                         .load(ship_url)
                         .into(iv_port2);
-                        break;
+                break;
             case 3:
                 jsonObject_port3 = jsonObject;
                 Picasso.with(DirectMe.getInstance())
                         .load(ship_url)
                         .into(iv_port3);
-                        break;
+                break;
             case 4:
                 jsonObject_port4 = jsonObject;
                 Picasso.with(DirectMe.getInstance())
                         .load(ship_url)
                         .into(iv_port4);
-                        break;
+                break;
             case 5:
                 jsonObject_port5 = jsonObject;
                 Picasso.with(DirectMe.getInstance())
                         .load(ship_url)
                         .into(iv_port5);
-                        break;
+                break;
         }
     }
-    void replaceWithNewFragment(JSONObject jsonObject, String parkingType){
 
-        if(jsonObject ==null) {
+    void replaceWithNewFragment(JSONObject jsonObject, String parkingType) {
+
+        if (jsonObject == null) {
 
             final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
             dialog.setMessage("This port is empty")
@@ -159,7 +162,7 @@ public class ParkingPortFragment extends Fragment implements View.OnClickListene
                         }
                     })
                     .show();
-        }else{
+        } else {
             Fragment islandFragment = new ParkingUserPortViewFragment();
             Bundle bundle = new Bundle();
             bundle.putString("port_jsonObject", jsonObject.toString());
@@ -175,9 +178,9 @@ public class ParkingPortFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.parkingport1:
-                replaceWithNewFragment(jsonObject_port1 , "Parking");
+                replaceWithNewFragment(jsonObject_port1, "Parking");
                 break;
             case R.id.parkingport2:
                 replaceWithNewFragment(jsonObject_port2, "Parking");

@@ -21,9 +21,8 @@ import in.silive.directme.fragments.ShowroomFragment;
 
 public class ShowroomAdapter extends FragmentStatePagerAdapter {
 
-    JSONArray jArray;
-    int count;
-
+    private JSONArray jArray;
+    private int count;
 
     public ShowroomAdapter(FragmentManager fm, JSONArray jsonArray, int c) {
         super(fm);
@@ -50,7 +49,6 @@ public class ShowroomAdapter extends FragmentStatePagerAdapter {
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;
-
             }
         } else
             return null;

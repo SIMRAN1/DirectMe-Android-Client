@@ -7,10 +7,8 @@ package in.silive.directme.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +29,6 @@ import in.silive.directme.activity.ParkNowActivity;
 import in.silive.directme.application.DirectMe;
 import in.silive.directme.utils.Constants;
 import it.sephiroth.android.library.tooltip.Tooltip;
-import jp.wasabeef.picasso.transformations.BlurTransformation;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import jp.wasabeef.picasso.transformations.GrayscaleTransformation;
 
 import static in.silive.directme.fragments.DockyardFargment.json_data;
@@ -44,11 +40,12 @@ import static in.silive.directme.fragments.DockyardFargment.json_data;
 public class ParknowUsershipselectFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button select;
-    String boatName,status,boatImageUrl;
+    String boatName, status, boatImageUrl;
     ImageView boat_image;
     TextView boat_name;
     String id;
     ProgressBar pbShip;
+
     public ParknowUsershipselectFragment() {
 
     }
@@ -56,53 +53,50 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.parknow_ship_select, container,
                 false);
-        boat_image=(ImageView)v.findViewById(R.id.boatimage);
-        boat_name=(TextView)v.findViewById(R.id.txtboatname);
+        boat_image = (ImageView) v.findViewById(R.id.boatimage);
+        boat_name = (TextView) v.findViewById(R.id.txtboatname);
         select = (Button) v.findViewById(R.id.select);
         pbShip = (ProgressBar) v.findViewById(R.id.progressBarParkNowShipSelect);
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/CarnevaleeFreakshow.ttf");
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CarnevaleeFreakshow.ttf");
         boat_name.setTypeface(type);
         select.setOnClickListener(this);
-        AlphaAnimation fadeOut = new AlphaAnimation(0.0f , 1.0f ) ;
-        AlphaAnimation fadeIn = new AlphaAnimation( 1.0f , 0.0f ) ;
+        AlphaAnimation fadeOut = new AlphaAnimation(0.0f, 1.0f);
+        AlphaAnimation fadeIn = new AlphaAnimation(1.0f, 0.0f);
         boat_name.startAnimation(fadeIn);
         boat_name.startAnimation(fadeOut);
         fadeIn.setDuration(500);
         fadeIn.setFillAfter(true);
         fadeOut.setDuration(1000);
         fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(500+fadeIn.getStartOffset());
+        fadeOut.setStartOffset(500 + fadeIn.getStartOffset());
         try {
             json_data = new JSONObject(getArguments().getString("data", ""));
             boatName = json_data.getString("name");
             boatImageUrl = json_data.getString("ship_image");
             status = json_data.getString("ship_status");
-            id=json_data.getString("ship_id");
+            id = json_data.getString("ship_id");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(status.equals("Idle"))
-        {
+        if (status.equals("Idle")) {
             Picasso.with(getContext())
-                .load(boatImageUrl)
-                .into(boat_image, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        pbShip.setVisibility(View.GONE);
-                    }
+                    .load(boatImageUrl)
+                    .into(boat_image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            pbShip.setVisibility(View.GONE);
+                        }
 
-                    @Override
-                    public void onError() {
+                        @Override
+                        public void onError() {
 
-                    }
-                });
+                        }
+                    });
             select.setEnabled(true);
             boat_name.setText(boatName);
 
-        }
-        else
-        {
+        } else {
             Picasso.with(getContext())
                     .load(boatImageUrl)
                     .transform(new GrayscaleTransformation())
@@ -155,11 +149,10 @@ public class ParknowUsershipselectFragment extends android.support.v4.app.Fragme
         SharedPreferences sharedpreferences = DirectMe.getInstance().sharedPrefs;
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(Constants.SHIP_IMAGE_URL, boatImageUrl);
-        editor.putString(Constants.SHIP_ID,id);
-        editor.commit();
+        editor.putString(Constants.SHIP_ID, id);
+        editor.apply();
         Intent intent = new Intent(getActivity(), ParkNowActivity.class);
         startActivity(intent);
-
     }
 }
 

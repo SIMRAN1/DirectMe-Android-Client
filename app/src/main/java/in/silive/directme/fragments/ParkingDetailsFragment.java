@@ -92,30 +92,37 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
 
 
         sharedPreferences = DirectMe.getInstance().sharedPrefs;
+        final String island_id=sharedPreferences.getString(Constants.ISLAND_ID,"");
         try {
-            json_data= new JSONObject(getArguments().getString("data", ""));
-            type = json_data.get("type").toString();
-            TypeTextView.setText(type);
-            id=json_data.get("id").toString();
-            JSONArray logs=json_data.getJSONArray("logs");
-            if(logs.length()>0)
+            if(Integer.parseInt(island_id)==5)
             {
-                JSONObject logdetails=logs.getJSONObject(0);
-                username=logdetails.get("username").toString();
-                ship_img_url=logdetails.get("ship_image").toString();
-                Picasso.with(getContext())
-                        .load(ship_img_url)
-                        .into(boat);
-
-                UsernameTextview.setText(username);
-                dock.setVisibility(View.GONE);
-            }
-            else
-            {
+                TypeTextView.setText("Pirate Port");
                 UsernameTextview.setText("N-A");
                 UsernameTextview.setTypeface(typeface);
-                TypeTextView.setText(type);
                 dock.setEnabled(true);
+            }
+            else {
+                json_data = new JSONObject(getArguments().getString("data", ""));
+                type = json_data.get("type").toString();
+                TypeTextView.setText(type);
+                id = json_data.get("id").toString();
+                JSONArray logs = json_data.getJSONArray("logs");
+                if (logs.length() > 0) {
+                    JSONObject logdetails = logs.getJSONObject(0);
+                    username = logdetails.get("username").toString();
+                    ship_img_url = logdetails.get("ship_image").toString();
+                    Picasso.with(getContext())
+                            .load(ship_img_url)
+                            .into(boat);
+
+                    UsernameTextview.setText(username);
+                    dock.setVisibility(View.GONE);
+                } else {
+                    UsernameTextview.setText("N-A");
+                    UsernameTextview.setTypeface(typeface);
+                    TypeTextView.setText(type);
+                    dock.setEnabled(true);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -139,6 +146,7 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
     String  ship_image;
     void alertDialog()
     {final String ship_img=sharedPreferences.getString(Constants.SHIP_IMAGE_URL,"");
+        final String island_id=sharedPreferences.getString(Constants.ISLAND_ID,"");
         ship_image=ship_img;
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
         builder1.setMessage("Do you want to dock your ship");
@@ -148,7 +156,13 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         flag=1;
-                        connect();
+                        if(Integer.parseInt(island_id)==5) {
+                            connectPirate();
+                        }
+                        else
+                        {
+                            connect();
+                        }
                     }
                 });
         builder1.setNegativeButton(
@@ -196,12 +210,55 @@ public class ParkingDetailsFragment extends Fragment implements View.OnClickList
             }, getContext());
             String post_data = "";
             try {
-                post_data= URLEncoder.encode("ship_id", "UTF-8") + "=" + URLEncoder.encode(ship_id, "UTF-8");
-                post_data+="&"+URLEncoder.encode("port_id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
+
+
+                    post_data = URLEncoder.encode("ship_id", "UTF-8") + "=" + URLEncoder.encode(ship_id, "UTF-8");
+                    post_data += "&" + URLEncoder.encode("port_id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             apicalling.setArgs(API_URL_LIST.Dock_Url, token, post_data);
+            apicalling.execute();
+
+        }else{
+            in.silive.directme.dialog.AlertDialog alertDialog = new in.silive.directme.dialog.AlertDialog();
+            alertDialog.alertDialog(getContext());
+        }
+    }
+    void connectPirate() {
+        final String token = sharedPreferences.getString(Constants.AUTH_TOKEN, "");
+        final String ship_id=sharedPreferences.getString(Constants.SHIP_ID,"");
+        network_available = NetworkUtils.isNetConnected();
+        if (network_available) {
+            apicalling = new FetchData(new FetchDataListener() {
+                @Override
+                public void processStart() {
+                }
+                @Override
+                public void processFinish(String output) {
+                    final String responsecode=sharedPreferences.getString(Constants.RESPONSE_CODE,"");
+                    if (Integer.parseInt(responsecode)==201)
+                    {
+                        dock();
+                    }
+                    else
+                    {
+                        initiatePopupWindow("Sorry your ship is not docked...",0);
+                    }
+                }
+            }, getContext());
+            String post_data = "";
+            try {
+
+
+                post_data = URLEncoder.encode("ship_id", "UTF-8") + "=" + URLEncoder.encode(ship_id, "UTF-8");
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            apicalling.setArgs(API_URL_LIST.PIRATE_ISLAND_URL, token, post_data);
             apicalling.execute();
 
         }else{

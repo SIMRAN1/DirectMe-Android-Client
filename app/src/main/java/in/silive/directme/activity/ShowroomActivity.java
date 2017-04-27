@@ -16,15 +16,15 @@ import android.widget.ImageView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import in.silive.directme.R;
 import in.silive.directme.adapter.ShowroomAdapter;
 import in.silive.directme.application.DirectMe;
 import in.silive.directme.dialog.AlertDialog;
+import in.silive.directme.listeners.FetchDataListener;
 import in.silive.directme.network.FetchData;
+import in.silive.directme.utils.API_URL_LIST;
 import in.silive.directme.utils.Constants;
 import in.silive.directme.utils.NetworkUtils;
-import in.silive.directme.listeners.FetchDataListener;
-import in.silive.directme.R;
-import in.silive.directme.utils.API_URL_LIST;
 import in.silive.directme.utils.ViewPagerAnimation;
 
 
@@ -35,7 +35,7 @@ public class ShowroomActivity extends AppCompatActivity {
     boolean network_available;
     FetchData apicalling;
     SharedPreferences sharedpreferences;
-    ImageView left,right;
+    ImageView left, right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,9 @@ public class ShowroomActivity extends AppCompatActivity {
         Log.d("slot", "" + slot);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setPageTransformer(false , new ViewPagerAnimation());
+
         mViewPager.setOffscreenPageLimit(count-1);
+        mViewPager.setPageTransformer(false, new ViewPagerAnimation());
         sharedpreferences = DirectMe.getInstance().sharedPrefs;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -64,14 +65,37 @@ public class ShowroomActivity extends AppCompatActivity {
                 mViewPager.arrowScroll(View.FOCUS_RIGHT);
             }
         });
-
         connect();
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 0)
+                    left.setVisibility(View.GONE);
+                else if (position == count - 1)
+                    right.setVisibility(View.GONE);
+                else {
+                    left.setVisibility(View.VISIBLE);
+                    right.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
     void startfragments() {
         mViewPager.setAdapter(new ShowroomAdapter
-                (getSupportFragmentManager(), jArray ,count));
+                (getSupportFragmentManager(), jArray, count));
     }
 
     void connect() {
@@ -98,7 +122,7 @@ public class ShowroomActivity extends AppCompatActivity {
             apicalling.setArgs(API_URL_LIST.SHOWROOM_SHIPS_URL, token, "");
             apicalling.execute();
 
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(this);
         }

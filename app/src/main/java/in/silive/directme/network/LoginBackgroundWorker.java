@@ -1,6 +1,5 @@
 package in.silive.directme.network;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import com.google.android.gms.auth.GoogleAuthException;
@@ -28,35 +27,35 @@ import in.silive.directme.utils.API_URL_LIST;
  * Created by Shobhit-pc on 2/23/2017.
  */
 
-public class LoginBackgroundWorker  extends AsyncTask<String , String , String> {
+public class LoginBackgroundWorker extends AsyncTask<String, String, String> {
 
-    private FetchDataListener delecate  = null;
+    private FetchDataListener delecate = null;
 
-    public LoginBackgroundWorker(FetchDataListener stringInterface){
+    public LoginBackgroundWorker(FetchDataListener stringInterface) {
         this.delecate = stringInterface;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
     }
-    public void setArgs(String url, String token, String post_data){
+
+    public void setArgs(String url, String token, String post_data) {
     }
 
     @Override
     protected String doInBackground(String... params) {
-        String token = "",result = "";
+        String token = "", result = "";
         String scopes = "oauth2:profile email";
         try {
-            token = GoogleAuthUtil.getToken(DirectMe.getInstance(), params[0] , scopes );
-        } catch (IOException e) {
+            token = GoogleAuthUtil.getToken(DirectMe.getInstance(), params[0], scopes);
+        } catch (IOException | GoogleAuthException e) {
             e.printStackTrace();
 
-        } catch (GoogleAuthException e) {
-            e.printStackTrace();
         }
         try {
-            URL url = new URL(API_URL_LIST.BASE_URL+API_URL_LIST.USER_GOOGLE_OAUTH_URL);
+            URL url = new URL(API_URL_LIST.BASE_URL + API_URL_LIST.USER_GOOGLE_OAUTH_URL);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
@@ -76,7 +75,7 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
                 String line = "";
                 while ((line = bufferedReader.readLine()) != null) {
 
-                        result += line;
+                    result += line;
                 }
                 bufferedReader.close();
                 inputStream.close();
@@ -86,15 +85,12 @@ public class LoginBackgroundWorker  extends AsyncTask<String , String , String> 
             e.printStackTrace();
         }
 
-//return result from the server
         return result;
     }
 
     @Override
     protected void onPostExecute(String s) {
-
         delecate.processFinish(s);
         super.onPostExecute(s);
-
     }
 }

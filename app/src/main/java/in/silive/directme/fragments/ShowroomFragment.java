@@ -27,9 +27,9 @@ public class ShowroomFragment extends Fragment {
     int slot;
     ImageView ivBoatImage;
     ProgressBar pbShip;
-    TextView tv_banana, tv_gold, tv_wood, tv_bamboo, tv_coconut,tv_boat_name,tv_cost_multiplier,tv_buy_cost,tv_experience;
+    TextView tv_banana, tv_gold, tv_wood, tv_bamboo, tv_coconut, tv_boat_name, tv_cost_multiplier, tv_buy_cost, tv_experience;
     int banana_req = 0, bamboo_req = 0, timber_req = 0, coconut_req = 0, item_id, count;
-    String boatName,costMultiplier,buyCost,experienceGain,boatImageUrl;
+    String boatName, costMultiplier, buyCost, experienceGain, boatImageUrl;
     ImageView iv_buy_ship;
     SharedPreferences sharedPreferences;
     android.support.constraint.ConstraintLayout clfragment1, clfragment2;
@@ -46,7 +46,7 @@ public class ShowroomFragment extends Fragment {
             buyCost = json_data.getString("buy_cost");
             experienceGain = json_data.getString("experience_gain");
             JSONArray jsonArray = json_data.getJSONArray("items_required");
-            for(int i= 0; i<jsonArray.length(); i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 item_id = jsonObject.getInt("item_id");
                 count = jsonObject.getInt("count");
@@ -109,15 +109,16 @@ public class ShowroomFragment extends Fragment {
     }
 
     private void setInventoriesCount(int item_id, int count) {
-        if(item_id == 1)
+        if (item_id == 1)
             coconut_req = count;
-        else if(item_id == 2)
+        else if (item_id == 2)
             timber_req = count;
-        else if(item_id == 3)
+        else if (item_id == 3)
             banana_req = count;
-        else if(item_id == 4)
+        else if (item_id == 4)
             bamboo_req = count;
-        else{}
+        else {
+        }
     }
 
     private void startFragment() {

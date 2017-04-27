@@ -19,33 +19,37 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Observable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.silive.directme.Controller;
+import in.silive.directme.R;
+import in.silive.directme.application.DirectMe;
 import in.silive.directme.dialog.AlertDialog;
 import in.silive.directme.fragments.LeaderBoardFragment;
 import in.silive.directme.fragments.UserProfileFragment;
-import in.silive.directme.utils.Keys;
-import in.silive.directme.utils.NetworkUtils;
-import in.silive.directme.R;
-import in.silive.directme.application.DirectMe;
 import in.silive.directme.listeners.FetchDataListener;
 import in.silive.directme.network.FetchData;
 import in.silive.directme.utils.API_URL_LIST;
 import in.silive.directme.utils.Constants;
+import in.silive.directme.utils.Keys;
+import in.silive.directme.utils.NetworkUtils;
 import in.silive.directme.utils.ToasterUtils;
 
 
-public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer,Animation.AnimationListener {
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, java.util.Observer, Animation.AnimationListener {
     public static final String[] co = new String[7];
     public int[] commod = new int[7];
     String token;
@@ -82,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ImageView showroom;
     @BindView(R.id.leaderboard)
     ImageView iv_leader_board;
-   /* @BindView(R.id.wave1)
+    @BindView(R.id.wave1)
     RelativeLayout wave1;
     @BindView(R.id.wave2)
     RelativeLayout wave2;
@@ -101,18 +105,19 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     @BindView(R.id.wave9)
     RelativeLayout wave9;
     @BindView(R.id.wave10)
-    RelativeLayout wave10;*/
+    RelativeLayout wave10;
     @BindView(R.id.userprofile)
     ImageView avatar;
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
     Bundle args;
     JSONObject jsonObject;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         ButterKnife.bind(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//to make screen full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//to make screen full screen
         sharedpreferences = DirectMe.getInstance().sharedPrefs;
         park.setOnClickListener(this);
         parked.setOnClickListener(this);
@@ -122,7 +127,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         iv_leader_board.setOnClickListener(this);
         avatar.setOnClickListener(this);
         avatar.setEnabled(false);
-       /* Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.waveanimation);
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
         wave1.startAnimation(animation);
@@ -134,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         wave7.startAnimation(animation);
         wave8.startAnimation(animation);
         wave9.startAnimation(animation);
-        wave10.startAnimation(animation);*/
+        wave10.startAnimation(animation);
         controller.addObserver(DashboardActivity.this);
         token = sharedpreferences.getString(Constants.AUTH_TOKEN, "");
         count();
@@ -146,6 +151,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void processStart() {
                     }
+
                     @Override
                     public void processFinish(String output) {
                         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -162,7 +168,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 fetchData.setArgs(API_URL_LIST.FIREBASE_TOKEN_UPDATE, token, post_data);
                 fetchData.execute();
             }
-        }else {
+        } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.alertDialog(this);
         }
@@ -182,6 +188,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             }
         };
     }
+
     public void count() {
         network_available = NetworkUtils.isNetConnected();
         if (network_available) {
@@ -190,6 +197,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 public void processStart() {
 
                 }
+
                 @Override
                 public void processFinish(String output) {
                     try {
@@ -199,17 +207,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String user_id = jsonObject.getString(Keys.user_id);
                         String island_id = jsonObject.getString(Keys.island_id);
                         String island_name = jsonObject.getString(Keys.island_name);
-                        String first_name=jsonObject.getString(Keys.firstname);
-                        String experience=jsonObject.getString(Keys.experience);
-                        String gravatar=jsonObject.getString(Keys.gravatar);
+                        String first_name = jsonObject.getString(Keys.firstname);
+                        String experience = jsonObject.getString(Keys.experience);
+                        String gravatar = jsonObject.getString(Keys.gravatar);
                         experiencetxtview.setText(experience);
                         editor.putString(Keys.username, username);
                         editor.putString(Keys.user_id, user_id);
                         editor.putString(Keys.island_id, island_id);
                         editor.putString(Keys.island_name, island_name);
-                        editor.putString(Keys.firstname,first_name);
-                        editor.putString(Keys.experience,experience);
-                        editor.putString(Keys.gravatar,gravatar);
+                        editor.putString(Keys.firstname, first_name);
+                        editor.putString(Keys.experience, experience);
+                        editor.putString(Keys.gravatar, gravatar);
                         Picasso.with(getApplicationContext()).load(gravatar).into(avatar, new Callback() {
                             @Override
                             public void onSuccess() {
@@ -223,20 +231,20 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             }
                         });
                         JSONArray things = jsonObject.getJSONArray(Keys.inventory);
-                            for(i=0;i<5;i++) {
-                                JSONObject jsonObject1 = things.getJSONObject(i);
-                                commod[i] = Integer.parseInt(jsonObject1.getString(Keys.count));
+                        for (i = 0; i < 5; i++) {
+                            JSONObject jsonObject1 = things.getJSONObject(i);
+                            commod[i] = Integer.parseInt(jsonObject1.getString(Keys.count));
 
-                                //putting values
-                                editor.putString(Keys.co[i], Integer.toString(commod[i]));
-                                editor.commit();
+                            //putting values
+                            editor.putString(Keys.co[i], Integer.toString(commod[i]));
+                            editor.commit();
 
-                            }
-                            controller.setBambooCount(commod[1]);
-                            controller.setBananaCount(commod[2]);
-                            controller.setTimberCount(commod[3]);
-                            controller.setCoconutCount(commod[4]);
-                            controller.setGoldCoinCount(commod[0]);
+                        }
+                        controller.setBambooCount(commod[1]);
+                        controller.setBananaCount(commod[2]);
+                        controller.setTimberCount(commod[3]);
+                        controller.setCoconutCount(commod[4]);
+                        controller.setGoldCoinCount(commod[0]);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -246,7 +254,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             apicalling.execute();
         } else {
             for (i = 0; i < 5; i++) {
-                    commod[i] = Integer.parseInt(sharedpreferences.getString(Keys.co[i], ""));
+                commod[i] = Integer.parseInt(sharedpreferences.getString(Keys.co[i], ""));
             }
             controller.setBambooCount(commod[1]);
             controller.setBananaCount(commod[2]);
@@ -255,6 +263,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             controller.setGoldCoinCount(commod[0]);
         }
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -279,7 +288,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(in);
                 break;
             case R.id.userprofile:
-                    fragmentInitialise();
+                fragmentInitialise();
                 break;
             case R.id.leaderboard:
                 leaderBoardFragment();
@@ -287,6 +296,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         }
     }
+
     private void leaderBoardFragment() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -297,6 +307,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
     @Override
     //updating values through observer
     public void update(Observable observable, Object o) {
@@ -307,6 +318,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         timber.setText(String.valueOf(controller.getTimberCount()));
         gold_coin.setText(String.valueOf(controller.getGoldCoinCount()));
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -317,27 +329,29 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
-        }
-        else
-        {super.onBackPressed();
+        } else {
+            super.onBackPressed();
             finish();
 
         }
     }
+
     @Override
     public void onAnimationStart(Animation animation) {
 
     }
+
     @Override
     public void onAnimationEnd(Animation animation) {
 
     }
+
     @Override
     public void onAnimationRepeat(Animation animation) {
 
     }
-    void fragmentInitialise()
-    {
+
+    void fragmentInitialise() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,

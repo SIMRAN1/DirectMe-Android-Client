@@ -23,7 +23,6 @@ public class BitmapUtils {
             istr = assetManager.open(filepath);
             bitmap = BitmapFactory.decodeStream(istr);
         } catch (IOException ioe) {
-            // manage exception
             ioe.printStackTrace();
         } finally {
             if (istr != null) {

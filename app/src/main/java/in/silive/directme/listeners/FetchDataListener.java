@@ -6,6 +6,7 @@ package in.silive.directme.listeners;
 
 public interface FetchDataListener {
     void processStart();
+
     void processFinish(String output);
 }
 

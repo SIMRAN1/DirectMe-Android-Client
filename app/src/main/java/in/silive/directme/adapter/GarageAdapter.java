@@ -21,13 +21,13 @@ import in.silive.directme.fragments.DockyardFargment;
 
 public class GarageAdapter extends FragmentStatePagerAdapter {
 
+
     int slot = 0;
     JSONArray jArray;
     int count;
 
 
     public GarageAdapter(FragmentManager fm, JSONArray jsonArray, int c) {
-
         super(fm);
         jArray = jsonArray;
         count = c;
@@ -35,24 +35,20 @@ public class GarageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        JSONObject json_send = null;
+        JSONObject json_send;
         if (jArray != null) {
             try {
                 json_send = jArray.getJSONObject(position);
-
                 Log.d("shipapi", json_send.toString());
                 DockyardFargment dockyardFargment = new DockyardFargment();
                 Bundle args = new Bundle();
                 args.putString("data", json_send.toString());
-                // args.putInt("slot", slot);
                 Log.d("args", args.toString());
                 dockyardFargment.setArguments(args);
                 return dockyardFargment;
-
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;
-
             }
         } else
             return null;
@@ -61,7 +57,6 @@ public class GarageAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return count;
-
     }
 
     public void destroyItem(ViewGroup container, int position, Object object) {
